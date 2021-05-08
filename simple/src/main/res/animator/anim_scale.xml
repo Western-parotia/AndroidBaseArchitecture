@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+    <objectAnimator
+        android:propertyName="translateY"
+        android:valueType="floatType"
+        android:valueFrom="0"
+        android:valueTo="15"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"
+        android:duration="400" />
+
+</set>

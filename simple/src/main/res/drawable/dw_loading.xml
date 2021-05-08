@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/ic_loading_svg"
+    tools:ignore="MissingDefaultResource">
+
+    <target
+        android:animation="@animator/anim_scale"
+        android:name="l" />
+    <target
+        android:animation="@animator/anim_scale"
+        android:name="a" />
+    <target
+        android:animation="@animator/anim_scale"
+        android:name="i" />
+    <target
+        android:animation="@animator/anim_scale"
+        android:name="g" />
+</animated-vector>

@@ -1,0 +1,23 @@
+import com.foundation.widget.buildsrc.AndroidConfig
+import com.foundation.widget.buildsrc.Publish
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion AndroidConfig.compileSdkVersion
+    defaultConfig {
+        minSdkVersion AndroidConfig.minSdkVersion
+        targetSdkVersion AndroidConfig.targetSdkVersion
+        versionCode = Publish.Version.versionCode
+        versionName = Publish.Version.versionName
+    }
+
+
+    compileOptions {
+        sourceCompatibility = AndroidConfig.Language.sourceCompatibility
+        targetCompatibility = AndroidConfig.Language.targetCompatibility
+    }
+    kotlinOptions {
+        jvmTarget = AndroidConfig.Language.jvmTarget
+    }
+}
