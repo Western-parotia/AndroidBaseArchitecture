@@ -10,13 +10,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
-import com.foundation.app.simple.databinding.ActivityMainBinding
+import com.foundation.app.simple.databinding.ActivityLoadingBinding
 import com.foundation.widget.loading.PageLoadingAdapter
 
 class MainActivity : AppCompatActivity() {
+    val binding = ActivityLoadingBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.contentLoading.setLoadingAdapter(MyContentLoadingAdapter(this))
         binding.contentLoading.failViewEventListener = { _: View, type: Int, extra: Any? ->
@@ -123,8 +124,4 @@ class MyContentLoadingAdapter(private val context: Context) : PageLoadingAdapter
         }
     }
 
-}
-
-private fun String.log(secTag: String) {
-    println("MainActivity $secTag $this")
 }
