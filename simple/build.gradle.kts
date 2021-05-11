@@ -1,5 +1,4 @@
 import com.foundation.widget.buildsrc.Dependencies
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -9,7 +8,7 @@ android {
     compileSdkVersion(30)
 
     defaultConfig {
-        applicationId = "com.foundation.widget.simple"
+        applicationId = "com.foundation.app.simple"
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1
@@ -38,14 +37,10 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs.getByName("normalSign")
         }
-        create("dev").initWith(getByName("debug")).run {
-
-        }
     }
     buildFeatures {
         viewBinding = true
     }
-
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -56,6 +51,15 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        //版本号会改变
+        cacheDynamicVersionsFor(10, TimeUnit.SECONDS)
+        //版本号不变,1.0-SNAPSHOT 这种应该实时更新
+        cacheChangingModulesFor(10, TimeUnit.SECONDS)
+
+    }
+}
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     implementation(Dependencies.Kotlin.kotlin_stdlib)
@@ -63,8 +67,15 @@ dependencies {
     implementation(Dependencies.AndroidX.appcompat)
     implementation(Dependencies.Material.material)
     implementation(Dependencies.AndroidX.constraintlayout)
-    implementation(project(":loading"))
-    implementation(Dependencies.Glide.glide)
-    implementation(Dependencies.Glide.compiler)
+    implementation("com.foundation.widget:loading:1.0-SNAPSHOT")
 
+}
+repositories {
+    maven {
+        setUrl(com.foundation.widget.buildsrc.Publish.Maven.codingArtifactsRepoUrl)
+        credentials {
+            username = com.foundation.widget.buildsrc.Publish.Maven.codingArtifactsGradleUsername
+            password = com.foundation.widget.buildsrc.Publish.Maven.codingArtifactsGradlePassword
+        }
+    }
 }
