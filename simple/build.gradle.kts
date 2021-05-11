@@ -68,6 +68,7 @@ dependencies {
     implementation(Dependencies.Material.material)
     implementation(Dependencies.AndroidX.constraintlayout)
     implementation("com.foundation.widget:loading:1.0-SNAPSHOT")
+    implementation(project(":baseAF"))
 
 }
 repositories {

@@ -8,10 +8,16 @@ package com.foundation.widget.buildsrc
  */
 object Dependencies {
     object Kotlin {
+        /**
+         * kotlin 语言核心库，像 let这种操作域拓展
+         */
         const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:1.4.32"
     }
 
     object AndroidX {
+        /**
+         * kotlin 标准库，各种推展方法，像 foreach什么的
+         */
         const val core_ktx = "androidx.core:core-ktx:1.3.2"
         const val appcompat = "androidx.appcompat:appcompat:1.2.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
