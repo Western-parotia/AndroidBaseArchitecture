@@ -21,16 +21,6 @@ inline fun <reified VB : ViewBinding> Fragment.fastBind() = FragmentViewBindingD
     requireView().bind()
 }
 
-inline fun <reified VB : ViewBinding> Fragment.fastBind(view: View) =
-    FragmentViewBindingDelegate<VB> {
-        view.bind()
-    }
-
-inline fun <reified VB : ViewBinding> Fragment.fastBind(crossinline view: () -> View) =
-    FragmentViewBindingDelegate<VB> {
-        view.invoke().bind()
-    }
-
 inline fun <reified VB : ViewBinding> View.bind(): VB =
     VB::class.java.getMethod("bind", View::class.java)
         .invoke(null, this) as VB
@@ -40,17 +30,15 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () ->
     private var binding: VB? = null
     private var hasInit = false
     override fun getValue(thisRef: Fragment, property: KProperty<*>): VB {
-        //不允许在onDestroyView 中再访问 viewBinding 示例
-        val curState = thisRef.viewLifecycleOwner.lifecycle.currentState
-        "curState=$curState".log()
-        if (!curState.isAtLeast(Lifecycle.State.DESTROYED)) {
-            throw IllegalAccessException(
-                "can not access value, $curState isAtLeast(Lifecycle.State.DESTROYED) = true " +
-                        "implement BeforeOnDestroyView can do something before destroyView"
-            )
-        }
         return when {
             !hasInit && null == binding -> {
+                val curSate = thisRef.viewLifecycleOwner.lifecycle.currentState
+                if (curSate == Lifecycle.State.DESTROYED) {
+                    throw IllegalAccessException(
+                        "can not init binding,because of fragment will be destroyed soon" +
+                                " you can implement ViewBindingLifecycleListener on Fragment and override onViewBindingDestroy"
+                    )
+                }
                 "init binding instance".log("FragmentViewBindingDelegate")
                 binding = initBlock()
                 thisRef.viewLifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
@@ -59,6 +47,7 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () ->
                         if (thisRef is ViewBindingLifecycleListener) {
                             thisRef.onViewBindingDestroy()
                         }
+                        hasInit = false
                         binding = null
                     }
                 })
@@ -69,15 +58,14 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () ->
                 binding!!
             }
         }
-
     }
 }
 
 interface ViewBindingLifecycleListener {
     /**
      * 在OnDestroyView执行清理前 处理例如状态保持，释放等逻辑
+     * 通常并不需要实现
      */
     fun onViewBindingDestroy() {
-
     }
 }
