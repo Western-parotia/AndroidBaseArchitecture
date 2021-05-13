@@ -13,25 +13,25 @@ import androidx.viewbinding.ViewBinding
  */
 
 //<editor-fold desc="activity viewBinding 拓展">
-inline fun <reified VB : ViewBinding> Activity.fastBind() = lazy(LazyThreadSafetyMode.NONE) {
-    bindingVB<VB>(layoutInflater).apply {
+inline fun <reified VB : ViewBinding> Activity.autoBind() = lazy(LazyThreadSafetyMode.NONE) {
+    initVB<VB>().apply {
         setContentView(root)
     }
 }
 
-inline fun <reified VB : ViewBinding> Activity.bindingVB(layoutInflater: LayoutInflater) =
+inline fun <reified VB : ViewBinding> Activity.initVB() =
     VB::class.java.getMethod("inflate", LayoutInflater::class.java)
         .invoke(null, layoutInflater) as VB
 //</editor-fold>
 
 //<editor-fold desc="dialog viewBinding 拓展">
-inline fun <reified VB : ViewBinding> Dialog.fastBind() = lazy(LazyThreadSafetyMode.NONE) {
-    bindingVB<VB>(layoutInflater).apply {
+inline fun <reified VB : ViewBinding> Dialog.autoBind() = lazy(LazyThreadSafetyMode.NONE) {
+    initVB<VB>().apply {
         setContentView(root)
     }
 }
 
-inline fun <reified VB : ViewBinding> Dialog.bindingVB(layoutInflater: LayoutInflater) =
+inline fun <reified VB : ViewBinding> Dialog.initVB() =
     VB::class.java.getMethod("inflate", LayoutInflater::class.java)
         .invoke(null, layoutInflater) as VB
 //</editor-fold>

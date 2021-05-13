@@ -6,12 +6,14 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.foundation.app.af.BuildConfig
-import com.foundation.app.af.extensions.fastBind
+import com.foundation.app.af.extensions.autoBind
 import com.foundation.app.af.fragment.ViewBindingLifecycleListener
-import com.foundation.app.af.fragment.fastBind
+import com.foundation.app.af.fragment.autoBind
+import com.foundation.app.simple.databinding.Test1Binding
 
 /**
  *@Desc:
@@ -21,10 +23,9 @@ import com.foundation.app.af.fragment.fastBind
  */
 
 class VBActivity : AppCompatActivity() {
-    val actVbBinding by fastBind<ActVbBindingCopy>()
+    val actVbBinding by autoBind<Test1Binding>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.test1)
         supportFragmentManager.beginTransaction()
             .replace(R.id.specialFrameLayout, MyFragment(), "MyFragment")
             .commitNowAllowingStateLoss()
@@ -34,8 +35,12 @@ class VBActivity : AppCompatActivity() {
 class SpecialFrameLayout(context: Context, attributeSet: AttributeSet) :
     FrameLayout(context, attributeSet)
 
-class MyFragment : Fragment(R.layout.act_vb), ViewBindingLifecycleListener {
-    val actVbBinding by fastBind<ActVbBindingCopy>()
+open class MyBaseFragment(@LayoutRes id: Int = 0) : Fragment(id) {
+
+}
+
+class MyFragment : MyBaseFragment(R.layout.act_vb), ViewBindingLifecycleListener {
+    val actVbBinding by autoBind<ActVbBindingCopy>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
