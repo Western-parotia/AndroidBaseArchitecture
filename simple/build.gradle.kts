@@ -66,7 +66,7 @@ dependencies {
     implementation(Dependencies.AndroidX.core_ktx)
     implementation(Dependencies.AndroidX.appcompat)
     implementation(Dependencies.Material.material)
-    implementation(Dependencies.AndroidX.constraintlayout)
+    implementation(Dependencies.AndroidX.constraintLayout)
     implementation("com.foundation.widget:loading:1.0-SNAPSHOT")
     implementation(project(":baseAF"))
 

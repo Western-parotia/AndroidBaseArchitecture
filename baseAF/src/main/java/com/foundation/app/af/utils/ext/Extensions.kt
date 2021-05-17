@@ -1,4 +1,4 @@
-package com.foundation.app.af.utils
+package com.foundation.app.af.utils.ext
 
 import com.foundation.app.af.BuildConfig
 

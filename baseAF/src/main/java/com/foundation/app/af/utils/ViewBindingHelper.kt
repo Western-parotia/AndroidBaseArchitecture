@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType
 /**
  *@Desc:
  *-
- *- 检查一级范型声明获取ViewBinding类型，创建对应ViewBinding 实际例
+ *- 检查一级范型声明获取ViewBinding类型，创建对应ViewBinding 实例
  *create by zhusw on 4/22/21 10:48
  */
 object ViewBindingHelper {

@@ -1,12 +1,10 @@
-package com.foundation.app.af.fragment
+package com.foundation.app.af.utils.ext
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.viewbinding.ViewBinding
-import com.foundation.app.af.utils.log
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -14,19 +12,13 @@ import kotlin.reflect.KProperty
  *@Desc:
  *-
  *- 使用此委托fragment 必须在BaseFragment中传入 layoutId
- * 如果又base层，确保支持布局id，像下面这样来声明BaseFragment
+ * 如果有base层，确保支持布局id，像下面这样来声明BaseFragment
  * open class MyBaseFragment(@LayoutRes id:Int=0):Fragment(id){}
  * class MyFragment : MyBaseFragment(R.layout.act_vb)
  *create by zhusw on 5/12/21 15:19
  */
 
-inline fun <reified VB : ViewBinding> Fragment.autoBind() = FragmentViewBindingDelegate<VB> {
-    requireView().bind()
-}
 
-inline fun <reified VB : ViewBinding> View.bind(): VB =
-    VB::class.java.getMethod("bind", View::class.java)
-        .invoke(null, this) as VB
 
 class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () -> VB) :
     ReadOnlyProperty<Fragment, VB> {

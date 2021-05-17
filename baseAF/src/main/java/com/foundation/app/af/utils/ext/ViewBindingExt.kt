@@ -1,8 +1,10 @@
-package com.foundation.app.af.extensions
+package com.foundation.app.af.utils.ext
 
 import android.app.Activity
 import android.app.Dialog
 import android.view.LayoutInflater
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 /**
@@ -36,3 +38,12 @@ inline fun <reified VB : ViewBinding> Dialog.initVB() =
         .invoke(null, layoutInflater) as VB
 //</editor-fold>
 
+//<editor-fold desc="fragment vb">
+inline fun <reified VB : ViewBinding> Fragment.autoBind() = FragmentViewBindingDelegate<VB> {
+    requireView().bind()
+}
+
+inline fun <reified VB : ViewBinding> View.bind(): VB =
+    VB::class.java.getMethod("bind", View::class.java)
+        .invoke(null, this) as VB
+//</editor-fold>

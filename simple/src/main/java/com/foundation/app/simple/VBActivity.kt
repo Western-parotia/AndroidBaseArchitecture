@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.foundation.app.af.BuildConfig
 import com.foundation.app.af.extensions.autoBind
 import com.foundation.app.af.fragment.ViewBindingLifecycleListener
-import com.foundation.app.af.fragment.autoBind
 import com.foundation.app.simple.databinding.Test1Binding
 
 /**

@@ -52,8 +52,12 @@ dependencies {
     implementation(Dependencies.Kotlin.kotlin_stdlib)
     implementation(Dependencies.AndroidX.core_ktx)
     implementation(Dependencies.AndroidX.appcompat)
-    implementation(Dependencies.AndroidX.constraintlayout)
-    implementation(Dependencies.Glide.glide)
+    implementation(Dependencies.AndroidX.constraintLayout)
+    implementation(Dependencies.Coroutines.coroutines_android)
+    implementation(Dependencies.Coroutines.lifecycle_runtime)
+    implementation(Dependencies.Coroutines.lifecycle_liveData)
+    implementation(Dependencies.Coroutines.lifecycle_viewModel)
+
 }
 
 val sourceCodeTask: Jar = tasks.register("sourceCode", Jar::class.java) {
