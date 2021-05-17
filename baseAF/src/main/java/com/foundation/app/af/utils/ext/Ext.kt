@@ -17,8 +17,8 @@ internal fun String.log(secTag: String = "") {
 }
 
 /**
- * 多线程场景下保证返回第一次创建的实例
- * 内部使用原子性检查，保证创建实例时具备原子性
+ * 无锁开销的单例加载
+ * 多线程场景下保证返回首次创建的实例
  */
 fun <T> lazyAtomic(initializer: () -> T) = lazy(LazyThreadSafetyMode.PUBLICATION, initializer)
 

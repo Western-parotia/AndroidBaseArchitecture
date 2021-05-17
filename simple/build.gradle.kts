@@ -65,8 +65,12 @@ dependencies {
     implementation(Dependencies.Kotlin.kotlin_stdlib)
     implementation(Dependencies.Ktx.core_ktx)
     implementation(Dependencies.AndroidX.appcompat)
-    implementation(Dependencies.Material.material)
     implementation(Dependencies.AndroidX.constraintLayout)
+    implementation(Dependencies.Coroutines.coroutines_android)
+    implementation(Dependencies.Ktx.lifecycle_liveData_ktx)
+    implementation(Dependencies.Ktx.lifecycle_runtime_ktx)
+    implementation(Dependencies.Ktx.lifecycle_viewModel_ktx)
+    implementation(Dependencies.Ktx.fragment_ktx)
     implementation("com.foundation.widget:loading:1.0-SNAPSHOT")
     implementation(project(":baseAF"))
 
