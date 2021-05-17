@@ -18,7 +18,7 @@ object Dependencies {
         /**
          * kotlin 标准库，各种推展方法，像 foreach什么的
          */
-        const val core_ktx = "androidx.core:core-ktx:1.3.2"
+
         const val appcompat = "androidx.appcompat:appcompat:1.2.0"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
 
@@ -28,15 +28,24 @@ object Dependencies {
         const val material = "com.google.android.material:material:1.3.0"
     }
 
-    /**
-     * ktx 库 版本：https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
-     */
     object Coroutines {
         const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
-        const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-        const val lifecycle_liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-        const val lifecycle_viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
+    }
+
+    /**
+     * ktx 库清单与版本：https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
+     */
+    object Ktx {
+        const val core_ktx = "androidx.core:core-ktx:1.3.2"
+        const val fragment_ktx = "androidx.fragment:fragment-ktx:1.3.3"
+
+        /*Lifecycle 拓展协程*/
+        const val lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+        const val lifecycle_liveData_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
+        /*viewModel 拓展协程*/
+        const val lifecycle_viewModel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     }
 
 }

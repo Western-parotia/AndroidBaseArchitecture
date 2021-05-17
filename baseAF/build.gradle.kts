@@ -50,13 +50,14 @@ android {
 
 dependencies {
     implementation(Dependencies.Kotlin.kotlin_stdlib)
-    implementation(Dependencies.AndroidX.core_ktx)
+    implementation(Dependencies.Ktx.core_ktx)
     implementation(Dependencies.AndroidX.appcompat)
     implementation(Dependencies.AndroidX.constraintLayout)
     implementation(Dependencies.Coroutines.coroutines_android)
-    implementation(Dependencies.Coroutines.lifecycle_runtime)
-    implementation(Dependencies.Coroutines.lifecycle_liveData)
-    implementation(Dependencies.Coroutines.lifecycle_viewModel)
+    implementation(Dependencies.Ktx.lifecycle_liveData_ktx)
+    implementation(Dependencies.Ktx.lifecycle_runtime_ktx)
+    implementation(Dependencies.Ktx.lifecycle_viewModel_ktx)
+    implementation(Dependencies.Ktx.fragment_ktx)
 
 }
 
@@ -88,7 +89,7 @@ publishing {
                 bundleReleaseAarTask.finalizedBy("createGitTagAndPush")
                 artifact(bundleReleaseAarTask)
             }
-//            artifact("$buildDir/outputs/aar/loading-release.aar")//直接制定文件
+//            artifact("$buildDir/outputs/aar/loading-release.aar")//直接指定文件
             " allDependencies=${configurations.implementation.get().allDependencies.size}".log("dep============")
             pom.withXml {
                 val dependenciesNode = asNode().appendNode("dependencies")

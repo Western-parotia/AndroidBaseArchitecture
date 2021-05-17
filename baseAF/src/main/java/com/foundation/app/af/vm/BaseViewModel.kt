@@ -1,8 +1,5 @@
 package com.foundation.app.af.vm
-
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 
 /**
  *@Desc:
@@ -12,10 +9,4 @@ import kotlinx.coroutines.launch
  */
 class BaseViewModel : ViewModel() {
 
-    fun foo() {
-
-        viewModelScope.launch {
-
-        }
-    }
 }

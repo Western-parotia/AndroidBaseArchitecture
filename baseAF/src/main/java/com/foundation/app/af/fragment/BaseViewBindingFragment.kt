@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.af.utils.ViewBindingHelper
+import com.foundation.app.af.utils.ext.ViewBindingLifecycleListener
 
 /**
  *@Desc:
