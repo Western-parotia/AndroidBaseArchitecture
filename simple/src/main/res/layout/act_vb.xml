@@ -7,6 +7,6 @@
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
-        android:text="按钮"
+        android:text="打开新的Activity，传参数"
         android:layout_height="wrap_content" />
 </LinearLayout>
