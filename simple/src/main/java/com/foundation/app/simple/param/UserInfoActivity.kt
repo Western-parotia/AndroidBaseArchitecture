@@ -39,13 +39,7 @@ class UserInfoActivity : BaseParamsActivity() {
 
         vbBinding.auiBtn.setOnClickListener {
             val frag = UserInfoFragment()
-            val bundle = Bundle()
-            bundle.putInt("userId", 2)
-            bundle.putString("userName", "DogGi")
-            val address = UserAddress()
-            val desc = UserDesc()
-            bundle.putParcelable("address", address)
-            bundle.putParcelable("desc", desc)
+            val bundle = Producer.create()
             frag.arguments = bundle
             supportFragmentManager.beginTransaction()
                 .replace(R.id.aui_fl, frag, "UserInfoFragment")
