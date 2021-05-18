@@ -8,17 +8,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".CustomApplication"
         android:theme="@style/Theme.LoadingViewGroup">
         <activity
             android:name=".VBActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".param.UserInfoActivity" />
+        <activity android:name=".param.UserInfoActivity">
+            <intent-filter></intent-filter>
+        </activity>
     </application>
 
 </manifest>

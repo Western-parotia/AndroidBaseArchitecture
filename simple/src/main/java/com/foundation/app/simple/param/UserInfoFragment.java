@@ -2,27 +2,22 @@ package com.foundation.app.simple.param;
 
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
 import com.foundation.app.af.fragment.BaseViewBindingFragment;
 import com.foundation.app.af.utils.param.BundleParams;
+import com.foundation.app.simple.AndroidVM;
 import com.foundation.app.simple.databinding.FragUserInfoBinding;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @Desc: -
  * -
  * create by zhusw on 5/18/21 09:40
  */
-public class UserInfoFragment extends BaseViewBindingFragment {
-
-    FragUserInfoBinding binding;
+public class UserInfoFragment extends BaseViewBindingFragment<FragUserInfoBinding> {
+    AndroidVM vm;
 
     @BundleParams()
     private int userId = 1;
@@ -36,20 +31,22 @@ public class UserInfoFragment extends BaseViewBindingFragment {
     @BundleParams("desc")
     private UserDesc userDesc;
 
-
-    @Nullable
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragUserInfoBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    public void initViewModel() {
+        super.initViewModel();
+        vm = getAppVM(AndroidVM.class);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @androidx.annotation.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.auiTvUserId.setText(String.valueOf(userId));
-        binding.auiTvUserName.setText(userName);
-        binding.auiTvAddress.setText(userAddress.toString());
-        binding.auiTvDesc.setText(userDesc.toString());
+        jViewBinding.auiTvUserId.setText(String.valueOf(userId));
+        jViewBinding.auiTvUserName.setText(userName);
+        jViewBinding.auiTvAddress.setText(userAddress.toString());
+        jViewBinding.auiTvDesc.setText(userDesc.toString());
+        vm.getImgLiveData().observe(getViewLifecycleOwner(), s -> {
+            jViewBinding.auiTvVm.setText(s);
+        });
     }
 }

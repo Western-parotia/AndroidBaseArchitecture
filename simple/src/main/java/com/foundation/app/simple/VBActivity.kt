@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.foundation.app.af.BuildConfig
-import com.foundation.app.af.utils.ext.ViewBindingLifecycleListener
-import com.foundation.app.af.utils.ext.autoBind
+import com.foundation.app.af.fragment.BaseViewBinding2Fragment
 import com.foundation.app.simple.databinding.ActVbBinding
 import com.foundation.app.simple.param.UserAddress
 import com.foundation.app.simple.param.UserDesc
@@ -31,15 +28,11 @@ class VBActivity : AppCompatActivity() {
     }
 }
 
-/**
- * 限制子类必须传布局id
- */
-open class MyBaseFragment(@LayoutRes id: Int) : Fragment(id) {
 
-}
-
-class MyFragment : MyBaseFragment(R.layout.act_vb), ViewBindingLifecycleListener {
+class MyFragment : BaseViewBinding2Fragment(R.layout.act_vb) {
     val actVbBinding by autoBind<ActVbBinding>()
+    val vm by lazyAppVM<AndroidVM>()
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         "1 onAttach".log()

@@ -77,7 +77,8 @@ object ParamsUtils {
                     bundle.getDouble(key, 0.0)
                 }
                 else -> {
-                    bundle.getParcelable(key)
+//                    bundle.getParcelable(key) //不允许传递实体
+                    null
                 }
             }?.apply {
                 "set value=$this".log(TAG)

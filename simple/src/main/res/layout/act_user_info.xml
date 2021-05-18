@@ -4,9 +4,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <Button
+        android:id="@+id/aui_vm"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20dp"
+        android:text="no init"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
     <TextView
         android:id="@+id/aui_tv_userId"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aui_vm"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20dp"
         android:text="no init"

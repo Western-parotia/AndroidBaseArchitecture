@@ -15,13 +15,6 @@ open class BaseVMApplication : Application(), ViewModelStoreOwner {
     private val vmStore: ViewModelStore by lazyAtomic {
         ViewModelStore()
     }
-    lateinit var _instance: BaseVMApplication
-
-    override fun onCreate() {
-        super.onCreate()
-        _instance = this
-
-    }
 
     override fun getViewModelStore(): ViewModelStore = vmStore
 }

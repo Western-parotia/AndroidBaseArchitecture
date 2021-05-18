@@ -12,16 +12,17 @@ import com.foundation.app.af.utils.ext.ViewBindingLifecycleListener
  *@Desc:
  *-
  *-完成viewBinding的初始化，设置根布局
- * 如果继承了BaseViewBindingFragment 却不需要使用ViewBinding则不指定范型
- * 并重写onCreateView 放弃super 调用
  *create by zhusw on 4/22/21 11:28
  */
-open class BaseViewBindingFragment<B : ViewBinding> : BaseParamsFragment(),
+abstract class BaseViewBindingFragment<B : ViewBinding> : BaseVMFragment(),
     ViewBindingLifecycleListener {
 
     private var binding: B? = null
 
-    val viewBinding: B get() = binding!!
+    protected val viewBinding: B get() = binding!!
+
+    @JvmField
+    protected var jViewBinding: B? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +30,7 @@ open class BaseViewBindingFragment<B : ViewBinding> : BaseParamsFragment(),
         savedInstanceState: Bundle?
     ): View? {
         binding = ViewBindingHelper.getViewBindingInstance(this, inflater, container, false)
+        jViewBinding = binding
         val vbCheck = requireNotNull(binding, {
             "BaseViewBindingFragment ViewBinding has not init  or init failure,please check it"
         })
