@@ -11,7 +11,7 @@ import com.foundation.app.af.utils.ext.lazyAtomic
  *-
  *create by zhusw on 5/17/21 14:19
  */
-class BaseVMApplication : Application(), ViewModelStoreOwner {
+open class BaseVMApplication : Application(), ViewModelStoreOwner {
     private val vmStore: ViewModelStore by lazyAtomic {
         ViewModelStore()
     }
@@ -20,11 +20,6 @@ class BaseVMApplication : Application(), ViewModelStoreOwner {
     override fun onCreate() {
         super.onCreate()
         _instance = this
-
-        if (this::_instance.isInitialized) {
-
-
-        }
 
     }
 

@@ -39,22 +39,4 @@
         android:text="no init"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/aui_btn"
-        app:layout_constraintTop_toBottomOf="@+id/aui_tv_desc"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="20dp"
-        android:text="显示fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:id="@+id/aui_fl"
-        app:layout_constraintTop_toBottomOf="@+id/aui_btn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constrainedHeight="true"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

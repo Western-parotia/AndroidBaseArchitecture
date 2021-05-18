@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.foundation.app.af.activity.BaseParamsActivity
 import com.foundation.app.af.utils.ext.autoBind
 import com.foundation.app.af.utils.param.BundleParams
+import com.foundation.app.simple.R
 import com.foundation.app.simple.databinding.ActUserInfoBinding
 
 
@@ -17,7 +18,7 @@ class UserInfoActivity : BaseParamsActivity() {
     val vbBinding by autoBind<ActUserInfoBinding>()
 
     @BundleParams
-    private val userId: Int = 1
+    private val userId: Int = 0
 
     @BundleParams
     private val userName: String = "none"
@@ -36,6 +37,20 @@ class UserInfoActivity : BaseParamsActivity() {
         vbBinding.auiTvAddress.text = userAddress.toString()
         vbBinding.auiTvDesc.text = userDesc.toString()
 
+        vbBinding.auiBtn.setOnClickListener {
+            val frag = UserInfoFragment()
+            val bundle = Bundle()
+            bundle.putInt("userId", 2)
+            bundle.putString("userName", "DogGi")
+            val address = UserAddress()
+            val desc = UserDesc()
+            bundle.putParcelable("address", address)
+            bundle.putParcelable("desc", desc)
+            frag.arguments = bundle
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.aui_fl, frag, "UserInfoFragment")
+                .commitNowAllowingStateLoss()
+        }
     }
 
 }

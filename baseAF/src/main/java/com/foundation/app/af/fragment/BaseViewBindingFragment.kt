@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.af.utils.ViewBindingHelper
 import com.foundation.app.af.utils.ext.ViewBindingLifecycleListener
@@ -13,9 +12,12 @@ import com.foundation.app.af.utils.ext.ViewBindingLifecycleListener
  *@Desc:
  *-
  *-完成viewBinding的初始化，设置根布局
+ * 如果继承了BaseViewBindingFragment 却不需要使用ViewBinding则不指定范型
+ * 并重写onCreateView 放弃super 调用
  *create by zhusw on 4/22/21 11:28
  */
-open class BaseViewBindingFragment<B : ViewBinding> : Fragment(), ViewBindingLifecycleListener {
+open class BaseViewBindingFragment<B : ViewBinding> : BaseParamsFragment(),
+    ViewBindingLifecycleListener {
 
     private var binding: B? = null
 

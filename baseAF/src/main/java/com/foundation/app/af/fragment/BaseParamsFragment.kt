@@ -10,7 +10,7 @@ import com.foundation.app.af.utils.param.ParamsUtils
  *-
  *create by zhusw on 5/17/21 19:10
  */
-class BaseParamsFragment : Fragment() {
+open class BaseParamsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

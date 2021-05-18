@@ -2,11 +2,9 @@ package com.foundation.app.af.utils.param
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.foundation.app.af.utils.ext.log
-import java.io.Serializable
 import java.lang.reflect.Field
 
 /**
@@ -45,7 +43,7 @@ object ParamsUtils {
     }
 
     private fun bind(p: BundleParams, field: Field, obj: Any, bundle: Bundle) {
-        val key: String = if (p.key.isEmpty()) field.name else p.key
+        val key: String = if (p.value.isEmpty()) field.name else p.value
         "bind key=$key".log(TAG)
         if (bundle.containsKey(key)) {
             "bind type=${field.type.name}".log(TAG)
@@ -77,16 +75,11 @@ object ParamsUtils {
                 Double::class.javaPrimitiveType -> {
                     bundle.getDouble(key, 0.0)
                 }
-                Serializable::class.java -> {
-                    bundle.getSerializable(key)
-                }
-                Parcelable::class.java -> {
+                else -> {
                     bundle.getParcelable(key)
                 }
-                else -> {
-                    null
-                }
             }?.apply {
+                "set value=$this".log(TAG)
                 val accessible = field.isAccessible
                 if (!accessible) field.isAccessible = true
                 field.set(obj, this)

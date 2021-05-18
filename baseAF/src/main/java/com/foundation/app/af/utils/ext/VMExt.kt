@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 /**
  *@Desc:
  *-
- *-获取application级别的VM
+ *-ViewModel 相关 拓展
  *create by zhusw on 5/17/21 16:02
  */
 
@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelStoreOwner
  */
 @MainThread
 inline fun <reified VM : ViewModel> ComponentActivity.applicationViewModels(): Lazy<VM> {
-    val app = application
+    val app = application// val app 因为 此处 是 getApplication()，返回值可变，
     return when (app) {
         is ViewModelStoreOwner -> ViewModelLazy(
             VM::class,

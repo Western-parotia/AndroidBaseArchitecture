@@ -2,7 +2,6 @@ package com.foundation.app.simple.param
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
 
 /**
  *@Desc:
@@ -10,12 +9,36 @@ import java.io.Serializable
  *-
  *create by zhusw on 5/17/21 17:52
  */
-data class UserAddress(val city: String = "shanghai", val streetNo: Int = 32) : Serializable {
+data class UserAddress(val city: String = "none", val streetNo: Int = 0) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
+        parcel.readInt()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(city)
+        parcel.writeInt(streetNo)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<UserAddress> {
+        override fun createFromParcel(parcel: Parcel): UserAddress {
+            return UserAddress(parcel)
+        }
+
+        override fun newArray(size: Int): Array<UserAddress?> {
+            return arrayOfNulls(size)
+        }
+    }
 
 }
 
 
-class UserDesc(val disposition: String = "nice", val height: Int = 180) : Parcelable {
+data class UserDesc(val disposition: String = "none", val height: Int = 0) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
