@@ -16,6 +16,8 @@ package com.foundation.app.af.utils.param
  * }
  * 如果单个参数时使用value 命名
  * @BundleParams("key1") -> 正确
+ *
+ * 另外要注意java中使用final 修饰基础数据类型和"字符串" 的编译优化问题
  */
 annotation class BundleParams(val value: String = "")
 

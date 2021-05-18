@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".param.UserInfoActivity">
-            <intent-filter></intent-filter>
+        <activity android:name=".ui.UserInfoActivity">
+
         </activity>
     </application>
 

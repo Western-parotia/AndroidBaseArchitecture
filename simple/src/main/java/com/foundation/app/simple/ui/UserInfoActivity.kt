@@ -1,12 +1,12 @@
-package com.foundation.app.simple.param
+package com.foundation.app.simple.ui
 
 import android.os.Bundle
-import com.foundation.app.af.activity.BaseVMActivity
 import com.foundation.app.af.utils.ext.autoBind
 import com.foundation.app.af.utils.param.BundleParams
-import com.foundation.app.simple.AndroidVM
 import com.foundation.app.simple.R
+import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActUserInfoBinding
+import com.foundation.app.simple.vm.AndroidVM
 
 
 /**
@@ -17,7 +17,7 @@ import com.foundation.app.simple.databinding.ActUserInfoBinding
  * scheme://xxxd/?k-v
  *
  */
-class UserInfoActivity : BaseVMActivity() {
+class UserInfoActivity : BaseActivity() {
 
     @BundleParams
     private val userId: Int = 0
@@ -34,21 +34,11 @@ class UserInfoActivity : BaseVMActivity() {
     private val vbBinding by autoBind<ActUserInfoBinding>()
     private val vm by lazyAppVM<AndroidVM>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        vm.imgLiveData.observe(this, {
-            vbBinding.auiVm.text = it
-        })
+    override fun init(savedInstanceState: Bundle?) {
+
         vbBinding.auiVm.setOnClickListener {
             vm.imgLiveData.value = "activity update img${System.currentTimeMillis()}"
         }
-
-        vbBinding.auiTvUserId.text = userId.toString()
-        vbBinding.auiTvUserName.text = userName
-
-        vbBinding.auiTvAddress.text = userAddress.toString()
-        vbBinding.auiTvDesc.text = userDesc.toString()
-
         vbBinding.auiBtn.setOnClickListener {
             val frag = UserInfoFragment()
             val bundle = Producer.create()
@@ -58,5 +48,17 @@ class UserInfoActivity : BaseVMActivity() {
                 .commitNowAllowingStateLoss()
         }
     }
+
+    override fun observeData() {
+        vbBinding.auiTvUserId.text = userId.toString()
+        vbBinding.auiTvUserName.text = userName
+        vbBinding.auiTvAddress.text = userAddress.toString()
+        vbBinding.auiTvDesc.text = userDesc.toString()
+        vm.imgLiveData.observe(this, {
+            vbBinding.auiVm.text = it
+        })
+
+    }
+
 
 }

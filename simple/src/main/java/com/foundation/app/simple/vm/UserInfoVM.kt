@@ -1,4 +1,4 @@
-package com.foundation.app.simple.architecture
+package com.foundation.app.simple.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData

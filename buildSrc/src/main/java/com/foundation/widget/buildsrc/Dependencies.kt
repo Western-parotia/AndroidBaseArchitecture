@@ -42,8 +42,9 @@ object Dependencies {
 
         /*Lifecycle 拓展协程*/
         const val lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-        const val lifecycle_liveData_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
+        /*livedata 拓展协程*/
+        const val lifecycle_liveData_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
         /*viewModel 拓展协程*/
         const val lifecycle_viewModel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     }

@@ -1,5 +1,4 @@
-package com.foundation.app.simple
-
+package com.foundation.app.simple.vm
 import androidx.lifecycle.MutableLiveData
 import com.foundation.app.af.vm.BaseViewModel
 
@@ -11,4 +10,8 @@ import com.foundation.app.af.vm.BaseViewModel
  */
 class AndroidVM : BaseViewModel() {
     val imgLiveData: MutableLiveData<String> = MutableLiveData()
+
+    fun setUrl(str: String) {
+        imgLiveData.value = str
+    }
 }

@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.foundation.app.af.BuildConfig
-import com.foundation.app.af.fragment.BaseViewBinding2Fragment
+import com.foundation.app.simple.architecture.BaseFragment2
 import com.foundation.app.simple.databinding.ActVbBinding
-import com.foundation.app.simple.param.UserAddress
-import com.foundation.app.simple.param.UserDesc
-import com.foundation.app.simple.param.UserInfoActivity
+import com.foundation.app.simple.ui.UserAddress
+import com.foundation.app.simple.ui.UserDesc
+import com.foundation.app.simple.ui.UserInfoActivity
 
 /**
  *@Desc:
@@ -29,9 +29,9 @@ class VBActivity : AppCompatActivity() {
 }
 
 
-class MyFragment : BaseViewBinding2Fragment(R.layout.act_vb) {
+class MyFragment : BaseFragment2(R.layout.act_vb) {
+
     val actVbBinding by autoBind<ActVbBinding>()
-    val vm by lazyAppVM<AndroidVM>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,6 +48,13 @@ class MyFragment : BaseViewBinding2Fragment(R.layout.act_vb) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         "4 onViewCreated Fragment state ${viewLifecycleOwner.lifecycle.currentState}".log()//state INITIALIZED
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
+
+    }
+
+    override fun observeData() {
         actVbBinding.btn.setOnClickListener {
             val intent = Intent(activity, UserInfoActivity::class.java)
             intent.putExtra("userId", 2)
