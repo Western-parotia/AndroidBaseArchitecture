@@ -79,7 +79,7 @@ abstract class BaseVMFragment : BaseParamsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(savedInstanceState)//2
-        observeData()//3
+        bindData()//3
     }
 
     /**
@@ -98,6 +98,6 @@ abstract class BaseVMFragment : BaseParamsFragment() {
      * 建议：
      * 订阅viewModel的数据并进行绑定
      */
-    protected abstract fun observeData()
+    protected abstract fun bindData()
 
 }

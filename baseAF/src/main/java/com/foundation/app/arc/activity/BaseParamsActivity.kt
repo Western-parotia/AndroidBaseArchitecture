@@ -13,7 +13,7 @@ abstract class BaseParamsActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        //此intent中可能存在逻辑分叉点，暂不提供参数自动覆盖，否则容易导致强耦合的隐士逻辑
+        //此intent中可能存在逻辑分叉点，暂不提供参数自动覆盖，否则容易导致隐式逻辑
         //如有需要自行重写调用：ParamsUtils.initWithActivity(this)
     }
 

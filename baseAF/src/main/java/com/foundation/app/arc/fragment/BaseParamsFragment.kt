@@ -3,7 +3,6 @@ package com.foundation.app.arc.fragment
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.foundation.app.arc.utils.param.ParamsUtils
 
 /**
@@ -11,7 +10,7 @@ import com.foundation.app.arc.utils.param.ParamsUtils
  *- 参数绑定配置
  *create by zhusw on 5/17/21 19:10
  */
-abstract class BaseParamsFragment : Fragment() {
+abstract class BaseParamsFragment : BaseStateFragment() {
 
     protected lateinit var hostActivity: AppCompatActivity
         private set

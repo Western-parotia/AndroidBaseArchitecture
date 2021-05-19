@@ -60,7 +60,7 @@ abstract class BaseVMActivity : BaseParamsActivity() {
         super.onCreate(savedInstanceState)
         initViewModel()//2
         init(savedInstanceState)//3
-        observeData()//4
+        bindData()//4
     }
 
     /**
@@ -84,7 +84,7 @@ abstract class BaseVMActivity : BaseParamsActivity() {
      * 建议：
      * 订阅viewModel的数据并进行绑定
      */
-    protected abstract fun observeData()
+    protected abstract fun bindData()
 
 
 }
