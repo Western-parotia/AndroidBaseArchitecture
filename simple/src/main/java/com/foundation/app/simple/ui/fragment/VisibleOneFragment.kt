@@ -17,7 +17,7 @@ import com.foundation.app.simple.ui.EmptyActivity
 
 open class VisibleOneFragment : BaseFragment2(R.layout.frag_visible) {
     private fun String.vLog() {
-        this.log("VisibleOneFragment :")
+        this.log("${VisibleOneFragment::class.java.simpleName} :")
     }
 
     private val vbBinding by initVB<FragVisibleBinding>()

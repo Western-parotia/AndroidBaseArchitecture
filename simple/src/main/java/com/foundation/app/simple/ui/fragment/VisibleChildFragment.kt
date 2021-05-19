@@ -19,7 +19,7 @@ import com.foundation.app.simple.ui.EmptyActivity
  */
 open class VisibleChildFragment : BaseFragment2(R.layout.frag_visible) {
     private fun String.vLog() {
-        this.log("VisibleMultiFragment : $text: ")
+        this.log("${VisibleChildFragment::class.java.simpleName} : $text: ")
     }
 
 
@@ -51,12 +51,11 @@ open class VisibleChildFragment : BaseFragment2(R.layout.frag_visible) {
         vbBinding.btnOpenNewPage.setOnClickListener {
             jump(EmptyActivity::class.java)
         }
-
+        vbBinding.root.setBackgroundColor(Color.parseColor("#3d3d3d"))
     }
 
     override fun bindData() {
         super.bindData()
-        vbBinding.iv.setBackgroundColor(color)
         vbBinding.btn.text = text
     }
 

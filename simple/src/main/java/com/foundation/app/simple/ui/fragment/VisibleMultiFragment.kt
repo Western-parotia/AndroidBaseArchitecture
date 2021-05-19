@@ -19,7 +19,7 @@ import com.foundation.app.simple.ui.EmptyActivity
  */
 open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
     private fun String.vLog() {
-        this.log("VisibleMultiFragment : $text: ")
+        this.log("${VisibleMultiFragment::class.java.simpleName} : $text: ")
     }
 
 
@@ -51,7 +51,15 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
         vbBinding.btnOpenNewPage.setOnClickListener {
             jump(EmptyActivity::class.java)
         }
-
+        vbBinding.btnSetChildFragment.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(
+                    R.id.fl_child,
+                    VisibleChildFragment.newInstance(color, text),
+                    "VisibleChildFragment"
+                )
+                .commitNowAllowingStateLoss()
+        }
     }
 
     override fun bindData() {

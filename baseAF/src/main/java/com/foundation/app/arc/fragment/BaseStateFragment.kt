@@ -83,7 +83,6 @@ abstract class BaseStateFragment : Fragment() {
             }
         }
     }
-
     override fun onResume() {
         super.onResume()
         if (!currentVisibleState) {

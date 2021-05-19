@@ -5,8 +5,12 @@ import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActMultiFragmentVisibleTestBinding
+import com.foundation.app.simple.jump
 import com.foundation.app.simple.ui.adapter.FragmentAdapter
 import com.foundation.app.simple.ui.fragment.VisibleMultiFragment
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  *@Desc:
@@ -27,6 +31,13 @@ class MultiFragmentVisibleTestActivity : BaseActivity() {
         )
         viewBinding.afvVp.adapter = FragmentAdapter(supportFragmentManager, fragments)
         viewBinding.afvVp.offscreenPageLimit = 1// 1 default
+        viewBinding.btn.setOnClickListener {
+            jump(EmptyActivity::class.java)
+            MainScope().launch {
+                delay(2000)
+                viewBinding.afvVp.currentItem = 2
+            }
+        }
     }
 
     override fun bindData() {
