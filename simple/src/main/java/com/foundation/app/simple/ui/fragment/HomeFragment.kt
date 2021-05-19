@@ -9,6 +9,7 @@ import com.foundation.app.simple.architecture.BaseFragment2
 import com.foundation.app.simple.databinding.ActVbBinding
 import com.foundation.app.simple.jump
 import com.foundation.app.simple.log
+import com.foundation.app.simple.ui.MultiFragmentVisibleTestActivity
 import com.foundation.app.simple.ui.SingleFragmentVisibleTestActivity
 import com.foundation.app.simple.ui.UserInfoActivity
 
@@ -54,6 +55,9 @@ class HomeFragment : BaseFragment2(R.layout.act_vb) {
         }
         actVbBinding.btnSingleVisible.setOnClickListener {
             jump(SingleFragmentVisibleTestActivity::class.java)
+        }
+        actVbBinding.btnViewPageVisible.setOnClickListener {
+            jump(MultiFragmentVisibleTestActivity::class.java)
         }
     }
 

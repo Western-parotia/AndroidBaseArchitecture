@@ -1,7 +1,6 @@
 package com.foundation.app.arc.fragment
 
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 
@@ -46,7 +45,7 @@ abstract class BaseStateFragment : Fragment() {
     }
 
     /**
-     * 当前frggment 被hide 时调用true，被show时false
+     * 当前fragment 被hide 时调用true，被show时false
      * 注意使用pageadapter 创建的fragment 不会调用此方法，而是 走 setUserVisibleHint
      * 原因很简单  pageadapter，控制显示
      * 但是onPause时，不会调用，此方法只是 fm 的 hide 跟 show 的回调
@@ -68,13 +67,9 @@ abstract class BaseStateFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        onFragmentVisibleChange(true, "onViewCreated")
-    }
-
     @CallSuper
     protected open fun onFragmentVisibleChange(isVisible: Boolean, tag: String = "") {
+        //区分重复状态 与 用户可见性
         if (currentVisibleState != isVisible) {
             currentVisibleState = isVisible
             when (isVisible) {
@@ -92,7 +87,7 @@ abstract class BaseStateFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (!currentVisibleState) {
-            onFragmentVisibleChange(true, "onResume")
+            onFragmentVisibleChange(userVisibleHint, "onResume")
         }
     }
 

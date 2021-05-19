@@ -17,7 +17,7 @@ import com.foundation.app.simple.ui.EmptyActivity
  * 单个fragment 测试
  * create by zhusw on 5/19/21 14:33
  */
-open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
+open class VisibleChildFragment : BaseFragment2(R.layout.frag_visible) {
     private fun String.vLog() {
         this.log("VisibleMultiFragment : $text: ")
     }
@@ -32,8 +32,8 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
     val text: String = "-"
 
     companion object {
-        fun newInstance(color: Int, text: String): VisibleMultiFragment {
-            val f = VisibleMultiFragment()
+        fun newInstance(color: Int, text: String): VisibleChildFragment {
+            val f = VisibleChildFragment()
             f.arguments = buildBundle(color, text)
             return f
         }

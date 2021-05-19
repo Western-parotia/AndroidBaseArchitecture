@@ -21,6 +21,7 @@
         <activity android:name=".ui.UserInfoActivity" />
         <activity android:name=".ui.SingleFragmentVisibleTestActivity" />
         <activity android:name=".ui.EmptyActivity" />
+        <activity android:name=".ui.MultiFragmentVisibleTestActivity" />
 
     </application>
 

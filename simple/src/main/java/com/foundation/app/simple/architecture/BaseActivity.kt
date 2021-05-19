@@ -1,7 +1,6 @@
 package com.foundation.app.simple.architecture
 
 import android.os.Bundle
-import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.activity.BaseVMVBActivity
 
 /**
@@ -22,6 +21,4 @@ abstract class BaseActivity : BaseVMVBActivity() {
     override fun initViewModel() {
 
     }
-
-    override fun getContentVB(): ViewBinding? = null
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.viewbinding.ViewBinding
 import com.foundation.app.simple.architecture.BaseActivity
 
 /**
@@ -19,6 +20,8 @@ class EmptyActivity : BaseActivity() {
             layoutParams = ViewGroup.LayoutParams(-1, -1)
         })
     }
+
+    override fun getContentVB(): ViewBinding? = null
 
     override fun init(savedInstanceState: Bundle?) {
 
