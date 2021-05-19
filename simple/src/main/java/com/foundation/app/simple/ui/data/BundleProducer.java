@@ -1,13 +1,12 @@
-package com.foundation.app.simple.ui;
-
+package com.foundation.app.simple.ui.data;
 import android.os.Bundle;
 
 /**
  * @Desc: -
- * -
+ * - 测试java 基本参数类型
  * create by zhusw on 5/18/21 10:39
  */
-public class Producer {
+public class BundleProducer {
     public static Bundle create() {
         Bundle bundle = new Bundle();
         bundle.putInt("userId", 1);

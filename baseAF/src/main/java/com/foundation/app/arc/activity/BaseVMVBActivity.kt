@@ -1,19 +1,23 @@
 package com.foundation.app.arc.activity
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.annotation.MainThread
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.ext.AFViewModelLazy
 import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
  *@Desc:
- *- ViewModel 创建与使用规范
- *create by zhusw on 5/18/21 15:05
+ * ViewModel 创建与使用规范
+ * ViewBinding 初始化与简化
+ * create by zhusw on 5/18/21 15:05
  */
-abstract class BaseVMActivity : BaseParamsActivity() {
+abstract class BaseVMVBActivity : BaseParamsActivity() {
     protected val activityVMProvider by lazyAtomic {
         ViewModelProvider(this)
     }
@@ -56,17 +60,31 @@ abstract class BaseVMActivity : BaseParamsActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        beforeOnCreate(savedInstanceState)//1
+        beforeSuperOnCreate(savedInstanceState)//1
         super.onCreate(savedInstanceState)
-        initViewModel()//2
-        init(savedInstanceState)//3
-        bindData()//4
+        afterSuperOnCreate(savedInstanceState)//2
+        getContentVB()?.let { setContentView(it.root) }//3
+        initViewModel()//4
+        init(savedInstanceState)//5
+        bindData()//6
     }
 
     /**
+     * super.onCreate 之前回调
      * 支持一些特殊的窗口配置需要在onCreate之前设置
      */
-    protected abstract fun beforeOnCreate(savedInstanceState: Bundle?)
+    protected abstract fun beforeSuperOnCreate(savedInstanceState: Bundle?)
+
+    /**
+     *
+     * super.onCreate 之后回调
+     */
+    abstract fun afterSuperOnCreate(savedInstanceState: Bundle?)
+
+    /**
+     * 将ViewBinding.root 设置为根布局
+     */
+    abstract fun getContentVB(): ViewBinding?
 
     /**
      * 主要是支持在java中使用，在kotlin中可用[lazyActivityVM]
@@ -76,7 +94,7 @@ abstract class BaseVMActivity : BaseParamsActivity() {
     /**
      * 建议：
      * 1.view初始化,比如是否开启下拉刷新
-     * 2.初始数据加载执
+     * 2.调用数据加载
      */
     protected abstract fun init(savedInstanceState: Bundle?)
 
@@ -86,5 +104,9 @@ abstract class BaseVMActivity : BaseParamsActivity() {
      */
     protected abstract fun bindData()
 
+    protected inline fun <reified VB : ViewBinding> Activity.initVB() = lazyAtomic {
+        VB::class.java.getMethod("inflate", LayoutInflater::class.java)
+            .invoke(null, layoutInflater) as VB
+    }
 
 }

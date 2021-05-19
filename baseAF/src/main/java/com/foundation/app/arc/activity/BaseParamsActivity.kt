@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.foundation.app.arc.utils.param.ParamsUtils
 
 /**
- *@Desc:VM 快捷初始化
- *create by zhusw on 5/17/21 15:12
+ * 1
+ *
+ * VM 快捷初始化
+ *
+ * create by zhusw on 5/17/21 15:12
  */
 abstract class BaseParamsActivity : AppCompatActivity() {
 
@@ -21,6 +24,4 @@ abstract class BaseParamsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ParamsUtils.initWithActivity(this)
     }
-
-
 }

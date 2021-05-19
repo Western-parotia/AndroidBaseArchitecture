@@ -1,4 +1,4 @@
-package com.foundation.app.simple.ui
+package com.foundation.app.simple.ui.data
 
 import android.os.Parcel
 import android.os.Parcelable

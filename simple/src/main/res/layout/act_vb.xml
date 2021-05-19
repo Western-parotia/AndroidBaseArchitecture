@@ -7,6 +7,13 @@
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
-        android:text="打开新的Activity，传参数"
+        android:text="参数绑定测试"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_single_visible"
+        android:layout_width="wrap_content"
+        android:text="但fragment 可见性测试"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

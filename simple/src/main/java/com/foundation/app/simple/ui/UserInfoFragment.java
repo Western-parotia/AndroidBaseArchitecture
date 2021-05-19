@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.foundation.app.arc.utils.param.BundleParams;
 import com.foundation.app.simple.architecture.BaseFragment;
 import com.foundation.app.simple.databinding.FragUserInfoBinding;
-import com.foundation.app.simple.vm.AndroidVM;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
  * create by zhusw on 5/18/21 09:40
  */
 public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
-    AndroidVM vm;
 
     @BundleParams()
     private int userId = -1;
@@ -23,13 +21,9 @@ public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
     @BundleParams()
     private String userName = "none";
 
-    private UserAddress userAddress;
-
-    private UserDesc userDesc;
-
     @Override
     public void initViewModel() {
-        vm = getAppVM(AndroidVM.class);
+
     }
 
     @Override
@@ -38,13 +32,8 @@ public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
     }
 
     @Override
-    protected void observeData() {
+    protected void bindData() {
         jViewBinding.auiTvUserId.setText(String.valueOf(userId));
         jViewBinding.auiTvUserName.setText(userName);
-//        jViewBinding.auiTvAddress.setText(userAddress.toString());
-//        jViewBinding.auiTvDesc.setText(userDesc.toString());
-        vm.getImgLiveData().observe(getViewLifecycleOwner(), s -> {
-            jViewBinding.auiTvVm.setText(s);
-        });
     }
 }

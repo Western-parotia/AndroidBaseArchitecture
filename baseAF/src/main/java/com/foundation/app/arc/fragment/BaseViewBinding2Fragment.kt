@@ -11,8 +11,7 @@ import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
 
 /**
  *@Desc:
- *- 为了约束仅在子类中可用自动绑定对[autoBind] [bind]都进行了内部约束
- *- layoutId 作为减少[onCreateView]模版代码的替代品
+ *- 约束在子类中使用[initVB] 时 必须设置 layoutId
  *- create by zhusw on 5/18/21 10:46
  */
 abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
@@ -22,13 +21,10 @@ abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
      * 懒加载赋值
      * viewBinding 销毁前调用 [onViewBindingDestroy]
      */
-    protected inline fun <reified VB : ViewBinding> autoBind() = FragmentViewBindingDelegate<VB> {
-        requireView().bind()
-    }
-
-    protected inline fun <reified VB : ViewBinding> View.bind(): VB =
+    protected inline fun <reified VB : ViewBinding> initVB() = FragmentViewBindingDelegate {
         VB::class.java.getMethod("bind", View::class.java)
-            .invoke(null, this) as VB
+            .invoke(null, requireView()) as VB
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

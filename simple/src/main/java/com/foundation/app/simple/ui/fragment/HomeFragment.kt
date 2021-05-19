@@ -1,37 +1,26 @@
-package com.foundation.app.simple
+package com.foundation.app.simple.ui.fragment
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.foundation.app.arc.BuildConfig
+import com.foundation.app.simple.R
 import com.foundation.app.simple.architecture.BaseFragment2
 import com.foundation.app.simple.databinding.ActVbBinding
-import com.foundation.app.simple.ui.UserAddress
-import com.foundation.app.simple.ui.UserDesc
+import com.foundation.app.simple.jump
+import com.foundation.app.simple.log
+import com.foundation.app.simple.ui.SingleFragmentVisibleTestActivity
 import com.foundation.app.simple.ui.UserInfoActivity
 
 /**
  *@Desc:
  *-
  *-
- *create by zhusw on 5/11/21 14:42
+ *create by zhusw on 5/19/21 13:32
  */
+class HomeFragment : BaseFragment2(R.layout.act_vb) {
 
-class VBActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, MyFragment(), "MyFragment")
-            .commitNowAllowingStateLoss()
-    }
-}
-
-
-class MyFragment : BaseFragment2(R.layout.act_vb) {
-
-    val actVbBinding by autoBind<ActVbBinding>()
+    val actVbBinding by initVB<ActVbBinding>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,20 +40,25 @@ class MyFragment : BaseFragment2(R.layout.act_vb) {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
-    }
-
-    override fun observeData() {
+        "init savedInstanceState".log()
         actVbBinding.btn.setOnClickListener {
             val intent = Intent(activity, UserInfoActivity::class.java)
             intent.putExtra("userId", 2)
             intent.putExtra("userName", "DogGi")
-            val address = UserAddress("beijing", 99)
-            val desc = UserDesc("friendly", 170)
-            intent.putExtra("address", address)
-            intent.putExtra("desc", desc)
+            //不支持传递实体
+//            val address = UserAddress("beijing", 99)
+//            val desc = UserDesc("friendly", 170)
+//            intent.putExtra("address", address)
+//            intent.putExtra("desc", desc)
             startActivity(intent)
         }
+        actVbBinding.btnSingleVisible.setOnClickListener {
+            jump(SingleFragmentVisibleTestActivity::class.java)
+        }
+    }
+
+    override fun bindData() {
+        "init observeData".log()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -93,7 +87,6 @@ class MyFragment : BaseFragment2(R.layout.act_vb) {
     override fun onStop() {
         super.onStop()
         "onStop Fragment state ${viewLifecycleOwner.lifecycle.currentState}".log() //state CREATED
-
     }
 
     override fun onViewBindingDestroy() {
@@ -123,12 +116,4 @@ class MyFragment : BaseFragment2(R.layout.act_vb) {
     }
 
 
-}
-
-
-private const val TAG = "baseAF"
-fun String.log(secTag: String = "") {
-    if (BuildConfig.DEBUG) {
-        println("$TAG $secTag $this")
-    }
 }

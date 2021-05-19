@@ -2,8 +2,8 @@ package com.foundation.app.arc.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
-import com.foundation.app.arc.utils.ext.log
 
 /**
  *@Desc:
@@ -11,8 +11,8 @@ import com.foundation.app.arc.utils.ext.log
  *- fragment 状态管理，首次显示，显示，隐藏,视图重用
  *create by zhusw on 5/19/21 09:44
  */
-abstract class BaseStateFragment : Fragment() {
 
+abstract class BaseStateFragment : Fragment() {
     private var neverVisibleBefore = true
     private var currentVisibleState = false
 
@@ -73,8 +73,8 @@ abstract class BaseStateFragment : Fragment() {
         onFragmentVisibleChange(true, "onViewCreated")
     }
 
-    private fun onFragmentVisibleChange(isVisible: Boolean, tag: String = "") {
-        "onFragmentVisibleChange $tag".log()
+    @CallSuper
+    protected open fun onFragmentVisibleChange(isVisible: Boolean, tag: String = "") {
         if (currentVisibleState != isVisible) {
             currentVisibleState = isVisible
             when (isVisible) {
@@ -87,7 +87,20 @@ abstract class BaseStateFragment : Fragment() {
                 }
             }
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        if (!currentVisibleState) {
+            onFragmentVisibleChange(true, "onResume")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (currentVisibleState) {
+            onFragmentVisibleChange(false, "onPause")
+        }
     }
 
 }

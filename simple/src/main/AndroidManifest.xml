@@ -11,16 +11,17 @@
         android:name=".CustomApplication"
         android:theme="@style/Theme.LoadingViewGroup">
         <activity
-            android:name=".VBActivity"
+            android:name=".ui.HomeActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.UserInfoActivity">
+        <activity android:name=".ui.UserInfoActivity" />
+        <activity android:name=".ui.SingleFragmentVisibleTestActivity" />
+        <activity android:name=".ui.EmptyActivity" />
 
-        </activity>
     </application>
 
 </manifest>

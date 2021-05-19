@@ -1,7 +1,8 @@
 package com.foundation.app.simple.architecture
 
 import android.os.Bundle
-import com.foundation.app.arc.activity.BaseVMActivity
+import androidx.viewbinding.ViewBinding
+import com.foundation.app.arc.activity.BaseVMVBActivity
 
 /**
  *@Desc:
@@ -9,8 +10,12 @@ import com.foundation.app.arc.activity.BaseVMActivity
  *-
  *create by zhusw on 5/18/21 18:38
  */
-abstract class BaseActivity : BaseVMActivity() {
-    override fun beforeOnCreate(savedInstanceState: Bundle?) {
+abstract class BaseActivity : BaseVMVBActivity() {
+    override fun beforeSuperOnCreate(savedInstanceState: Bundle?) {
+
+    }
+
+    override fun afterSuperOnCreate(savedInstanceState: Bundle?) {
 
     }
 
@@ -18,4 +23,5 @@ abstract class BaseActivity : BaseVMActivity() {
 
     }
 
+    override fun getContentVB(): ViewBinding? = null
 }
