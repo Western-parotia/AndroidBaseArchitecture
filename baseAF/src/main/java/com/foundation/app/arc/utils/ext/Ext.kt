@@ -1,7 +1,7 @@
-package com.foundation.app.af.utils.ext
+package com.foundation.app.arc.utils.ext
 
 import androidx.annotation.MainThread
-import com.foundation.app.af.BuildConfig
+import com.foundation.app.arc.BuildConfig
 
 /**
  *@Desc:

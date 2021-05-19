@@ -1,10 +1,10 @@
-package com.foundation.app.af.fragment
+package com.foundation.app.arc.fragment
 
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.foundation.app.af.utils.param.ParamsUtils
+import com.foundation.app.arc.utils.param.ParamsUtils
 
 /**
  *@Desc:

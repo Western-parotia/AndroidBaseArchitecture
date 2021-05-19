@@ -1,4 +1,4 @@
-package com.foundation.app.af.utils.param
+package com.foundation.app.arc.utils.param
 
 /**
  *@Desc:

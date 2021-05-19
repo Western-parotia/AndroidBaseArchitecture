@@ -1,8 +1,8 @@
 package com.foundation.app.simple.ui
 
 import android.os.Bundle
-import com.foundation.app.af.utils.ext.autoBind
-import com.foundation.app.af.utils.param.BundleParams
+import com.foundation.app.arc.utils.ext.autoBind
+import com.foundation.app.arc.utils.param.BundleParams
 import com.foundation.app.simple.R
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActUserInfoBinding

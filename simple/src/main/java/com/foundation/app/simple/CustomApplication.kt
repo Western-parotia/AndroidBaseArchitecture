@@ -1,6 +1,6 @@
 package com.foundation.app.simple
 
-import com.foundation.app.af.app.BaseVMApplication
+import com.foundation.app.arc.app.BaseVMApplication
 
 /**
  *@Desc:

@@ -1,4 +1,4 @@
-package com.foundation.app.af.fragment
+package com.foundation.app.arc.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.viewbinding.ViewBinding
-import com.foundation.app.af.utils.ext.FragmentViewBindingDelegate
-import com.foundation.app.af.utils.ext.ViewBindingLifecycleListener
+import com.foundation.app.arc.utils.ext.FragmentViewBindingDelegate
+import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
 
 /**
  *@Desc:

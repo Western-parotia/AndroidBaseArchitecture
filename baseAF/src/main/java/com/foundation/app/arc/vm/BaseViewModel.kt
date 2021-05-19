@@ -1,4 +1,4 @@
-package com.foundation.app.af.vm
+package com.foundation.app.arc.vm
 import androidx.lifecycle.ViewModel
 
 /**

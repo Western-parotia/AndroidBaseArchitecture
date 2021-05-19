@@ -1,4 +1,4 @@
-package com.foundation.app.af.utils
+package com.foundation.app.arc.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

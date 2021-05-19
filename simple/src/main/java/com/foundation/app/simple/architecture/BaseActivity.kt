@@ -1,7 +1,7 @@
 package com.foundation.app.simple.architecture
 
 import android.os.Bundle
-import com.foundation.app.af.activity.BaseVMActivity
+import com.foundation.app.arc.activity.BaseVMActivity
 
 /**
  *@Desc:

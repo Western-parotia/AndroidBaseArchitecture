@@ -1,6 +1,6 @@
 package com.foundation.app.simple.vm
 import androidx.lifecycle.MutableLiveData
-import com.foundation.app.af.vm.BaseViewModel
+import com.foundation.app.arc.vm.BaseViewModel
 
 /**
  *@Desc:

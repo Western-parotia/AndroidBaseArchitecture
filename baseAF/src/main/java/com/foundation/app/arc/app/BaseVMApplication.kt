@@ -1,9 +1,9 @@
-package com.foundation.app.af.app
+package com.foundation.app.arc.app
 
 import android.app.Application
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
-import com.foundation.app.af.utils.ext.lazyAtomic
+import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
  *@Desc:

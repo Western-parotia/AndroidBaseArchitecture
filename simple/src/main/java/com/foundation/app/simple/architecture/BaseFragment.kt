@@ -1,7 +1,7 @@
 package com.foundation.app.simple.architecture
 
 import androidx.viewbinding.ViewBinding
-import com.foundation.app.af.fragment.BaseViewBindingFragment
+import com.foundation.app.arc.fragment.BaseViewBindingFragment
 
 /**
  *@Desc:

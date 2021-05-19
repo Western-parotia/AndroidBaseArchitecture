@@ -2,7 +2,7 @@ package com.foundation.app.simple.ui;
 
 import android.os.Bundle;
 
-import com.foundation.app.af.utils.param.BundleParams;
+import com.foundation.app.arc.utils.param.BundleParams;
 import com.foundation.app.simple.architecture.BaseFragment;
 import com.foundation.app.simple.databinding.FragUserInfoBinding;
 import com.foundation.app.simple.vm.AndroidVM;

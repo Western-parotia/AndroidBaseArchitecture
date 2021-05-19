@@ -1,10 +1,10 @@
-package com.foundation.app.af.utils.param
+package com.foundation.app.arc.utils.param
 
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.foundation.app.af.utils.ext.log
+import com.foundation.app.arc.utils.ext.log
 import java.lang.reflect.Field
 
 /**

@@ -1,7 +1,7 @@
 package com.foundation.app.simple.architecture
 
 import androidx.annotation.LayoutRes
-import com.foundation.app.af.fragment.BaseViewBinding2Fragment
+import com.foundation.app.arc.fragment.BaseViewBinding2Fragment
 
 /**
  *@Desc:

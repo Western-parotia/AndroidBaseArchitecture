@@ -1,4 +1,4 @@
-package com.foundation.app.af.utils.ext
+package com.foundation.app.arc.utils.ext
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle

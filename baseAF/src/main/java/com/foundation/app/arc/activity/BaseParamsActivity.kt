@@ -1,9 +1,9 @@
-package com.foundation.app.af.activity
+package com.foundation.app.arc.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.foundation.app.af.utils.param.ParamsUtils
+import com.foundation.app.arc.utils.param.ParamsUtils
 
 /**
  *@Desc:VM 快捷初始化

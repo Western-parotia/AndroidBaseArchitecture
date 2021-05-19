@@ -1,4 +1,4 @@
-package com.foundation.app.af.utils.ext
+package com.foundation.app.arc.utils.ext
 
 import android.app.Activity
 import android.app.Dialog
