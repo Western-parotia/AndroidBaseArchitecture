@@ -37,6 +37,7 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs.getByName("normalSign")
 //            isMinifyEnabled = true
+            multiDexEnabled = true
         }
 
     }

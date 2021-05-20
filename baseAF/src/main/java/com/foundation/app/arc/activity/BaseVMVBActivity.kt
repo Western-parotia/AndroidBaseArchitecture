@@ -18,10 +18,11 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
  * create by zhusw on 5/18/21 15:05
  */
 abstract class BaseVMVBActivity : BaseParamsActivity() {
-    protected val activityVMProvider by lazyAtomic {
+
+    val activityVMProvider by lazyAtomic {
         ViewModelProvider(this)
     }
-    protected val applicationVMProvider by lazyAtomic {
+    val applicationVMProvider by lazyAtomic {
         val app = application ?: throw IllegalStateException(
             "$this is not attach application." +
                     "Activity 不可以在 onCreate 之前使用  ViewModel"
@@ -47,13 +48,27 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
         return applicationVMProvider.get(clz)
     }
 
+    /**
+    protected val testStr = ""
+    protected inline fun testI() {
+    val t = {
+    testStr // protected val testStr = ""
+    }
+    t.invoke()
+    }
+    如果内部使用了 lambda 或者匿名内部类 就会导致无法访问（仅在小米k30 os 10 上不复现）
+     */
     @MainThread
-    protected inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
-        return AFViewModelLazy(VM::class) { activityVMProvider }
+    inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
+        return AFViewModelLazy(VM::class, object : Function0<ViewModelProvider> {
+            override fun invoke(): ViewModelProvider {
+                return activityVMProvider
+            }
+        })
     }
 
     @MainThread
-    protected inline fun <reified VM : ViewModel> lazyAppVM(): Lazy<VM> {
+    inline fun <reified VM : ViewModel> lazyAppVM(): Lazy<VM> {
         return AFViewModelLazy(VM::class) {
             applicationVMProvider
         }

@@ -9,15 +9,14 @@ import com.foundation.app.simple.databinding.ActHomeWanandroidBinding
 /**
  * create by zhusw on 5/20/21 11:33
  */
+
 class HomeActivity : BaseActivity() {
+//    java.lang.IllegalAccessError: Method com.xx is inaccessible to class com.xx declaration of com.xx appears in base.apk!classes2.dex
 
     private val homeVM by lazyActivityVM<HomeVM>()
-//    private val homeVM by viewModels<HomeVM>()
-
     private val viewBinding by initVB<ActHomeWanandroidBinding>()
 
     override fun getContentVB(): ViewBinding = viewBinding
-
     override fun init(savedInstanceState: Bundle?) {
         viewBinding.btnStart.setOnClickListener {
             homeVM.loadBanner()
@@ -34,4 +33,5 @@ class HomeActivity : BaseActivity() {
             viewBinding.tvErrorMsg.text = it
         }
     }
+
 }
