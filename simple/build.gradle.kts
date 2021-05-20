@@ -36,7 +36,7 @@ android {
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("normalSign")
-            isMinifyEnabled = true
+//            isMinifyEnabled = true
         }
 
     }
@@ -76,6 +76,8 @@ dependencies {
     implementation(Dependencies.Ktx.fragment_ktx)
     implementation(Dependencies.Foundation.loading)
     implementation(Dependencies.Retrofit.retorifit)
+    implementation(Dependencies.Retrofit.converter_gson)
+    implementation(Dependencies.Dex.multidex)
     implementation(project(":baseAF"))
 
 }

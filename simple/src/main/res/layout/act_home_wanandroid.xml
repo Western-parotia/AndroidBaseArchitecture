@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_banner"
+        tools:background="#dac"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        app:layout_constraintDimensionRatio="16:9"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/tv_banner_title"
+        android:textSize="20dp"
+        android:text="Banner Title"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_banner"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:background="#f0000000"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_errorMsg"
+        app:layout_constraintBottom_toTopOf="@+id/btn_start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="错误信息展示"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/btn_start"
+        android:text="请求"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

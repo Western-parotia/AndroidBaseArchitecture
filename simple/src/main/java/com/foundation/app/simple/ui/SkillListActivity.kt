@@ -3,7 +3,7 @@ package com.foundation.app.simple.ui
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.simple.architecture.BaseActivity
-import com.foundation.app.simple.ui.fragment.HomeFragment
+import com.foundation.app.simple.ui.fragment.SkillListFragment
 
 /**
  *@Desc:
@@ -12,13 +12,13 @@ import com.foundation.app.simple.ui.fragment.HomeFragment
  *create by zhusw on 5/11/21 14:42
  */
 
-class HomeActivity : BaseActivity() {
+class SkillListActivity : BaseActivity() {
 
     override fun getContentVB(): ViewBinding? = null
 
     override fun init(savedInstanceState: Bundle?) {
         supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, HomeFragment(), "HomeFragment")
+            .replace(android.R.id.content, SkillListFragment(), "SkillListFragment")
             .commitNowAllowingStateLoss()
     }
 

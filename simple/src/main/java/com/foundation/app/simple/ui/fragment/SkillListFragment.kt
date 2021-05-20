@@ -7,6 +7,7 @@ import android.view.View
 import com.foundation.app.simple.R
 import com.foundation.app.simple.architecture.BaseFragment2
 import com.foundation.app.simple.databinding.ActVbBinding
+import com.foundation.app.simple.demo.home.HomeActivity
 import com.foundation.app.simple.jump
 import com.foundation.app.simple.log
 import com.foundation.app.simple.ui.MultiFragmentVisibleTestActivity
@@ -19,7 +20,7 @@ import com.foundation.app.simple.ui.UserInfoActivity
  *-
  *create by zhusw on 5/19/21 13:32
  */
-class HomeFragment : BaseFragment2(R.layout.act_vb) {
+class SkillListFragment : BaseFragment2(R.layout.act_vb) {
 
     val actVbBinding by initVB<ActVbBinding>()
 
@@ -58,6 +59,9 @@ class HomeFragment : BaseFragment2(R.layout.act_vb) {
         }
         actVbBinding.btnViewPageVisible.setOnClickListener {
             jump(MultiFragmentVisibleTestActivity::class.java)
+        }
+        actVbBinding.btnVm.setOnClickListener {
+            jump(HomeActivity::class.java)
         }
     }
 

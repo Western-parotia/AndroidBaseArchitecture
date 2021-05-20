@@ -17,7 +17,7 @@
         android:name=".CustomApplication"
         android:theme="@style/Theme.LoadingViewGroup">
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".ui.SkillListActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
         <activity android:name=".ui.SingleFragmentVisibleTestActivity" />
         <activity android:name=".ui.EmptyActivity" />
         <activity android:name=".ui.MultiFragmentVisibleTestActivity" />
-        <activity android:name=".ui.net.NetSimpleActivity" />
+        <activity android:name=".demo.home.HomeActivity" />
 
     </application>
 

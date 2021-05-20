@@ -15,6 +15,11 @@ repositories {
 
 allprojects {
     repositories {
+        maven { setUrl("http://maven.aliyun.com/nexus/content/groups/public/") }
+        maven { setUrl("https://maven.aliyun.com/repository/public/") }
+        maven { setUrl("https://maven.aliyun.com/repository/google/") }
+        maven { setUrl("https://maven.aliyun.com/repository/jcenter/") }
+        maven { setUrl("https://maven.aliyun.com/repository/central/") }
         google()
         jcenter()
         maven { setUrl("https://jitpack.io") }
