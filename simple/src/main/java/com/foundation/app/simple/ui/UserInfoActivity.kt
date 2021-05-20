@@ -19,10 +19,10 @@ import com.foundation.app.simple.ui.data.BundleProducer
  */
 class UserInfoActivity : BaseActivity() {
 
-    @BundleParams
+    @BundleParams("userId")
     private val userId: Int = 0
 
-    @BundleParams
+    @BundleParams("userId")
     private val userName: String = "none"
 
     private val vbBinding by initVB<ActUserInfoBinding>()

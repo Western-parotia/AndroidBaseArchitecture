@@ -15,10 +15,10 @@ import org.jetbrains.annotations.Nullable;
  */
 public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
 
-    @BundleParams()
+    @BundleParams("userId")
     private int userId = -1;
 
-    @BundleParams()
+    @BundleParams("userName")
     private String userName = "none";
 
     @Override

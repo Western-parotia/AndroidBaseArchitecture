@@ -19,7 +19,7 @@ package com.foundation.app.arc.utils.param
  *
  * 另外要注意java中使用final 修饰基础数据类型和"字符串" 的编译优化问题
  */
-annotation class BundleParams(val value: String = "")
+annotation class BundleParams(val value: String)
 
 /*在java中需要显式的赋值 key 字段
 annotation class BundleParams(val key: String = "") {

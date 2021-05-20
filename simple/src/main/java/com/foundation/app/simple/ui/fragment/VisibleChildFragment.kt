@@ -25,10 +25,10 @@ open class VisibleChildFragment : BaseFragment2(R.layout.frag_visible) {
 
     private val vbBinding by initVB<FragVisibleBinding>()
 
-    @BundleParams
+    @BundleParams("color")
     val color: Int = Color.parseColor("#3e3e3e")
 
-    @BundleParams
+    @BundleParams("text")
     val text: String = "-"
 
     companion object {

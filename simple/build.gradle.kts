@@ -36,7 +36,9 @@ android {
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("normalSign")
+            isMinifyEnabled = true
         }
+
     }
     buildFeatures {
         viewBinding = true
