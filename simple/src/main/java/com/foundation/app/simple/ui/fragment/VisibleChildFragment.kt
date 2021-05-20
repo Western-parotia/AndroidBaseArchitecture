@@ -51,17 +51,18 @@ open class VisibleChildFragment : BaseFragment2(R.layout.frag_visible) {
         vbBinding.btnOpenNewPage.setOnClickListener {
             jump(EmptyActivity::class.java)
         }
-        vbBinding.root.setBackgroundColor(Color.parseColor("#3d3d3d"))
     }
 
     override fun bindData() {
         super.bindData()
         vbBinding.btn.text = text
+        vbBinding.root.setBackgroundColor(Color.WHITE)
     }
 
+
     override fun onFragmentVisibleChange(isVisible: Boolean, tag: String) {
+        "onFragmentVisibleChange $tag : isVisible=$isVisible parentVisible=${checkParentFragmentIsVisible()}".vLog()//1
         super.onFragmentVisibleChange(isVisible, tag)
-        "onFragmentVisibleChange $tag : isVisible=$isVisible userVis=$userVisibleHint state=${lifecycle.currentState}".vLog()//1
     }
 
     override fun onVisible(isFirst: Boolean) {

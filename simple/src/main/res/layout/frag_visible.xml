@@ -2,26 +2,26 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:background="#3e3e3e"
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn"
             android:layout_width="wrap_content"
             android:text="---"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:layout_height="wrap_content" />
 
         <Button
@@ -37,10 +37,9 @@
             android:layout_height="wrap_content" />
 
         <FrameLayout
-            android:background="#dda"
             android:id="@+id/fl_child"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="300dp" />
     </LinearLayout>
 
 </FrameLayout>

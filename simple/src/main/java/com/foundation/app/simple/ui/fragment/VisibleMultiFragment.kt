@@ -55,11 +55,12 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
             childFragmentManager.beginTransaction()
                 .replace(
                     R.id.fl_child,
-                    VisibleChildFragment.newInstance(color, text),
+                    VisibleChildFragment.newInstance(color, "$text Child"),
                     "VisibleChildFragment"
                 )
                 .commitNowAllowingStateLoss()
         }
+        vbBinding.flChild.setBackgroundColor(Color.LTGRAY)
     }
 
     override fun bindData() {
@@ -69,8 +70,9 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
     }
 
     override fun onFragmentVisibleChange(isVisible: Boolean, tag: String) {
-        super.onFragmentVisibleChange(isVisible, tag)
         "onFragmentVisibleChange $tag : isVisible=$isVisible userVis=$userVisibleHint state=${lifecycle.currentState}".vLog()//1
+        super.onFragmentVisibleChange(isVisible, tag)
+
     }
 
     override fun onVisible(isFirst: Boolean) {

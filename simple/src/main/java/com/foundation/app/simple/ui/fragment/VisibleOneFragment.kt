@@ -53,8 +53,8 @@ open class VisibleOneFragment : BaseFragment2(R.layout.frag_visible) {
     }
 
     override fun onFragmentVisibleChange(isVisible: Boolean, tag: String) {
-        super.onFragmentVisibleChange(isVisible, tag)
         "onFragmentVisibleChange $tag : isVisible=$isVisible userVis=$userVisibleHint".vLog()//1
+        super.onFragmentVisibleChange(isVisible, tag)
     }
 
     override fun onVisible(isFirst: Boolean) {

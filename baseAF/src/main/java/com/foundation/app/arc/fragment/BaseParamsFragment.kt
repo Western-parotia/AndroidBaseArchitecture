@@ -10,7 +10,7 @@ import com.foundation.app.arc.utils.param.ParamsUtils
  *- 参数绑定配置
  *create by zhusw on 5/17/21 19:10
  */
-abstract class BaseParamsFragment : BaseStateFragment() {
+abstract class BaseParamsFragment : BaseVisibilityFragment() {
 
     protected lateinit var hostActivity: AppCompatActivity
         private set

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
  *create by zhusw on 5/19/21 09:44
  */
 
-abstract class BaseStateFragment : Fragment() {
+abstract class BaseVisibilityFragment : Fragment() {
     private var neverVisibleBefore = true
     private var currentVisibleState = false
 
@@ -67,27 +67,66 @@ abstract class BaseStateFragment : Fragment() {
         }
     }
 
+    //isVisible=$isVisible userVis=$userVisibleHint isAdded=$isAdded isHidden=$isHidden view v=${view?.visibility==View.VISIBLE}
+    //在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
+    //所以真实的状态需要参考父 fragment 是否可见
     @CallSuper
     protected open fun onFragmentVisibleChange(isVisible: Boolean, tag: String = "") {
+        //支持子fragment 完全跟随 父fragment 可见状态
+        val realVisible = isVisible && checkParentFragmentIsVisible()
         //区分重复状态 与 用户可见性
-        if (currentVisibleState != isVisible) {
-            currentVisibleState = isVisible
-            when (isVisible) {
+        if (realVisible != currentVisibleState) {
+            currentVisibleState = realVisible
+            when (realVisible) {
                 true -> {
                     onVisible(neverVisibleBefore)
                     neverVisibleBefore = false
                 }
-                false -> {
-                    onHidden()
+                false -> onHidden()
+            }
+        }
+        //每次的parentFragment的变化都需要通知 childFragment
+        childFragmentManager.fragments.forEach {
+            when (it) {
+                is BaseVisibilityFragment -> {
+                    it.onParentFragmentVisibleChanged(realVisible)
                 }
             }
         }
     }
+
+    /**
+     * parentFragment 也必须是[BaseVisibilityFragment] 才完全有效
+     * 如果不是则只判断 userVisibleHint，isAdded,!isHidden
+     * @return parentFragment是否可见
+     *
+     */
+    protected fun checkParentFragmentIsVisible(): Boolean {
+        return when (val pf: Fragment? = parentFragment) {
+            null -> true
+            is BaseVisibilityFragment -> {
+                pf.currentVisibleState
+            }
+            else -> {
+                pf.userVisibleHint || (pf.isAdded && !pf.isHidden)
+            }
+        }
+    }
+
+    private fun onParentFragmentVisibleChanged(isVisible: Boolean) {
+        //当父fragment 的状态与子不同时，重新检查子的 状态
+        if (isVisible != currentVisibleState) {
+            val realVisible = userVisibleHint || (isAdded && !isHidden)
+            onFragmentVisibleChange(realVisible, "onParentFragmentVisibleChanged")
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         if (!currentVisibleState) {
             onFragmentVisibleChange(userVisibleHint, "onResume")
         }
+
     }
 
     override fun onPause() {

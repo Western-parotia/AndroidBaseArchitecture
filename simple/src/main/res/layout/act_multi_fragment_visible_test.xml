@@ -11,7 +11,7 @@
 
     <Button
         android:id="@+id/btn"
-        android:text="打开页面"
+        android:text="打开页面后，选中其他fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </FrameLayout>
