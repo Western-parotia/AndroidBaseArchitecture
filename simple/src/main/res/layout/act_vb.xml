@@ -22,4 +22,9 @@
         android:text="viewPage fragment 可见性测试"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/btn_vm"
+        android:layout_width="wrap_content"
+        android:text="vm repo 网络示例"
+        android:layout_height="wrap_content" />
 </LinearLayout>

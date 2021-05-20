@@ -74,7 +74,8 @@ dependencies {
     implementation(Dependencies.Ktx.lifecycle_runtime_ktx)
     implementation(Dependencies.Ktx.lifecycle_viewModel_ktx)
     implementation(Dependencies.Ktx.fragment_ktx)
-    implementation("com.foundation.widget:loading:1.0-SNAPSHOT")
+    implementation(Dependencies.Foundation.loading)
+    implementation(Dependencies.Retrofit.retorifit)
     implementation(project(":baseAF"))
 
 }
