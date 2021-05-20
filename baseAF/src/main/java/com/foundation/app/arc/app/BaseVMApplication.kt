@@ -8,7 +8,7 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
 /**
  *@Desc:
  *-
- *-
+ *- 你并不一定要继承[BaseVMApplication] ,仅需要实现[ViewModelStoreOwner]
  *create by zhusw on 5/17/21 14:19
  */
 open class BaseVMApplication : Application(), ViewModelStoreOwner {
