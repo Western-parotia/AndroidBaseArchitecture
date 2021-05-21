@@ -24,10 +24,9 @@ private class StickLessWrapperObserver<T>(
 ) :
     Observer<T> {
     private val initVersion: Int
-    private val versionField: Field
+    private val versionField: Field = LiveData::class.java.getDeclaredField("mVersion")
 
     init {
-        versionField = LiveData::class.java.getDeclaredField("mVersion")
         initVersion = getVersion()
     }
 
