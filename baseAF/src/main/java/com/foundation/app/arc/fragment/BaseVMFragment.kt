@@ -17,14 +17,14 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
  */
 abstract class BaseVMFragment : BaseParamsFragment() {
 
-    protected val fragmentVMProvider: ViewModelProvider by lazyAtomic {
+    val fragmentVMProvider: ViewModelProvider by lazyAtomic {
         ViewModelProvider(this)
     }
-    protected val activityVMProvider by lazyAtomic {
+    val activityVMProvider by lazyAtomic {
         val activity = requireActivity()
         ViewModelProvider(activity)
     }
-    protected val applicationVMProvider by lazyAtomic {
+    val applicationVMProvider by lazyAtomic {
         val activity = requireActivity()
         val app = activity.application ?: throw IllegalStateException(
             "$hostActivity 还没有 attached to application." +
@@ -56,17 +56,17 @@ abstract class BaseVMFragment : BaseParamsFragment() {
     }
 
     @MainThread
-    protected inline fun <reified VM : ViewModel> lazyFragmentVM(): Lazy<VM> {
+    inline fun <reified VM : ViewModel> lazyFragmentVM(): Lazy<VM> {
         return AFViewModelLazy(VM::class) { fragmentVMProvider }
     }
 
     @MainThread
-    protected inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
+    inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
         return AFViewModelLazy(VM::class) { activityVMProvider }
     }
 
     @MainThread
-    protected inline fun <reified VM : ViewModel> lazyAppVM(): Lazy<VM> {
+    inline fun <reified VM : ViewModel> lazyAppVM(): Lazy<VM> {
         return AFViewModelLazy(VM::class) { applicationVMProvider }
     }
 
