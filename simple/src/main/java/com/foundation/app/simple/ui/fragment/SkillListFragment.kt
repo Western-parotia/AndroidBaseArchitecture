@@ -12,6 +12,7 @@ import com.foundation.app.simple.jump
 import com.foundation.app.simple.log
 import com.foundation.app.simple.ui.MultiFragmentVisibleTestActivity
 import com.foundation.app.simple.ui.SingleFragmentVisibleTestActivity
+import com.foundation.app.simple.ui.StickyLiveDataActivity
 import com.foundation.app.simple.ui.UserInfoActivity
 
 /**
@@ -63,6 +64,10 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
         actVbBinding.btnVm.setOnClickListener {
             jump(HomeActivity::class.java)
         }
+        actVbBinding.btnLd.setOnClickListener {
+            jump(StickyLiveDataActivity::class.java)
+        }
+
     }
 
     override fun bindData() {

@@ -29,6 +29,7 @@
         <activity android:name=".ui.EmptyActivity" />
         <activity android:name=".ui.MultiFragmentVisibleTestActivity" />
         <activity android:name=".demo.home.HomeActivity" />
+        <activity android:name=".ui.StickyLiveDataActivity" />
 
     </application>
 

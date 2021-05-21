@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="粘性"
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="---"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sticky"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="粘性 Count +1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="非 粘性"
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="---"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sticky_less"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="非 粘性 Count +1" />
+</LinearLayout>

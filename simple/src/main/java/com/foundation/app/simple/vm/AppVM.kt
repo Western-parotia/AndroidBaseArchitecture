@@ -5,13 +5,11 @@ import com.foundation.app.arc.vm.BaseViewModel
 /**
  *@Desc:
  *-
- *-
+ *-模拟粘性事件
  *create by zhusw on 5/18/21 11:02
  */
-class AndroidVM : BaseViewModel() {
-    val imgLiveData: MutableLiveData<String> = MutableLiveData()
+class AppVM : BaseViewModel() {
+    val stickyData: MutableLiveData<Int> = MutableLiveData()
+    val stickyLessData: MutableLiveData<Int> = MutableLiveData()
 
-    fun setUrl(str: String) {
-        imgLiveData.value = str
-    }
 }
