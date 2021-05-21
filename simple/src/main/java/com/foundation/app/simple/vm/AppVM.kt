@@ -9,7 +9,6 @@ import com.foundation.app.arc.vm.BaseViewModel
  *create by zhusw on 5/18/21 11:02
  */
 class AppVM : BaseViewModel() {
-    val stickyData: MutableLiveData<Int> = MutableLiveData()
-    val stickyLessData: MutableLiveData<Int> = MutableLiveData()
+    val data: MutableLiveData<Int> = MutableLiveData()
 
 }
