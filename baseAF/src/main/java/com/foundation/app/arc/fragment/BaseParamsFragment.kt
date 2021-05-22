@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.foundation.app.arc.utils.param.ParamsUtils
 
 /**
- *@Desc:
- *- 参数绑定配置
+
+*- 参数绑定配置
  *create by zhusw on 5/17/21 19:10
  */
 abstract class BaseParamsFragment : BaseVisibilityFragment() {

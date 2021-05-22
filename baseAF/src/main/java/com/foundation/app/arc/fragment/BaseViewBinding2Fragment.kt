@@ -10,9 +10,8 @@ import com.foundation.app.arc.utils.ext.FragmentViewBindingDelegate
 import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
 
 /**
- *@Desc:
- *- 约束在子类中使用[initVB] 时 必须设置 layoutId
- *- create by zhusw on 5/18/21 10:46
+ * 约束在子类中使用[initVB] 时 必须设置 layoutId
+ * create by zhusw on 5/18/21 10:46
  */
 abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
     BaseVMFragment(), ViewBindingLifecycleListener {

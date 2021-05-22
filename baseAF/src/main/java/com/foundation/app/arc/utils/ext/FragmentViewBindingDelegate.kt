@@ -9,16 +9,12 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 /**
- *@Desc:
- *-
- *- 使用此委托fragment 必须在BaseFragment中传入 layoutId
+ * 使用此委托fragment 必须在BaseFragment中传入 layoutId
  * 如果有base层，确保支持布局id，像下面这样来声明BaseFragment
  * open class MyBaseFragment(@LayoutRes id:Int=0):Fragment(id){}
  * class MyFragment : MyBaseFragment(R.layout.act_vb)
- *create by zhusw on 5/12/21 15:19
+ * create by zhusw on 5/12/21 15:19
  */
-
-
 class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () -> VB) :
     ReadOnlyProperty<Fragment, VB> {
     private var binding: VB? = null

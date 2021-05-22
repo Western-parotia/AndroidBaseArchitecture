@@ -1,8 +1,8 @@
 package com.foundation.app.arc.utils.param
 
 /**
- *@Desc:
- *-activity，fragment 自动初始化参数注解
+
+*-activity，fragment 自动初始化参数注解
  *create by zhusw on 5/17/21 16:26
  */
 @Target(AnnotationTarget.FIELD)

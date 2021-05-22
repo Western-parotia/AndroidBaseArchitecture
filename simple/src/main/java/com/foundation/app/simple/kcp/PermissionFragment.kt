@@ -12,9 +12,9 @@ import androidx.fragment.app.FragmentActivity
 import java.util.*
 
 /**
- *@Desc:
- *-
- *-
+
+ *
+ *
  *create by zhusw on 2020/11/19 17:48
  */
 internal class PermissionFragment : Fragment() {

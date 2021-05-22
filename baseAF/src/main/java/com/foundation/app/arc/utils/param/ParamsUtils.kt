@@ -8,10 +8,10 @@ import com.foundation.app.arc.utils.ext.log
 import java.lang.reflect.Field
 
 /**
- *@Desc:
- *-支持全部基本类型
+
+ * 支持全部基本类型
  *
- *-
+ *
  *create by zhusw on 5/17/21 16:32
  */
 object ParamsUtils {

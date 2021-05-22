@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import kotlin.reflect.KClass
 
 /**
- *@Desc:
- *-
- *-ViewModel 相关 拓展
+ *
+ * ViewModel 相关 拓展
  *create by zhusw on 5/17/21 16:02
  */
 

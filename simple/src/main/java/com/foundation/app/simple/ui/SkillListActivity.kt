@@ -6,8 +6,8 @@ import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.ui.fragment.SkillListFragment
 
 /**
- *@Desc:
- *-
+
+*-
  *-
  *create by zhusw on 5/11/21 14:42
  */

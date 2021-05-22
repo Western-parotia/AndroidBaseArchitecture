@@ -16,8 +16,8 @@ import com.foundation.app.simple.ui.StickyLiveDataActivity
 import com.foundation.app.simple.ui.UserInfoActivity
 
 /**
- *@Desc:
- *-
+
+*-
  *-
  *create by zhusw on 5/19/21 13:32
  */

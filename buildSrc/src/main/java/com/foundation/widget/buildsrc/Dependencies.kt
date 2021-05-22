@@ -1,9 +1,9 @@
 package com.foundation.widget.buildsrc
 
 /**
- *@Desc:
- *-
- *-依赖声明
+
+ *
+ * 依赖声明
  *create by zhusw on 5/6/21 15:45
  */
 object Dependencies {

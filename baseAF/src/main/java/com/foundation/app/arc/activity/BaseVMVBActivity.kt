@@ -12,7 +12,6 @@ import com.foundation.app.arc.utils.ext.AFViewModelLazy
 import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
- *@Desc:
  * ViewModel 创建与使用规范
  * ViewBinding 初始化与简化
  * create by zhusw on 5/18/21 15:05

@@ -5,9 +5,7 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 
 /**
- *@Desc:
- *-
- *- fragment 状态管理，首次显示，显示，隐藏,视图重用
+ * fragment 状态管理，首次显示，显示，隐藏,视图重用
  *create by zhusw on 5/19/21 09:44
  */
 

@@ -9,8 +9,8 @@ import com.foundation.app.simple.databinding.ActSingleFragmentVisibleTestBinding
 import com.foundation.app.simple.ui.fragment.VisibleOneFragment
 
 /**
- *@Desc:
- *-
+
+*-
  *- 测试 单个 fragment 可见性回调
  *create by zhusw on 5/19/21 13:24
  */
