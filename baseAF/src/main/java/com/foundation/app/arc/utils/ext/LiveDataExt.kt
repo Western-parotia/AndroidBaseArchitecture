@@ -45,7 +45,6 @@ private class StickLessWrapperObserver<T>(
 
     override fun onChanged(t: T) {
         val curVersion = getVersion()
-        "initVersion=$initVersion curVersion=$curVersion".log("StickyLess")
         if (curVersion > initVersion) {
             realObs.onChanged(t)
         }
