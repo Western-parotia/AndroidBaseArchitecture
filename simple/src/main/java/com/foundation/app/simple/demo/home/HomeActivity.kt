@@ -14,6 +14,7 @@ class HomeActivity : BaseActivity() {
 //    java.lang.IllegalAccessError: Method com.xx is inaccessible to class com.xx declaration of com.xx appears in base.apk!classes2.dex
 
     private val homeVM by lazyActivityVM<HomeVM>()
+
     private val viewBinding by initVB<ActHomeWanandroidBinding>()
 
     override fun getContentVB(): ViewBinding = viewBinding
@@ -21,6 +22,7 @@ class HomeActivity : BaseActivity() {
         viewBinding.btnStart.setOnClickListener {
             homeVM.loadBanner()
         }
+
     }
 
     override fun bindData() {
@@ -29,8 +31,8 @@ class HomeActivity : BaseActivity() {
                 .into(viewBinding.ivBanner)
             viewBinding.tvBannerTitle.text = it[1].title
         }
-        homeVM.errorMsg.observe(this) {
-            viewBinding.tvErrorMsg.text = it
+        homeVM.errorLiveData.observe(this) {
+            viewBinding.tvErrorMsg.text = it.errorMessage
         }
     }
 

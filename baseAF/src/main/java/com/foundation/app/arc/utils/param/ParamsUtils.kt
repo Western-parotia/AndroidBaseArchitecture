@@ -1,6 +1,7 @@
 package com.foundation.app.arc.utils.param
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,8 +18,8 @@ import java.lang.reflect.Field
 object ParamsUtils {
     private val TAG = ParamsUtils::class.java.simpleName
 
-    fun initWithActivity(activity: Activity) {
-        activity.intent?.extras?.let {
+    fun initWithActivity(activity: Activity, intent: Intent?) {
+        intent?.extras?.let {
             initParams(activity, it)
         }
     }
