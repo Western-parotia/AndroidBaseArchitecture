@@ -76,14 +76,22 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        beforeSuperOnCreate(savedInstanceState)//1
-        super.onCreate(savedInstanceState)
-        afterSuperOnCreate(savedInstanceState)//2
+        val state = if (supportRebuildData()) savedInstanceState else null
+        beforeSuperOnCreate(state)//1
+        super.onCreate(state)
+        afterSuperOnCreate(state)//2
         getContentVB()?.let { setContentView(it.root) }//3
         initViewModel()//4
-        init(savedInstanceState)//5
+        init(state)//5
         bindData()//6
     }
+
+    /**
+     * 是否支持activity被杀死后重建（就是savedInstanceState相关数据）
+     *
+     * @return 默认不支持。如果返回true，则必须测试杀死后重建的流程
+     */
+    protected open fun supportRebuildData() = false
 
     /**
      * super.onCreate 之前回调

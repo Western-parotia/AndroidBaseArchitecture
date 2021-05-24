@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import java.lang.reflect.Field
 
 /**
+ * 同一observer对象多次订阅[observerStickyLess]和[LiveData.observe]只会有一次生效
  * 订阅无粘性消息，使用到了反射 liveData的 mVersion
  * 反射谣言：在Android 大可不必考虑反射的性能开销。在个位数指令执行测试中，反射1w次
  * 裸调 多消耗 16 ms， 使用缓存 多消耗 2ms
@@ -38,8 +39,10 @@ private class StickLessWrapperObserver<T>(
     override fun equals(other: Any?): Boolean {
         if (other is StickLessWrapperObserver<*>) {
             return realObs == other.realObs
+        } else if (other is Observer<*>) {
+            return realObs == other
         }
-        return super.equals(other)
+        return false
     }
 //</editor-fold>
 
@@ -54,7 +57,7 @@ private class StickLessWrapperObserver<T>(
         if (!versionField.isAccessible) {
             versionField.isAccessible = true
         }
-        return versionField.get(liveData) as Int
+        return versionField.getInt(liveData)
     }
 
 }
