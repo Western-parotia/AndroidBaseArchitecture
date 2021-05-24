@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.foundation.app.arc.vm.BaseViewModel
 import com.foundation.app.simple.demo.home.data.BannerEntity
-import com.foundation.app.simple.demo.net.BaseApiException
+import com.foundation.app.simple.demo.net.WanAndroidResException
 
 /**
  *
  */
-class HomeVM : BaseViewModel<BaseApiException>() {
+class HomeVM : BaseViewModel<WanAndroidResException>() {
     private val homeRepo by lazy {
         HomeRepo(viewModelScope, _errorLiveData)
     }

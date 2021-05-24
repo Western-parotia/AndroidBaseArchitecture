@@ -32,7 +32,7 @@ class HomeActivity : BaseActivity() {
             viewBinding.tvBannerTitle.text = it[1].title
         }
         homeVM.errorLiveData.observe(this) {
-            viewBinding.tvErrorMsg.text = it.errorMessage
+            viewBinding.tvErrorMsg.text = it.msg
         }
     }
 
