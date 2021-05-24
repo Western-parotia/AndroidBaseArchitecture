@@ -1,36 +1,31 @@
 package com.foundation.app.simple.demo.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.foundation.app.arc.vm.BaseViewModel
 import com.foundation.app.simple.demo.home.data.BannerEntity
-import com.foundation.app.simple.demo.net.RetrofitManager
-import com.foundation.app.simple.demo.net.api.WanAndroidService
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.foundation.app.simple.demo.net.BaseApiException
 
 /**
  *
  */
-class HomeVM : BaseViewModel() {
+class HomeVM : BaseViewModel<BaseApiException>() {
+    private val homeRepo by lazy {
+        HomeRepo(viewModelScope, _errorLiveData)
+    }
 
-    val bannerData = MutableLiveData<List<BannerEntity>>()
+    private val _bannerData = MutableLiveData<List<BannerEntity>>()
+
+    /**
+     * 核心架构 思想：保证单一可信源
+     * view层只能订阅状态，不可修改状态
+     */
+    val bannerData: LiveData<List<BannerEntity>> = _bannerData
 
     fun loadBanner() {
-
-        viewModelScope.launch(ex) {
-            val data = withContext(Dispatchers.Default) {
-                RetrofitManager.getApiService(WanAndroidService::class.java)
-                    .getBanner()
-                    .formatData()
-            }
-            bannerData.value = data
-        }
+        homeRepo.getBanner(_bannerData)
     }
 
-    private val ex = CoroutineExceptionHandler { coroutineContext, throwable ->
-        errorMsg.value = "请求发生错误:$throwable"
-    }
+
 }

@@ -1,8 +1,7 @@
 package com.foundation.app.simple
 
-import android.content.Context
-import androidx.multidex.MultiDex
 import com.foundation.app.arc.app.BaseVMApplication
+import com.foundation.app.simple.utils.Utils
 
 /**
 
@@ -11,8 +10,12 @@ import com.foundation.app.arc.app.BaseVMApplication
  *create by zhusw on 5/18/21 11:26
  */
 class CustomApplication : BaseVMApplication() {
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(base)
+    companion object {
+        lateinit var app: CustomApplication
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        Utils.init(this)
     }
 }
