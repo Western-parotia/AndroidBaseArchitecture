@@ -10,9 +10,6 @@ import com.foundation.app.simple.utils.Utils
  *create by zhusw on 5/18/21 11:26
  */
 class CustomApplication : BaseVMApplication() {
-    companion object {
-        lateinit var app: CustomApplication
-    }
 
     override fun onCreate() {
         super.onCreate()

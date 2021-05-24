@@ -7,8 +7,8 @@ import android.app.Application
  */
 object Utils {
 
-    private lateinit var _application: Application
-    val app = _application
+    private var _application: Application? = null
+    val app = _application!!
     fun init(app: Application) {
         _application = app
     }
