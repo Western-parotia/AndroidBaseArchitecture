@@ -1,6 +1,7 @@
 package com.foundation.app.simple.demo.net
 
 import com.foundation.app.simple.demo.net.api.ApiUrl
+import com.foundation.service.net.addUrlSkill
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,6 +14,7 @@ object RetrofitFactory {
         }
 
     fun factory(): Retrofit {
+        okHttpClientBuilder.addUrlSkill()
         val okHttpClient = okHttpClientBuilder.build()
         return Retrofit.Builder()
             .client(okHttpClient)

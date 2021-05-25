@@ -3,10 +3,11 @@ package com.foundation.app.simple.demo.home
 import androidx.lifecycle.MutableLiveData
 import com.foundation.app.simple.demo.entity.BaseApiResponse
 import com.foundation.app.simple.demo.home.data.BannerEntity
+import com.foundation.app.simple.demo.net.ApiManager
 import com.foundation.app.simple.demo.net.BaseApiException
-import com.foundation.app.simple.demo.net.RetrofitManager
 import com.foundation.app.simple.demo.net.WanAndroidResException
 import com.foundation.app.simple.demo.net.api.WanAndroidService
+import com.foundation.app.simple.demo.net.getApi
 import com.foundation.app.simple.log
 import kotlinx.coroutines.*
 import retrofit2.Response
@@ -19,9 +20,10 @@ class HomeRepo(
     val errorLiveData: MutableLiveData<WanAndroidResException>
 ) {
 
-    val api = RetrofitManager.getApiService(WanAndroidService::class.java)
+    val api = ApiManager.getApi<WanAndroidService>()
 
     fun getBanner(receiver: MutableLiveData<List<BannerEntity>>) {
+        "${Any::class.java == Object::class.java}".log("kj--")
         wiseLaunch {
             val data: List<BannerEntity> = filerBus {
                 api.getBanner()

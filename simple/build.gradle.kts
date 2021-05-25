@@ -80,6 +80,7 @@ dependencies {
     implementation(Dependencies.Retrofit.converter_gson)
     implementation(Dependencies.Dex.multidex)
     implementation(project(":baseAF"))
+    implementation(project(":net"))
 
 }
 repositories {

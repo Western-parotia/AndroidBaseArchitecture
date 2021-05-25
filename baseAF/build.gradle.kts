@@ -56,7 +56,6 @@ dependencies {
     implementation(Dependencies.Coroutines.coroutines_android)
     implementation(Dependencies.Ktx.lifecycle_viewModel_ktx)
     implementation(Dependencies.Ktx.fragment_ktx)
-    implementation(project(":net"))
 
 }
 
