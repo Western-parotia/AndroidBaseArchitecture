@@ -38,7 +38,7 @@ object Dependencies {
     }
 
     object Retrofit {
-        const val retorifit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val retorifit = "com.squareup.retrofit2:retrofit:2.9.0"//依赖okhttp 3.14.9
         const val converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"
 
     }

@@ -7,7 +7,7 @@ plugins {
     `maven-publish`
 }
 
-apply("common.gradle")
+apply("../common.gradle")
 
 val versionTimestamp = Publish.Version.getVersionTimestamp()
 
@@ -56,6 +56,7 @@ dependencies {
     implementation(Dependencies.Coroutines.coroutines_android)
     implementation(Dependencies.Ktx.lifecycle_viewModel_ktx)
     implementation(Dependencies.Ktx.fragment_ktx)
+    implementation(project(":net"))
 
 }
 
