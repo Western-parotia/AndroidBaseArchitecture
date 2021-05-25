@@ -4,56 +4,76 @@ import androidx.lifecycle.MutableLiveData
 import com.foundation.app.simple.demo.entity.BaseApiResponse
 import com.foundation.app.simple.demo.home.data.BannerEntity
 import com.foundation.app.simple.demo.net.ApiManager
-import com.foundation.app.simple.demo.net.BaseApiException
 import com.foundation.app.simple.demo.net.WanAndroidResException
 import com.foundation.app.simple.demo.net.api.WanAndroidService
 import com.foundation.app.simple.demo.net.getApi
 import com.foundation.app.simple.log
-import kotlinx.coroutines.*
+import com.foundation.service.net.NetException
+import com.foundation.service.net.NetStateListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import retrofit2.Response
 
 /**
  * create by zhusw on 5/24/21 09:58
  */
 class HomeRepo(
-    val uiCoroutineScope: CoroutineScope,
-    val errorLiveData: MutableLiveData<WanAndroidResException>
-) {
+    uiCoroutineScope: CoroutineScope,
+    val errorLiveData: MutableLiveData<WanAndroidResException>,
+    val loadingLiveData: MutableLiveData<LoadingState>
+) : BaseRepo<WanAndroidResException>(uiCoroutineScope) {
 
     val api = ApiManager.getApi<WanAndroidService>()
 
+
     fun getBanner(receiver: MutableLiveData<List<BannerEntity>>) {
-        "${Any::class.java == Object::class.java}".log("kj--")
-        wiseLaunch {
-            val data: List<BannerEntity> = filerBus {
+        netLaunch({
+            val data: List<BannerEntity> = take {
                 api.getBanner()
             }
-            //继续
+            delay(3000)//看loading 效果
             receiver.value = data
-        }
 
+        }, object : NetStateListener {
+            override fun onStart() {
+                loadingLiveData.value = LoadingState.LOADING_START
+            }
+
+            override fun onSuccess() {
+                loadingLiveData.value = LoadingState.LOADING_STOP
+            }
+
+            override fun onFailure(e: Throwable) {
+                loadingLiveData.value = LoadingState.LOADING_ERROR
+                handlerNetException(e, errorLiveData)
+            }
+        })
     }
 
-    fun wiseLaunch(block: suspend () -> Unit): Job {
-        return uiCoroutineScope.launch(coroutineExceptionHandler) {
-            block.invoke()
-        }
-    }
 
-    private val coroutineExceptionHandler: CoroutineExceptionHandler =
-        CoroutineExceptionHandler { context, throwable ->
-            when (throwable) {
-                is WanAndroidResException -> {
-                    errorLiveData.postValue(throwable)
-                }
-                else -> {
-                    "HomeRepo eror $throwable".log()
-                }
+    override fun handlerNetException(
+        e: Throwable,
+        errorLiveData: MutableLiveData<WanAndroidResException>?
+    ) {
+        when (e) {
+            is NetException -> {
+                "NetException: $e".log("net--")
+            }
+            is WanAndroidResException -> {
+                "WanAndroidResException: $e".log("net--")
+            }
+            else -> {
+                "else: $e".log("net--")
             }
         }
 
-    private suspend fun <T> filerBus(block: suspend () -> Response<BaseApiResponse<T>>): T {
-        val baseRes = filterRes(block)
+    }
+
+    /**
+     * 业务层处理
+     */
+    private suspend fun <T> take(block: suspend () -> Response<BaseApiResponse<T>>): T {
+        val baseRes: BaseApiResponse<T> = takeResponse(block)!!
         //过滤业务状态码
         return when (baseRes.errorCode) {
             0 -> {
@@ -65,19 +85,5 @@ class HomeRepo(
         }
     }
 
-    private suspend fun <T> filterRes(block: suspend () -> Response<T>): T {
-        val res = withIO(block) //Response<BaseApiResponse<List<BannerEntity>>>
-        return when {
-            res.isSuccessful -> {
-                res.body() ?: throw BaseApiException(res)
-            }
-            else -> throw BaseApiException(res)
-        }
-    }
 
-    suspend fun <T> withIO(block: suspend () -> T): T {
-        return withContext(Dispatchers.IO) {
-            block.invoke()
-        }
-    }
 }

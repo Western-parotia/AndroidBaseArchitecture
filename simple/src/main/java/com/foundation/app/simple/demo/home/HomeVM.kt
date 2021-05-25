@@ -12,16 +12,19 @@ import com.foundation.app.simple.demo.net.WanAndroidResException
  */
 class HomeVM : BaseViewModel<WanAndroidResException>() {
     private val homeRepo by lazy {
-        HomeRepo(viewModelScope, _errorLiveData)
+        HomeRepo(viewModelScope, _errorLiveData, _loadState)
     }
 
     private val _bannerData = MutableLiveData<List<BannerEntity>>()
+    private val _loadState = MutableLiveData<LoadingState>()
 
     /**
      * 核心架构 思想：保证单一可信源
      * view层只能订阅状态，不可修改状态
      */
     val bannerData: LiveData<List<BannerEntity>> = _bannerData
+
+    val loadState: LiveData<LoadingState> = _loadState
 
     fun loadBanner() {
         homeRepo.getBanner(_bannerData)

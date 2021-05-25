@@ -16,7 +16,7 @@ class CustomApplication : BaseVMApplication() {
     override fun onCreate() {
         super.onCreate()
         Utils.init(this)
-        NetManager.init(RetrofitFactory.factory())
+        NetManager.init(RetrofitFactory.factory(), BuildConfig.DEBUG)
 
     }
 }

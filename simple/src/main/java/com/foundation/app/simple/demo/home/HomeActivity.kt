@@ -22,10 +22,22 @@ class HomeActivity : BaseActivity() {
         viewBinding.btnStart.setOnClickListener {
             homeVM.loadBanner()
         }
-
     }
 
     override fun bindData() {
+        homeVM.loadState.observe(this) {
+            when (it) {
+                LoadingState.LOADING_START -> {
+                    viewBinding.contentLoading.asLoading().showLoading()
+                }
+                LoadingState.LOADING_STOP -> {
+                    viewBinding.contentLoading.asLoading().stop()
+                }
+                LoadingState.LOADING_ERROR -> {
+
+                }
+            }
+        }
         homeVM.bannerData.observe(this) {
             Glide.with(this).load(it[1].imagePath)
                 .into(viewBinding.ivBanner)

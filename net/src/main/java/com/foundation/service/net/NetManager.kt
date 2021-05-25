@@ -12,7 +12,8 @@ import java.util.concurrent.atomic.AtomicBoolean
  * create by zhusw on 5/25/21 10:52
  */
 object NetManager : IRetrofitUrlSkill {
-
+    internal var debug = BuildConfig.DEBUG
+        private set
     private val skill: IRetrofitUrlSkill by lazy {
         UrkSkill()
     }
@@ -28,10 +29,11 @@ object NetManager : IRetrofitUrlSkill {
      * 不保证多线程安全，但是会以最早传入的对象为准
      * 参考 lazy(Atomic 模式)
      */
-    fun init(retrofit: Retrofit) {
+    fun init(retrofit: Retrofit, debug: Boolean) {
         if (!initState.get()) {
             initState.set(true)
             this.retrofit = retrofit
+            this.debug = debug
         }
     }
 

@@ -43,6 +43,7 @@ dependencies {
     implementation(Dependencies.Ktx.core_ktx)
     implementation(Dependencies.Retrofit.retorifit)
     implementation(Dependencies.Retrofit.url_manager)
+    implementation(Dependencies.Coroutines.coroutines_android)
 
 }
 
