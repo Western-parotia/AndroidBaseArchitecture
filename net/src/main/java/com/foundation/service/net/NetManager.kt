@@ -6,6 +6,9 @@ import retrofit2.Retrofit
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
+ * 网络管理器：init 之后 可获取 apiService,并对其进行缓存优化内存
+ * 支持全局动态修改域名
+ * @see [more_Introduction]("http://xx.com")
  * create by zhusw on 5/25/21 10:52
  */
 object NetManager : IRetrofitUrlSkill {
