@@ -1,5 +1,6 @@
 package com.foundation.service.net
 
+import com.foundation.service.net.utils.NetState
 import okhttp3.Request
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -10,7 +11,7 @@ import retrofit2.Response
 open class NetException(res: Response<*>? = null) : Throwable() {
 
     var netMsg: String = ""
-    var netCode: Int = -1
+    var netCode: Int = NetState.CODE_NORMAL
     var errorBody: ResponseBody? = null
         private set
 
@@ -30,6 +31,6 @@ open class NetException(res: Response<*>? = null) : Throwable() {
     }
 
     override fun toString(): String {
-        return "netCode:$netCode netMsg:$netMsg"
+        return "netCode:$netCode netMsg:$netMsg request:$request"
     }
 }

@@ -17,6 +17,7 @@ open class NetRepository(val uiCoroutineScope: CoroutineScope) {
             if (!NetState.networkIsAvailable(NetManager.app)) {
                 throw NetException().apply {
                     netCode = NetState.CODE_NETWORK_OFF
+                    netMsg = "network is unavailable"
                 }
             }
             state?.onStart()

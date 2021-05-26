@@ -10,6 +10,6 @@ import retrofit2.http.GET
  */
 interface WanAndroidService {
 
-    @GET("banner/json")
+    @GET("banner1/json")
     suspend fun getBanner(): Response<BaseApiResponse<List<BannerEntity>>>
 }
