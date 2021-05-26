@@ -1,6 +1,8 @@
 package com.foundation.service.net
 
-import com.foundation.service.net.utils.NetState
+import com.foundation.service.net.utils.NetStateType
+import com.foundation.service.net.utils.networkIsAvailable
+import com.foundation.service.net.utils.transformHttpException
 import kotlinx.coroutines.*
 import retrofit2.Response
 
@@ -11,12 +13,13 @@ open class NetRepository(val uiCoroutineScope: CoroutineScope) {
 
     fun launch(block: suspend CoroutineScope.() -> Unit, state: NetStateListener? = null) {
         val exHandler = CoroutineExceptionHandler { _, throwable ->
-            state?.onFailure(throwable)
+            val transformThrowable = transformHttpException(throwable)
+            state?.onFailure(transformThrowable)
         }
         uiCoroutineScope.launch(exHandler) {
-            if (!NetState.networkIsAvailable(NetManager.app)) {
-                throw NetException().apply {
-                    netCode = NetState.CODE_NETWORK_OFF
+            if (!networkIsAvailable(NetManager.app)) {
+                throw NetException(NetStateType.CODE_NETWORK_OFF).apply {
+                    netCode = NetStateType.CODE_NETWORK_OFF.value
                     netMsg = "network is unavailable"
                 }
             }
@@ -33,7 +36,7 @@ open class NetRepository(val uiCoroutineScope: CoroutineScope) {
             res.isSuccessful -> {
                 res.body()
             }
-            else -> throw NetException(res)
+            else -> throw NetException(NetStateType.CODE_RESPONSE_ERROR, res)
         }
     }
 

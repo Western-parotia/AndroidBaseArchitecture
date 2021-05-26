@@ -38,7 +38,7 @@ class HomeActivity : BaseActivity() {
                 }
             }
         }
-        homeVM.bannerData.observe(this) {
+        homeVM.getBannerDataOut().observe(this) {
             Glide.with(this).load(it[1].imagePath)
                 .into(viewBinding.ivBanner)
             viewBinding.tvBannerTitle.text = it[1].title
