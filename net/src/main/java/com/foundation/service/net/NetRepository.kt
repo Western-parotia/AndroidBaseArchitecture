@@ -28,7 +28,7 @@ open class NetRepository(val uiCoroutineScope: CoroutineScope) {
 
 
     protected suspend fun <T> takeResponse(block: suspend () -> Response<T>): T? {
-        val res = withIO(block) //Response<BaseApiResponse<List<BannerEntity>>>
+        val res = withIO(block) //Response<BaseApiResponse<List<YourData>>>
         return when {
             res.isSuccessful -> {
                 res.body()
