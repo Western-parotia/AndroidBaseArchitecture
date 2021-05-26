@@ -3,13 +3,13 @@ package com.foundation.app.simple.demo.home
 import androidx.lifecycle.MutableLiveData
 import com.foundation.app.simple.demo.entity.BaseApiResponse
 import com.foundation.app.simple.demo.home.data.BannerEntity
-import com.foundation.app.simple.demo.net.ApiManager
 import com.foundation.app.simple.demo.net.WanAndroidResException
 import com.foundation.app.simple.demo.net.api.WanAndroidService
-import com.foundation.app.simple.demo.net.getApi
 import com.foundation.app.simple.log
 import com.foundation.service.net.NetException
+import com.foundation.service.net.NetManager
 import com.foundation.service.net.NetStateListener
+import com.foundation.service.net.getApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import retrofit2.Response
@@ -23,17 +23,15 @@ class HomeRepo(
     val loadingLiveData: MutableLiveData<LoadingState>
 ) : BaseRepo<WanAndroidResException>(uiCoroutineScope) {
 
-    val api = ApiManager.getApi<WanAndroidService>()
-
+    val api = NetManager.getApiService<WanAndroidService>()
 
     fun getBanner(receiver: MutableLiveData<List<BannerEntity>>) {
-        netLaunch({
+        launch({
             val data: List<BannerEntity> = take {
                 api.getBanner()
             }
             delay(3000)//看loading 效果
             receiver.value = data
-
         }, object : NetStateListener {
             override fun onStart() {
                 loadingLiveData.value = LoadingState.LOADING_START

@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity() {
                     viewBinding.contentLoading.asLoading().stop()
                 }
                 LoadingState.LOADING_ERROR -> {
-
+                    viewBinding.contentLoading.asLoading().stop()
                 }
             }
         }

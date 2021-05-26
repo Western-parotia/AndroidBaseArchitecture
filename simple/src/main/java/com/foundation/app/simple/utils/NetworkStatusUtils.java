@@ -1,6 +1,5 @@
 package com.foundation.app.simple.utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -11,9 +10,6 @@ import android.os.Build;
  * create by zhusw on 5/24/21 16:07
  */
 public class NetworkStatusUtils {
-    public static void init(Application app) {
-
-    }
 
     public static boolean networkIsConnected(Context context) {
         if (null != context) {
@@ -41,6 +37,7 @@ public class NetworkStatusUtils {
                     return isWifiConnected || isMobileConnected;
                 }
             } else {
+
                 throw new NullPointerException("cann not obtain  ConnectivityManager," +
                         "check internet permission  or Mobile Phone Network Setting");
             }

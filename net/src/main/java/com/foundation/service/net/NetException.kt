@@ -7,12 +7,10 @@ import retrofit2.Response
 /**
  * create by zhusw on 5/20/21 14:30
  */
-open class NetException(res: Response<*>?) : Throwable() {
+open class NetException(res: Response<*>? = null) : Throwable() {
 
     var netMsg: String = ""
-        private set
     var netCode: Int = -1
-        private set
     var errorBody: ResponseBody? = null
         private set
 
@@ -31,4 +29,7 @@ open class NetException(res: Response<*>?) : Throwable() {
         }
     }
 
+    override fun toString(): String {
+        return "netCode:$netCode netMsg:$netMsg"
+    }
 }

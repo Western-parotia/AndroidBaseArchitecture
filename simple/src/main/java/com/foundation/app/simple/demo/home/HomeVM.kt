@@ -16,7 +16,8 @@ class HomeVM : BaseViewModel<WanAndroidResException>() {
     }
 
     private val _bannerData = MutableLiveData<List<BannerEntity>>()
-    private val _loadState = MutableLiveData<LoadingState>()
+    protected val _loadState = MutableLiveData<LoadingState>()
+    val loadState: LiveData<LoadingState> = _loadState
 
     /**
      * 核心架构 思想：保证单一可信源
@@ -24,7 +25,6 @@ class HomeVM : BaseViewModel<WanAndroidResException>() {
      */
     val bannerData: LiveData<List<BannerEntity>> = _bannerData
 
-    val loadState: LiveData<LoadingState> = _loadState
 
     fun loadBanner() {
         homeRepo.getBanner(_bannerData)

@@ -1,7 +1,7 @@
 package com.foundation.service.net
 
+import android.app.Application
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -11,16 +11,18 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @see [more_Introduction]("http://xx.com")
  * create by zhusw on 5/25/21 10:52
  */
-object NetManager : IRetrofitUrlSkill {
+object NetManager : INetManagerSkill {
     internal var debug = BuildConfig.DEBUG
         private set
-    private val skill: IRetrofitUrlSkill by lazy {
+    private val skill: INetManagerSkill by lazy {
         UrkSkill()
     }
 
     private lateinit var retrofit: Retrofit
-    private val initState = AtomicBoolean(false)
 
+    private val initState = AtomicBoolean(false)
+    lateinit var app: Application
+        private set
     private val cacheMap by lazy {
         mutableMapOf<Class<*>, Any>()
     }
@@ -29,11 +31,12 @@ object NetManager : IRetrofitUrlSkill {
      * 不保证多线程安全，但是会以最早传入的对象为准
      * 参考 lazy(Atomic 模式)
      */
-    fun init(retrofit: Retrofit, debug: Boolean) {
+    fun init(retrofit: Retrofit, app: Application, debug: Boolean) {
         if (!initState.get()) {
             initState.set(true)
             this.retrofit = retrofit
             this.debug = debug
+            this.app = app
         }
     }
 
@@ -71,14 +74,10 @@ object NetManager : IRetrofitUrlSkill {
 }
 
 inline fun <reified T : Any> NetManager.getApiService(): T {
-    return NetManager.getApiService(T::class.java)
+    return getApiService(T::class.java)
 }
 
-fun OkHttpClient.Builder.addUrlSkill(): OkHttpClient.Builder {
-    return RetrofitUrlManager.getInstance().with(this)
-}
-
-internal class UrkSkill : IRetrofitUrlSkill {
+internal class UrkSkill : INetManagerSkill {
     override fun putDomain(domainKey: String, domainUrl: String) {
         RetrofitUrlManager.getInstance().putDomain(domainKey, domainUrl)
     }
@@ -86,6 +85,5 @@ internal class UrkSkill : IRetrofitUrlSkill {
     override fun setGlobalDomain(domain: String) {
         RetrofitUrlManager.getInstance().setGlobalDomain(domain)
     }
-
 
 }

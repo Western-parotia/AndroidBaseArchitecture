@@ -1,7 +1,7 @@
 package com.foundation.app.simple.demo.net
 
 import com.foundation.app.simple.demo.net.api.ApiUrl
-import com.foundation.service.net.addUrlSkill
+import com.foundation.service.net.utils.addUrlSkill
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
