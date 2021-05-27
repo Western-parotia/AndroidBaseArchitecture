@@ -31,13 +31,16 @@ class HomeActivity : BaseActivity() {
 
         }
 
-        viewBinding.btnBanner.setOnClickListener {
+        viewBinding.btnInit.setOnClickListener {
             homeVM.loadBanner()
-        }
-        viewBinding.btnList.setOnClickListener {
             homeVM.loadNews(false)
         }
-
+        viewBinding.btnListMore.setOnClickListener {
+            homeVM.loadNews(false)
+        }
+        viewBinding.btnListNew.setOnClickListener {
+            homeVM.loadNews(true)
+        }
     }
 
     override fun bindData() {

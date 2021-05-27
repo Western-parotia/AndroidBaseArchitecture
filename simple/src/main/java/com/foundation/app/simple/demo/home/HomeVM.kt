@@ -37,7 +37,14 @@ class HomeVM : BaseViewModel() {
     val cleanAdapterLiveData: LiveData<Unit> = _cleanAdapterLiveData
 
     fun loadNews(refresh: Boolean = true) {
-        if (refresh) pageCount = 0 else pageCount++
+        if (refresh) {
+            if (pageCount > 0) {
+                _cleanAdapterLiveData.value = Unit
+            }
+            pageCount = 0
+        } else {
+            pageCount++
+        }
         homeRepo.getNews(pageCount, _newsLiveData)
     }
 }

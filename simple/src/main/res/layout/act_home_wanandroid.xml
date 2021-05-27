@@ -48,18 +48,32 @@
         android:layout_height="wrap_content" />
 
     <Button
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/btn_banner"
-        android:text="请求banner"
+        android:id="@+id/btn_init"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:text="初始请求"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
+        android:id="@+id/btn_list_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="加载更多 +一页"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_banner"
-        android:id="@+id/btn_list"
-        android:text="加载列表 每次+10"
+        app:layout_constraintStart_toEndOf="@+id/btn_list_new" />
+
+    <Button
+        android:id="@+id/btn_list_new"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="刷新"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btn_banner"
+        app:layout_constraintStart_toStartOf="parent" />
 </com.foundation.widget.loading.LoadingConstraintLayout>
