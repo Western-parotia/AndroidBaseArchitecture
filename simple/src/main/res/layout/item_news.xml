@@ -20,7 +20,7 @@
     <TextView
         android:layout_marginTop="20dp"
         android:id="@+id/tv_author_desc"
-        tools:text="作者:"
+        android:text="作者:"
         android:textSize="18dp"
         android:textColor="@color/black"
         android:maxLines="1"

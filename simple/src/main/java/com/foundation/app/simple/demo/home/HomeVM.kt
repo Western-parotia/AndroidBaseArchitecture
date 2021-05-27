@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.foundation.app.simple.demo.home.data.BannerEntity
 import com.foundation.app.simple.demo.home.data.NewsFeedInfo
 import com.foundation.app.simple.demo.net.WanAndroidNetStateHandler
+import kotlinx.coroutines.delay
 
 /**
  *
@@ -28,6 +29,7 @@ class HomeVM : WanAndroidVM() {
 
     fun loadBanner() {
         netLaunch({
+            delay(3000)
             val data = withBusiness {
                 homeRepo.homeApi.getBanner()
             }

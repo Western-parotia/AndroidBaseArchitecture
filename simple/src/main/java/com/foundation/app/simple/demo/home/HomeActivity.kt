@@ -1,6 +1,10 @@
 package com.foundation.app.simple.demo.home
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
@@ -9,6 +13,7 @@ import com.foundation.app.simple.databinding.ActHomeWanandroidBinding
 import com.foundation.app.simple.log
 import com.foundation.app.simple.toast
 import com.foundation.service.net.NetLoadingEvent
+import com.foundation.widget.loading.NormalLoadingAdapter
 
 /**
  * create by zhusw on 5/20/21 11:33
@@ -27,9 +32,8 @@ class HomeActivity : BaseActivity() {
     override fun init(savedInstanceState: Bundle?) {
         viewBinding.rlNews.adapter = adapter
         viewBinding.rlNews.layoutManager = LinearLayoutManager(this)
-        adapter.setOnItemChildClickListener { adapter, view, position ->
 
-        }
+        viewBinding.contentLoading.asLoading().setLoadingAdapter(LoadingAdapter(this))
 
         viewBinding.btnInit.setOnClickListener {
             homeVM.loadBanner()
@@ -69,10 +73,25 @@ class HomeActivity : BaseActivity() {
             adapter.setNewInstance(null)
         }
         homeVM.newsLiveData.observe(this) {
-            "size ${it.size}".toast()
             adapter.addData(it)
         }
 
     }
 
+
 }
+
+private class LoadingAdapter(private val ctx: Context) : NormalLoadingAdapter(ctx) {
+    override fun getBottomPlateView(): View? {
+        return View(ctx).apply {
+            setBackgroundColor(Color.LTGRAY)
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        }
+    }
+
+
+}
+

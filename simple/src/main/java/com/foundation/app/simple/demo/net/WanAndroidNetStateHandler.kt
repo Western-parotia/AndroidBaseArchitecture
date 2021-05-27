@@ -10,19 +10,18 @@ import com.foundation.service.net.NetStateListener
  * create by zhusw on 5/26/21 14:06
  */
 class WanAndroidNetStateHandler(
-    private val onlyToast: Boolean = true,
+    private val control: Boolean = false,
     private val stateLiveData: MutableLiveData<NetLoadingEvent>
 ) :
     NetStateListener {
     override fun onStart() {
-        if (!onlyToast) {
-
+        if (control) {
             stateLiveData.value = NetLoadingEvent.START
         }
     }
 
     override fun onSuccess() {
-        if (!onlyToast) {
+        if (control) {
             stateLiveData.value = NetLoadingEvent.STOP
         }
     }
