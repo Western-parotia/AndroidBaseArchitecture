@@ -5,26 +5,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.foundation.app.arc.vm.BaseViewModel
 import com.foundation.app.simple.demo.home.data.BannerEntity
-import com.foundation.app.simple.demo.net.WanAndroidResException
+import com.foundation.app.simple.demo.net.LoadingEvent
 
 /**
  *
  */
-class HomeVM : BaseViewModel<WanAndroidResException>() {
+class HomeVM : BaseViewModel() {
+    protected val _loadState = MutableLiveData<LoadingEvent>()
+    val loadState: LiveData<LoadingEvent> = _loadState
     private val homeRepo by lazy {
         HomeRepo(viewModelScope, _loadState)
     }
-
-    private val _bannerData = MutableLiveData<List<BannerEntity>>()
 
     /**
      * 核心架构 思想：保证单一可信源
      * view层只能订阅状态，不可修改状态
      */
-    fun getBannerDataOut(): LiveData<List<BannerEntity>> = _bannerData
+    private val _bannerData = MutableLiveData<List<BannerEntity>>()
+    val bannerData: LiveData<List<BannerEntity>> = _bannerData
 
-    private val _loadState = MutableLiveData<LoadingState>()
-    val loadState: LiveData<LoadingState> = _loadState
 
     fun loadBanner() {
         homeRepo.getBanner(_bannerData)

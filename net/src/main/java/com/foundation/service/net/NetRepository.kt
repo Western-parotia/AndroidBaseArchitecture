@@ -1,6 +1,5 @@
 package com.foundation.service.net
 
-import com.foundation.service.net.utils.NetStateType
 import com.foundation.service.net.utils.networkIsAvailable
 import com.foundation.service.net.utils.transformHttpException
 import kotlinx.coroutines.*

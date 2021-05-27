@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.core.content.ContextCompat
 import com.foundation.service.net.NetException
+import com.foundation.service.net.NetStateType
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
 import org.json.JSONException

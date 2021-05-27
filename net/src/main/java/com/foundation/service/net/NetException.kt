@@ -1,6 +1,5 @@
 package com.foundation.service.net
 
-import com.foundation.service.net.utils.NetStateType
 import okhttp3.Request
 import okhttp3.ResponseBody
 import retrofit2.Response

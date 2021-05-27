@@ -1,5 +1,6 @@
 package com.foundation.app.simple.demo.home
 
+import androidx.lifecycle.MutableLiveData
 import com.foundation.app.simple.demo.entity.BaseApiResponse
 import com.foundation.app.simple.demo.net.WanAndroidResException
 import com.foundation.service.net.NetRepository
@@ -9,8 +10,9 @@ import retrofit2.Response
 /**
  * create by zhusw on 5/25/21 17:26
  */
-open abstract class BaseWanAndroidRepo(uiCoroutineScope: CoroutineScope) :
+open abstract class BaseWanAndroidRepo<T>(uiCoroutineScope: CoroutineScope) :
     NetRepository(uiCoroutineScope) {
+    val loadingState = MutableLiveData<T>()
 
     /**
      * 业务层处理

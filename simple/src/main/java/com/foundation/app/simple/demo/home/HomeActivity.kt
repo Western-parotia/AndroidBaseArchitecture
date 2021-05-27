@@ -5,6 +5,8 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActHomeWanandroidBinding
+import com.foundation.app.simple.demo.net.LoadingEvent
+import com.foundation.app.simple.toast
 
 /**
  * create by zhusw on 5/20/21 11:33
@@ -26,26 +28,25 @@ class HomeActivity : BaseActivity() {
 
     override fun bindData() {
         homeVM.loadState.observe(this) {
-            when (it) {
-                LoadingState.LOADING_START -> {
+            when (it.code) {
+                LoadingEvent.TYPE_START -> {
                     viewBinding.contentLoading.asLoading().showLoading()
                 }
-                LoadingState.LOADING_STOP -> {
+                LoadingEvent.TYPE_STOP -> {
                     viewBinding.contentLoading.asLoading().stop()
                 }
-                LoadingState.LOADING_ERROR -> {
+                LoadingEvent.TYPE_ERROR -> {
                     viewBinding.contentLoading.asLoading().stop()
+                    "${it.msg}:${it.code}".toast()
                 }
             }
         }
-        homeVM.getBannerDataOut().observe(this) {
+        homeVM.bannerData.observe(this) {
             Glide.with(this).load(it[1].imagePath)
                 .into(viewBinding.ivBanner)
             viewBinding.tvBannerTitle.text = it[1].title
         }
-        homeVM.errorLiveData.observe(this) {
-            viewBinding.tvErrorMsg.text = it.msg
-        }
+
     }
 
 }

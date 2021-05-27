@@ -2,6 +2,7 @@ package com.foundation.app.simple.demo.home
 
 import androidx.lifecycle.MutableLiveData
 import com.foundation.app.simple.demo.home.data.BannerEntity
+import com.foundation.app.simple.demo.net.LoadingEvent
 import com.foundation.app.simple.demo.net.WanAndroidNetStateHandler
 import com.foundation.app.simple.demo.net.api.WanAndroidService
 import com.foundation.service.net.NetManager
@@ -13,8 +14,8 @@ import kotlinx.coroutines.CoroutineScope
  */
 class HomeRepo(
     uiCoroutineScope: CoroutineScope,
-    val loadingLiveData: MutableLiveData<LoadingState>
-) : BaseWanAndroidRepo(uiCoroutineScope) {
+    private val loadingStateLiveData: MutableLiveData<LoadingEvent>
+) : BaseWanAndroidRepo<LoadingEvent>(uiCoroutineScope) {
 
     val api = NetManager.getApiService<WanAndroidService>()
 
@@ -24,7 +25,7 @@ class HomeRepo(
                 api.getBanner()
             }
             throw IllegalArgumentException("数据处理异常")
-        }, WanAndroidNetStateHandler(loadingLiveData))
+        }, WanAndroidNetStateHandler(loadingStateLiveData))
     }
 
 

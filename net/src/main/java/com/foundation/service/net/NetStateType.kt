@@ -1,4 +1,4 @@
-package com.foundation.service.net.utils
+package com.foundation.service.net
 
 /**
  * create by zhusw on 5/26/21 12:02

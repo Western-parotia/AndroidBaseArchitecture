@@ -2,8 +2,10 @@ package com.foundation.app.simple
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.foundation.app.arc.BuildConfig
+import com.foundation.app.simple.utils.Utils
 
 /**
 
@@ -25,4 +27,8 @@ fun Activity.jump(clz: Class<out Activity>) {
 
 fun Fragment.jump(clz: Class<out Activity>) {
     requireActivity().jump(clz)
+}
+
+fun String.toast() {
+    Toast.makeText(Utils.app, this, Toast.LENGTH_LONG).show()
 }
