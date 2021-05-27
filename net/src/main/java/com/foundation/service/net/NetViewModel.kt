@@ -26,15 +26,29 @@ open class NetViewModel : ViewModel() {
      * 完全没必要反而会丧失对"子"协程的控制）
      * [NetStateListener] 作为状态监听器，通常你应该自己实现一个子类，
      * 统一处理状态满足匹配UI展示需要
+     *
+     * 异常捕获：不管是 withContext(IO) 还是 async(IO) 中发生的异常，最终都会
+     * 在根协程的线程环境获取到异常信息。赞！
+     *
      */
-    fun netLaunch(block: suspend CoroutineScope.() -> Unit, state: NetStateListener? = null) {
-        val exHandler = CoroutineExceptionHandler { _, throwable ->
+    fun netLaunch(
+        block: suspend CoroutineScope.() -> Unit,
+        state: NetStateListener? = null,
+        tag: String = ""
+    ) {
+        val exHandler = CoroutineExceptionHandler { ctx, throwable ->
             throwable.printStackTrace()
-            "$throwable".log(TAG)
+            val name: String? = ctx[CoroutineName.Key]?.name
+            "$throwable ,ctxName:$name ,thread:${Thread.currentThread().name}".log(TAG)
             val transformThrowable = transformHttpException(throwable)
             state?.onFailure(transformThrowable)
         }
-        viewModelScope.launch(exHandler) {
+        val ctx = if (tag.isNotEmpty()) {
+            exHandler + CoroutineName(tag)
+        } else {
+            exHandler
+        }
+        viewModelScope.launch(ctx) {
             if (!networkIsAvailable(NetManager.app)) {
                 throw NetException.createNetWorkType("网络链接不可用")
             }
@@ -57,7 +71,7 @@ open class NetViewModel : ViewModel() {
 
     //需要测试异常线程
     protected suspend fun <T> withIO(block: suspend () -> T): T {
-        return withContext(Dispatchers.IO) {
+        return withContext(Dispatchers.IO) {//异常信息 将在根协程的线程环境捕获
             block.invoke()
         }
     }

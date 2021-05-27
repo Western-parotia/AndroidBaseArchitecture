@@ -32,7 +32,7 @@ class HomeVM : WanAndroidVM() {
                 homeRepo.homeApi.getBanner()
             }
             _bannerData.value = data
-        }, WanAndroidNetStateHandler(true, _loadEventLiveData))
+        }, WanAndroidNetStateHandler(true, _loadEventLiveData), "加载 banner")
     }
 
     private var pageCount = -1
@@ -49,11 +49,14 @@ class HomeVM : WanAndroidVM() {
         } else {
             pageCount++
         }
-        netLaunch({
-            val data = withBusiness {
-                homeRepo.homeApi.getNews(pageCount)
-            }
-            _newsLiveData.value = data.datas
-        }, WanAndroidNetStateHandler(stateLiveData = _loadEventLiveData))
+        netLaunch(
+            {
+                val data = withBusiness {
+                    homeRepo.homeApi.getNews(pageCount)
+                }
+                _newsLiveData.value = data.datas
+            }, WanAndroidNetStateHandler(stateLiveData = _loadEventLiveData),
+            "加载 列表"
+        )
     }
 }
