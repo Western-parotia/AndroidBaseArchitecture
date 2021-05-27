@@ -26,7 +26,9 @@ class HomeRepo(
                 delay(3000)//模拟耗时
                 api.getBanner()
             }
+//            throw IllegalAccessException("客户端错误")
         }, WanAndroidNetStateHandler(loadingStateLiveData))
     }
+
 
 }

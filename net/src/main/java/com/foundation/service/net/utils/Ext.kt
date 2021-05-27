@@ -2,9 +2,11 @@ package com.foundation.service.net.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.foundation.service.net.NetException
-import com.foundation.service.net.NetLinkErrorType
+import com.foundation.service.net.NetManager
+import com.google.gson.JsonSyntaxException
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
 import org.json.JSONException
@@ -18,6 +20,12 @@ import javax.net.ssl.SSLException
 /**
  * create by zhusw on 5/26/21 11:56
  */
+private const val TAG = "base-net"
+internal fun String.log(secondTag: String = "") {
+    if (NetManager.debug) {
+        Log.i(TAG, "$secondTag:$this")
+    }
+}
 
 fun OkHttpClient.Builder.addUrlSkill(): OkHttpClient.Builder {
     return RetrofitUrlManager.getInstance().with(this)
@@ -40,45 +48,28 @@ internal fun networkIsAvailable(context: Context): Boolean {
  */
 internal fun transformHttpException(e: Throwable): Throwable {
     return when (e) {
-        is JSONException -> {
-            return createDeveloperException("数据解析异常", e)
+        is JSONException,
+        is JsonSyntaxException -> {
+            return NetException.createNormalType("数据解析异常", e)
         }
         is HttpException -> {
-            return createResponseException("Http 异常 code:${e.code()} msg:${e.message()}", e)
+            return NetException.createConnectType("Http 异常 code:${e.code()} msg:${e.message()}", e)
         }
         is UnknownHostException -> {
-            return createConnectException("访问的目标主机不存在", e)
+            return NetException.createConnectType("访问的目标主机不存在", e)
         }
         is SSLException -> {
-            return createConnectException("无法与目标主机建立链接", e)
+            return NetException.createConnectType("无法与目标主机建立链接", e)
         }
         is SocketTimeoutException,
         is ConnectException -> {
-            return createConnectException("网络链接异常", e)
+            return NetException.createConnectType("网络链接异常", e)
         }
         is TimeoutException -> {
-            return createConnectException("网络链接超时", e)
+            return NetException.createConnectType("网络链接超时", e)
         }
         else -> {
             e
         }
-    }
-}
-
-private fun createDeveloperException(msg: String, e: Throwable): NetException {
-    return NetException(type = NetLinkErrorType.CODE_NORMAL, e = e).apply {
-        netMsg = msg
-    }
-}
-
-private fun createResponseException(msg: String, e: Throwable): NetException {
-    return NetException(type = NetLinkErrorType.CODE_RESPONSE_ERROR, e = e).apply {
-        netMsg = msg
-    }
-}
-
-private fun createConnectException(msg: String, e: Throwable): NetException {
-    return NetException(type = NetLinkErrorType.CODE_CONNECT_ERROR, e = e).apply {
-        netMsg = msg
     }
 }

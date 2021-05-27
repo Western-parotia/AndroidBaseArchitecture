@@ -8,11 +8,37 @@ import retrofit2.Response
  * 网络请求 响应了错误（tsl，tcp 层 校验没问题）
  * create by zhusw on 5/20/21 14:30
  */
-class NetException(type: NetLinkErrorType, res: Response<*>? = null, e: Throwable? = null) :
+class NetException private constructor(
+    type: NetLinkErrorType,
+    res: Response<*>? = null,
+    e: Throwable? = null
+) :
     Throwable(e) {
-    constructor(type: NetLinkErrorType) : this(type, null, null)
+    companion object {
+        fun createNormalType(msg: String, e: Throwable? = null): NetException {
+            return NetException(NetLinkErrorType.CODE_NORMAL, e = e).apply {
+                netMsg = msg
+            }
+        }
 
-    var netStateType: NetLinkErrorType = NetLinkErrorType.CODE_NORMAL
+        fun createNetWorkType(msg: String): NetException {
+            return NetException(NetLinkErrorType.CODE_NETWORK_OFF).apply {
+                netMsg = msg
+            }
+        }
+
+        fun createConnectType(msg: String, e: Throwable): NetException {
+            return NetException(NetLinkErrorType.CODE_CONNECT_ERROR, e = e).apply {
+                netMsg = msg
+            }
+        }
+
+        fun createResponseType(res: Response<*>): NetException {
+            return NetException(NetLinkErrorType.CODE_RESPONSE_ERROR, res = res)
+        }
+    }
+
+    var netStateType: NetLinkErrorType
         private set
     var netMsg: String = ""
 

@@ -22,7 +22,7 @@ open abstract class BaseWanAndroidRepo<C>(uiCoroutineScope: CoroutineScope) :
         //过滤业务状态码
         return when (baseRes.errorCode) {
             0 -> {
-                baseRes.data ?: throw WanAndroidResException(baseRes.errorCode, baseRes.errorMsg)
+                baseRes.data ?: throw WanAndroidResException(-1, "无数据")
             }
             else -> {
                 throw WanAndroidResException(baseRes.errorCode, baseRes.errorMsg)

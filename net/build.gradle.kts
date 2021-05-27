@@ -44,6 +44,7 @@ dependencies {
     implementation(Dependencies.Retrofit.retorifit)
     implementation(Dependencies.Retrofit.url_manager)
     implementation(Dependencies.Coroutines.coroutines_android)
+    implementation(Dependencies.Retrofit.gson)
 
 }
 
