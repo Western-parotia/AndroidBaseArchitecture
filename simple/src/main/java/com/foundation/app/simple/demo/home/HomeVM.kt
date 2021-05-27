@@ -12,7 +12,7 @@ import com.foundation.app.simple.demo.home.data.BannerEntity
 class HomeVM : BaseViewModel() {
 
     private val homeRepo by lazy {
-        HomeRepo(viewModelScope, _loadState)
+        HomeRepo(viewModelScope, _loadEventLiveData)
     }
 
     /**

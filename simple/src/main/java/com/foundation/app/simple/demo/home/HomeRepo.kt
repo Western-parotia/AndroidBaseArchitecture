@@ -15,7 +15,7 @@ import kotlinx.coroutines.delay
  */
 class HomeRepo(
     uiCoroutineScope: CoroutineScope,
-    private val loadingStateLiveData: MutableLiveData<LoadingEvent>
+    private val loadingEventLiveData: MutableLiveData<LoadingEvent>
 ) : BaseWanAndroidRepo(uiCoroutineScope) {
 
     val api = NetManager.getApiService<WanAndroidService>()

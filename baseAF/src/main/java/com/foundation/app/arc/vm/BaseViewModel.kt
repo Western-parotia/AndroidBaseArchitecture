@@ -11,6 +11,6 @@ import com.foundation.app.arc.utils.LoadingEvent
  *create by zhusw on 5/17/21 11:36
  */
 abstract class BaseViewModel : ViewModel() {
-    protected val _loadState = MutableLiveData<LoadingEvent>()
-    val loadState: LiveData<LoadingEvent> = _loadState
+    protected val _loadEventLiveData = MutableLiveData<LoadingEvent>()
+    val loadEventLiveData: LiveData<LoadingEvent> = _loadEventLiveData
 }

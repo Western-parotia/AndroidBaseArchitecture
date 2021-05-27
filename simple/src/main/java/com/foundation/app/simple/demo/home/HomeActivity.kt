@@ -28,7 +28,7 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun bindData() {
-        homeVM.loadState.observe(this) {
+        homeVM.loadEventLiveData.observe(this) {
             "loadState type :${it.type}".log("net--")
             when (it.type) {
                 LoadingEvent.TYPE_START -> {
