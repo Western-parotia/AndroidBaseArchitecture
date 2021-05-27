@@ -78,7 +78,7 @@ dependencies {
     implementation(Dependencies.Foundation.loading)
     implementation(Dependencies.Retrofit.retorifit)
     implementation(Dependencies.Retrofit.converter_gson)
-    implementation(Dependencies.Dex.multidex)
+    implementation(Dependencies.UI.BaseRecyclerViewAdapterHelper)
     implementation(project(":baseAF"))
     implementation(project(":net"))
 

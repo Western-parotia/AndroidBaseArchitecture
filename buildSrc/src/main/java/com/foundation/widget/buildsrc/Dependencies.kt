@@ -7,9 +7,7 @@ package com.foundation.widget.buildsrc
  *create by zhusw on 5/6/21 15:45
  */
 object Dependencies {
-    object Dex {
-        const val multidex = "androidx.multidex:multidex:2.0.0"
-    }
+
 
     object Foundation {
         const val loading = "com.foundation.widget:loading:1.0-SNAPSHOT"
@@ -42,6 +40,12 @@ object Dependencies {
         const val converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"
         const val url_manager = "me.jessyan:retrofit-url-manager:1.4.0"
         const val gson = "com.google.code.gson:gson:2.8.5"
+    }
+
+    object UI {
+        const val BaseRecyclerViewAdapterHelper =
+            "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
+
     }
 
     /**

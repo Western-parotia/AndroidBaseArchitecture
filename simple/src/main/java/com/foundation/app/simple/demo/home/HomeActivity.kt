@@ -1,6 +1,7 @@
 package com.foundation.app.simple.demo.home
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.foundation.app.arc.utils.LoadingEvent
@@ -21,10 +22,22 @@ class HomeActivity : BaseActivity() {
     private val viewBinding by initVB<ActHomeWanandroidBinding>()
 
     override fun getContentVB(): ViewBinding = viewBinding
+
+    private val adapter = NewsAdapter()
     override fun init(savedInstanceState: Bundle?) {
-        viewBinding.btnStart.setOnClickListener {
+        viewBinding.rlNews.adapter = adapter
+        viewBinding.rlNews.layoutManager = LinearLayoutManager(this)
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+
+        }
+
+        viewBinding.btnBanner.setOnClickListener {
             homeVM.loadBanner()
         }
+        viewBinding.btnList.setOnClickListener {
+            homeVM.loadNews(false)
+        }
+
     }
 
     override fun bindData() {
@@ -44,9 +57,17 @@ class HomeActivity : BaseActivity() {
             }
         }
         homeVM.bannerData.observe(this) {
-            Glide.with(this).load(it[1].imagePath)
+            Glide.with(this).load(it[2].imagePath)
                 .into(viewBinding.ivBanner)
-            viewBinding.tvBannerTitle.text = it[1].title
+            viewBinding.tvBannerTitle.text = it[2].title
+        }
+
+        homeVM.cleanAdapterLiveData.observe(this) {
+            adapter.setNewInstance(null)
+        }
+        homeVM.newsLiveData.observe(this) {
+            "size ${it.size}".toast()
+            adapter.addData(it)
         }
 
     }
