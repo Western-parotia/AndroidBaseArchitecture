@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.core.content.ContextCompat
 import com.foundation.service.net.NetException
-import com.foundation.service.net.NetStateType
+import com.foundation.service.net.NetLinkErrorType
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
 import org.json.JSONException
@@ -41,23 +41,23 @@ internal fun networkIsAvailable(context: Context): Boolean {
 internal fun transformHttpException(e: Throwable): Throwable {
     return when (e) {
         is JSONException -> {
-            return createResultException("数据解析异常", e)
+            return createDeveloperException("数据解析异常", e)
         }
         is HttpException -> {
             return createResponseException("Http 异常 code:${e.code()} msg:${e.message()}", e)
         }
         is UnknownHostException -> {
-            return createNetConnectException("访问的目标主机不存在", e)
+            return createConnectException("访问的目标主机不存在", e)
         }
         is SSLException -> {
-            return createNetConnectException("无法与目标主机建立链接", e)
+            return createConnectException("无法与目标主机建立链接", e)
         }
         is SocketTimeoutException,
         is ConnectException -> {
-            return createNetConnectException("网络链接异常", e)
+            return createConnectException("网络链接异常", e)
         }
         is TimeoutException -> {
-            return createNetConnectException("网络链接超时", e)
+            return createConnectException("网络链接超时", e)
         }
         else -> {
             e
@@ -65,20 +65,20 @@ internal fun transformHttpException(e: Throwable): Throwable {
     }
 }
 
-private fun createResultException(msg: String, e: Throwable): NetException {
-    return NetException(type = NetStateType.CODE_NORMAL, e = e).apply {
+private fun createDeveloperException(msg: String, e: Throwable): NetException {
+    return NetException(type = NetLinkErrorType.CODE_NORMAL, e = e).apply {
         netMsg = msg
     }
 }
 
 private fun createResponseException(msg: String, e: Throwable): NetException {
-    return NetException(type = NetStateType.CODE_RESPONSE_ERROR, e = e).apply {
+    return NetException(type = NetLinkErrorType.CODE_RESPONSE_ERROR, e = e).apply {
         netMsg = msg
     }
 }
 
-private fun createNetConnectException(msg: String, e: Throwable): NetException {
-    return NetException(type = NetStateType.CODE_CONNECT_ERROR, e = e).apply {
+private fun createConnectException(msg: String, e: Throwable): NetException {
+    return NetException(type = NetLinkErrorType.CODE_CONNECT_ERROR, e = e).apply {
         netMsg = msg
     }
 }

@@ -8,13 +8,21 @@ import retrofit2.Response
  * 网络请求 响应了错误（tsl，tcp 层 校验没问题）
  * create by zhusw on 5/20/21 14:30
  */
-class NetException(type: NetStateType, res: Response<*>? = null, e: Throwable? = null) :
+class NetException(type: NetLinkErrorType, res: Response<*>? = null, e: Throwable? = null) :
     Throwable(e) {
-    constructor(state: NetStateType) : this(state, null, null)
+    constructor(type: NetLinkErrorType) : this(type, null, null)
 
-    var netStateType: NetStateType = NetStateType.CODE_NORMAL
+    var netStateType: NetLinkErrorType = NetLinkErrorType.CODE_NORMAL
+        private set
     var netMsg: String = ""
-    var netCode: Int = NetStateType.CODE_NORMAL.value
+
+    /**
+     * 默认为type.value:-900_x 为本框架定义的网络错误码
+     *
+     * 当存在Response时，将得到20x,30x,40x等为http 网络状态码
+     */
+    var netCode: Int
+        private set
     var errorBody: ResponseBody? = null
         private set
 
@@ -26,9 +34,7 @@ class NetException(type: NetStateType, res: Response<*>? = null, e: Throwable? =
 
     init {
         netStateType = type
-    }
-
-    init {
+        netCode = netStateType.value
         res?.let {
             netMsg = res.message()
             netCode = res.code()

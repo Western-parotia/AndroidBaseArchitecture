@@ -32,8 +32,7 @@ open class NetRepository(val coroutineScope: CoroutineScope) {
                 throw IllegalAccessException("coroutineScope $coroutineScope 不可以使用后台线程调度器作为根协程的调度器")
             }
             if (!networkIsAvailable(NetManager.app)) {
-                throw NetException(NetStateType.CODE_NETWORK_OFF).apply {
-                    netCode = NetStateType.CODE_NETWORK_OFF.value
+                throw NetException(NetLinkErrorType.CODE_NETWORK_OFF).apply {
                     netMsg = "network is unavailable"
                 }
             }
@@ -50,7 +49,7 @@ open class NetRepository(val coroutineScope: CoroutineScope) {
             res.isSuccessful -> {
                 res.body()
             }
-            else -> throw NetException(NetStateType.CODE_RESPONSE_ERROR, res)
+            else -> throw NetException(NetLinkErrorType.CODE_RESPONSE_ERROR, res)
         }
     }
 
