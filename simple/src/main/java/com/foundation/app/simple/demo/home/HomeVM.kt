@@ -2,18 +2,17 @@ package com.foundation.app.simple.demo.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.foundation.app.arc.vm.BaseViewModel
 import com.foundation.app.simple.demo.home.data.BannerEntity
 import com.foundation.app.simple.demo.home.data.NewsFeedInfo
+import com.foundation.app.simple.demo.net.WanAndroidNetStateHandler
 
 /**
  *
  */
-class HomeVM : BaseViewModel() {
+class HomeVM : WanAndroidVM() {
 
     private val homeRepo by lazy {
-        HomeRepo(viewModelScope, _loadEventLiveData)
+        HomeRepo()
     }
 
     /**
@@ -28,7 +27,12 @@ class HomeVM : BaseViewModel() {
     val newsLiveData: LiveData<List<NewsFeedInfo>> = _newsLiveData
 
     fun loadBanner() {
-        homeRepo.getBanner(_bannerData)
+        netLaunch({
+            val data = withBusiness {
+                homeRepo.homeApi.getBanner()
+            }
+            _bannerData.value = data
+        }, WanAndroidNetStateHandler(true, _loadEventLiveData))
     }
 
     private var pageCount = -1
@@ -45,6 +49,11 @@ class HomeVM : BaseViewModel() {
         } else {
             pageCount++
         }
-        homeRepo.getNews(pageCount, _newsLiveData)
+        netLaunch({
+            val data = withBusiness {
+                homeRepo.homeApi.getNews(pageCount)
+            }
+            _newsLiveData.value = data.datas
+        }, WanAndroidNetStateHandler(stateLiveData = _loadEventLiveData))
     }
 }

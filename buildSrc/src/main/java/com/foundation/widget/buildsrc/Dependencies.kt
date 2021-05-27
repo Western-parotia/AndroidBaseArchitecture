@@ -51,7 +51,7 @@ object Dependencies {
     /**
      * ktx 库清单与版本：https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
      */
-    object Ktx {
+    object JetPack {
         const val core_ktx = "androidx.core:core-ktx:1.3.2"
         const val fragment_ktx = "androidx.fragment:fragment-ktx:1.3.3"
 
@@ -61,8 +61,11 @@ object Dependencies {
         /*livedata 拓展协程*/
         const val lifecycle_liveData_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
+        //        "androidx.lifecycle:lifecycle-livedata-core:2.3.1"
         /*viewModel 拓展协程*/
         const val lifecycle_viewModel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+
+
     }
 
 }

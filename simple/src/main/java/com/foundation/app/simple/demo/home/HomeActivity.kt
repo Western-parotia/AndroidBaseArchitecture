@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import com.foundation.app.arc.utils.LoadingEvent
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActHomeWanandroidBinding
 import com.foundation.app.simple.log
 import com.foundation.app.simple.toast
+import com.foundation.service.net.NetLoadingEvent
 
 /**
  * create by zhusw on 5/20/21 11:33
@@ -47,13 +47,13 @@ class HomeActivity : BaseActivity() {
         homeVM.loadEventLiveData.observe(this) {
             "loadState type :${it.type}".log("net--")
             when (it.type) {
-                LoadingEvent.TYPE_START -> {
+                NetLoadingEvent.TYPE_START -> {
                     viewBinding.contentLoading.asLoading().showLoading()
                 }
-                LoadingEvent.TYPE_STOP -> {
+                NetLoadingEvent.TYPE_STOP -> {
                     viewBinding.contentLoading.asLoading().stop()
                 }
-                LoadingEvent.TYPE_ERROR -> {
+                NetLoadingEvent.TYPE_ERROR -> {
                     viewBinding.contentLoading.asLoading().stop()
                     "${it.msg}:${it.code}".toast()
                 }
