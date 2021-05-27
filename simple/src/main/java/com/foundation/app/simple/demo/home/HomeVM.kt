@@ -26,5 +26,4 @@ class HomeVM : BaseViewModel() {
         homeRepo.getBanner(_bannerData)
     }
 
-
 }

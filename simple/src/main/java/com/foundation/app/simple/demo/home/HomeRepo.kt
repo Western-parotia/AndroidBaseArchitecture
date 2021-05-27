@@ -16,18 +16,18 @@ import kotlinx.coroutines.delay
 class HomeRepo(
     uiCoroutineScope: CoroutineScope,
     private val loadingStateLiveData: MutableLiveData<LoadingEvent>
-) : BaseWanAndroidRepo<LoadingEvent>(uiCoroutineScope) {
+) : BaseWanAndroidRepo(uiCoroutineScope) {
 
     val api = NetManager.getApiService<WanAndroidService>()
 
     fun getBanner(receiver: MutableLiveData<List<BannerEntity>>) {
         launch({
-            receiver.value = take {
+            receiver.value = takeBusiness {
                 delay(3000)//模拟耗时
                 api.getBanner()
             }
 //            throw IllegalAccessException("客户端错误")
-        }, WanAndroidNetStateHandler(loadingStateLiveData))
+        }, WanAndroidNetStateHandler(loadingEventLiveData))
     }
 
 
