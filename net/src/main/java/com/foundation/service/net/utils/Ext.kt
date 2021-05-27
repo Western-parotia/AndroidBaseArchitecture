@@ -27,7 +27,7 @@ internal fun String.log(secondTag: String = "") {
     }
 }
 
-fun OkHttpClient.Builder.addUrlSkill(): OkHttpClient.Builder {
+fun OkHttpClient.Builder.addDynamicDomainSkill(): OkHttpClient.Builder {
     return RetrofitUrlManager.getInstance().with(this)
 }
 
