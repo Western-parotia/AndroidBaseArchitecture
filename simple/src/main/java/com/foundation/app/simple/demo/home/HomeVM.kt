@@ -5,14 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.foundation.app.arc.vm.BaseViewModel
 import com.foundation.app.simple.demo.home.data.BannerEntity
-import com.foundation.app.simple.demo.net.LoadingEvent
 
 /**
  *
  */
 class HomeVM : BaseViewModel() {
-    protected val _loadState = MutableLiveData<LoadingEvent>()
-    val loadState: LiveData<LoadingEvent> = _loadState
+
     private val homeRepo by lazy {
         HomeRepo(viewModelScope, _loadState)
     }
@@ -23,7 +21,6 @@ class HomeVM : BaseViewModel() {
      */
     private val _bannerData = MutableLiveData<List<BannerEntity>>()
     val bannerData: LiveData<List<BannerEntity>> = _bannerData
-
 
     fun loadBanner() {
         homeRepo.getBanner(_bannerData)

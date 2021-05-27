@@ -1,7 +1,7 @@
 package com.foundation.app.simple.demo.net
 
 import androidx.lifecycle.MutableLiveData
-import com.foundation.app.simple.BuildConfig
+import com.foundation.app.arc.utils.LoadingEvent
 import com.foundation.app.simple.log
 import com.foundation.service.net.NetException
 import com.foundation.service.net.NetStateListener
@@ -20,9 +20,6 @@ class WanAndroidNetStateHandler(private val stateLiveData: MutableLiveData<Loadi
     }
 
     override fun onFailure(e: Throwable) {
-        if (BuildConfig.DEBUG) {
-            e.printStackTrace()
-        }
         handlerNetException(e)
 
     }
@@ -38,7 +35,7 @@ class WanAndroidNetStateHandler(private val stateLiveData: MutableLiveData<Loadi
                 "WanAndroidResException: $e".log("net--")
             }
             else -> {
-                stateLiveData.value = LoadingEvent.getErrorEvent(-1, "未知错误")
+                stateLiveData.value = LoadingEvent.getErrorEvent(-1, "网络层未知错误")
                 "else: $e".log("net--")
             }
         }

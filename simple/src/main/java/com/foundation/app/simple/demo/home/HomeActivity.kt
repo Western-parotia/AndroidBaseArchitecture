@@ -3,9 +3,10 @@ package com.foundation.app.simple.demo.home
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
+import com.foundation.app.arc.utils.LoadingEvent
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActHomeWanandroidBinding
-import com.foundation.app.simple.demo.net.LoadingEvent
+import com.foundation.app.simple.log
 import com.foundation.app.simple.toast
 
 /**
@@ -28,7 +29,8 @@ class HomeActivity : BaseActivity() {
 
     override fun bindData() {
         homeVM.loadState.observe(this) {
-            when (it.code) {
+            "loadState type :${it.type}".log("net--")
+            when (it.type) {
                 LoadingEvent.TYPE_START -> {
                     viewBinding.contentLoading.asLoading().showLoading()
                 }

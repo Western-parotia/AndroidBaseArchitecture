@@ -10,15 +10,15 @@ import retrofit2.Response
 /**
  * create by zhusw on 5/25/21 17:26
  */
-open abstract class BaseWanAndroidRepo<T>(uiCoroutineScope: CoroutineScope) :
+open abstract class BaseWanAndroidRepo<C>(uiCoroutineScope: CoroutineScope) :
     NetRepository(uiCoroutineScope) {
-    val loadingState = MutableLiveData<T>()
+    val loadingState = MutableLiveData<C>()
 
     /**
      * 业务层处理
      */
-    protected suspend fun <T> take(block: suspend () -> Response<BaseApiResponse<T>>): T {
-        val baseRes: BaseApiResponse<T> = takeResponse(block)!!
+    protected suspend fun <F> take(block: suspend () -> Response<BaseApiResponse<F>>): F {
+        val baseRes: BaseApiResponse<F> = takeResponse(block)!!
         //过滤业务状态码
         return when (baseRes.errorCode) {
             0 -> {
