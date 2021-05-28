@@ -16,7 +16,7 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
  * ViewBinding 初始化与简化
  * create by zhusw on 5/18/21 15:05
  */
-abstract class BaseVMVBActivity : BaseParamsActivity() {
+abstract class BaseVMVBActivity : BaseFragmentActivity() {
 
     val activityVMProvider by lazyAtomic {
         ViewModelProvider(this)
