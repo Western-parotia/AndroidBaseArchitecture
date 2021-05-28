@@ -79,14 +79,15 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val state = if (supportRebuildData()) savedInstanceState else null
-        beforeSuperOnCreate(state)//1
-        super.onCreate(state)
-        afterSuperOnCreate(state)//2
-        getContentVB()?.let { setContentView(it.root) }//3
-        initViewModel()//4
-        init(state)//5
-        bindData()//6
+        val support = supportRebuildData()//1
+        val state = if (support) savedInstanceState else null
+        beforeSuperOnCreate(state)//2
+        super.onCreate(state)//3
+        afterSuperOnCreate(state)//4
+        getContentVB()?.let { setContentView(it.root) }//5
+        initViewModel()//6
+        init(state)//7
+        bindData()//8
     }
 
     /**
