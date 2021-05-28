@@ -22,6 +22,13 @@ abstract class BaseParamsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ParamsUtils.initWithActivity(this, intent)
+        if (openAutoBindParams()) {
+            ParamsUtils.initWithActivity(this, intent)
+        }
     }
+
+    /**
+     * 是否开启参数自动绑定
+     */
+    protected open fun openAutoBindParams(): Boolean = true
 }
