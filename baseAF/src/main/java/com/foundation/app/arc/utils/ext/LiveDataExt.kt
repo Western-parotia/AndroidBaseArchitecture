@@ -1,3 +1,5 @@
+@file:JvmName("LiveDataExt")
+@file:kotlin.jvm.JvmMultifileClass
 package com.foundation.app.arc.utils.ext
 
 import androidx.lifecycle.LifecycleOwner
