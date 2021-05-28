@@ -2,6 +2,7 @@ package com.foundation.app.simple.demo.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.foundation.app.simple.demo.base.BaseWanAndroidVM
 import com.foundation.app.simple.demo.home.data.BannerEntity
 import com.foundation.app.simple.demo.home.data.NewsFeedInfo
 import com.foundation.app.simple.demo.net.WanAndroidNetStateHandler
@@ -10,7 +11,7 @@ import kotlinx.coroutines.delay
 /**
  *
  */
-class HomeVM : WanAndroidVM() {
+class HomeVM : BaseWanAndroidVM() {
 
     private val homeRepo by lazy {
         HomeRepo()

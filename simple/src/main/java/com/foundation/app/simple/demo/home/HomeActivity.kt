@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActHomeWanandroidBinding
+import com.foundation.app.simple.demo.home.data.NewsFeedInfo
 import com.foundation.app.simple.log
 import com.foundation.app.simple.toast
 import com.foundation.service.net.NetLoadingEvent
@@ -20,7 +21,6 @@ import com.foundation.widget.loading.NormalLoadingAdapter
  */
 
 class HomeActivity : BaseActivity() {
-//    java.lang.IllegalAccessError: Method com.xx is inaccessible to class com.xx declaration of com.xx appears in base.apk!classes2.dex
 
     private val homeVM by lazyActivityVM<HomeVM>()
 
@@ -32,7 +32,11 @@ class HomeActivity : BaseActivity() {
     override fun init(savedInstanceState: Bundle?) {
         viewBinding.rlNews.adapter = adapter
         viewBinding.rlNews.layoutManager = LinearLayoutManager(this)
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val data = adapter.getItem(position) as NewsFeedInfo
+            "点击：${data.title}".toast()
 
+        }
         viewBinding.contentLoading.asLoading().setLoadingAdapter(LoadingAdapter(this))
 
         viewBinding.btnInit.setOnClickListener {

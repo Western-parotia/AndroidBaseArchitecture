@@ -1,6 +1,6 @@
 package com.foundation.app.simple.demo.net.api
 
-import com.foundation.app.simple.demo.entity.BaseApiResponse
+import com.foundation.app.simple.demo.base.BaseApiResponse
 import com.foundation.app.simple.demo.home.data.BannerEntity
 import com.foundation.app.simple.demo.home.data.NewsFeedInfo
 import com.foundation.app.simple.demo.home.data.PageInfo

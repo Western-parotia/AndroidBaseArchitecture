@@ -38,6 +38,7 @@ object Publish {
     object Maven {
         const val groupId = "com.foundation.app"
         const val artifactId = "activity-fragment"
+
         val codingArtifactsRepoUrl: String
         val codingArtifactsGradleUsername: String
         val codingArtifactsGradlePassword: String

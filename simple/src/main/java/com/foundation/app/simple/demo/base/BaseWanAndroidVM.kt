@@ -1,6 +1,5 @@
-package com.foundation.app.simple.demo.home
+package com.foundation.app.simple.demo.base
 
-import com.foundation.app.simple.demo.entity.BaseApiResponse
 import com.foundation.app.simple.demo.net.WanAndroidResException
 import com.foundation.service.net.NetViewModel
 import retrofit2.Response
@@ -8,7 +7,7 @@ import retrofit2.Response
 /**
  * create by zhusw on 5/27/21 17:06
  */
-open class WanAndroidVM : NetViewModel() {
+open class BaseWanAndroidVM : NetViewModel() {
 
     /**
      * 业务层处理

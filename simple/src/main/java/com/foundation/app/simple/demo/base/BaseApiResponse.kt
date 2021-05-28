@@ -1,4 +1,4 @@
-package com.foundation.app.simple.demo.entity
+package com.foundation.app.simple.demo.base
 
 /**
  * create by zhusw on 5/20/21 14:20

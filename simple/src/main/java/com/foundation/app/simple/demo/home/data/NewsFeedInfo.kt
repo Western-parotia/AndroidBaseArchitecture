@@ -9,5 +9,4 @@ data class NewsFeedInfo(
     val shareUser: String = "",
     val niceShareDate: String = "",
     val link: String = "",
-
     )
