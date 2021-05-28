@@ -21,11 +21,16 @@ import com.foundation.widget.loading.NormalLoadingAdapter
  */
 class HomeActivity : BaseActivity() {
 
-    private val homeVM by lazyActivityVM<HomeVM>()
-
     private val viewBinding by initVB<ActHomeWanandroidBinding>()
 
     override fun getContentVB(): ViewBinding = viewBinding
+
+    private lateinit var homeVM: HomeVM
+
+    override fun initViewModel() {
+        super.initViewModel()
+        homeVM = getActivityVM(HomeVM::class.java)
+    }
 
     private val adapter = NewsAdapter()
     override fun init(savedInstanceState: Bundle?) {
