@@ -34,6 +34,7 @@
             android:id="@+id/btn_setChildFragment"
             android:layout_width="wrap_content"
             android:text="设置子Fragment"
+            android:visibility="invisible"
             android:layout_height="wrap_content" />
 
         <FrameLayout

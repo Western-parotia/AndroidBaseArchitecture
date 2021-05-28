@@ -16,7 +16,7 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
  * ViewBinding 初始化与简化
  * create by zhusw on 5/18/21 15:05
  */
-abstract class BaseVMVBActivity : BaseFragmentActivity() {
+abstract class BaseVMVBActivity : BaseParamsActivity() {
 
     val activityVMProvider by lazyAtomic {
         ViewModelProvider(this)
@@ -34,7 +34,10 @@ abstract class BaseVMVBActivity : BaseFragmentActivity() {
                 )
             }
             else -> {
-                throw IllegalStateException("application:$app 没实现 ViewModelStoreOwner:调用处Fragment为 $this ")
+                throw IllegalStateException(
+                    "application:$app 没实现" +
+                            " ViewModelStoreOwner:调用处为 Activity$this "
+                )
             }
         }
     }
@@ -43,7 +46,7 @@ abstract class BaseVMVBActivity : BaseFragmentActivity() {
         return activityVMProvider.get(clz)
     }
 
-    protected fun <VM : ViewModel> getAppVM(clz: Class<VM>): VM {
+    protected fun <VM : ViewModel> getGlobalVM(clz: Class<VM>): VM {
         return applicationVMProvider.get(clz)
     }
 
@@ -69,7 +72,7 @@ abstract class BaseVMVBActivity : BaseFragmentActivity() {
     }
 
     @MainThread
-    inline fun <reified VM : ViewModel> lazyAppVM(): Lazy<VM> {
+    inline fun <reified VM : ViewModel> lazyGlobalVM(): Lazy<VM> {
         return AFViewModelLazy(VM::class) {
             applicationVMProvider
         }
@@ -100,7 +103,6 @@ abstract class BaseVMVBActivity : BaseFragmentActivity() {
     protected abstract fun beforeSuperOnCreate(savedInstanceState: Bundle?)
 
     /**
-     *
      * super.onCreate 之后回调
      */
     abstract fun afterSuperOnCreate(savedInstanceState: Bundle?)

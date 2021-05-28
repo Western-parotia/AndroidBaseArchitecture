@@ -50,7 +50,7 @@ abstract class BaseVMFragment : BaseParamsFragment() {
         return activityVMProvider.get(clz)
     }
 
-    protected fun <VM : ViewModel> getAppVM(clz: Class<VM>): VM {
+    protected fun <VM : ViewModel> getGlobalVM(clz: Class<VM>): VM {
         return applicationVMProvider.get(clz)
     }
 
@@ -65,7 +65,7 @@ abstract class BaseVMFragment : BaseParamsFragment() {
     }
 
     @MainThread
-    inline fun <reified VM : ViewModel> lazyAppVM(): Lazy<VM> {
+    inline fun <reified VM : ViewModel> lazyGlobalVM(): Lazy<VM> {
         return AFViewModelLazy(VM::class) { applicationVMProvider }
     }
 

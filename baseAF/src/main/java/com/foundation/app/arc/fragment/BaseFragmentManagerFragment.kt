@@ -1,4 +1,4 @@
-package com.foundation.app.arc.activity
+package com.foundation.app.arc.fragment
 
 import androidx.annotation.IdRes
 import androidx.annotation.NonNull
@@ -7,20 +7,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
 /**
- * 切换Fragment的Activity
- * create by zhusw on 5/28/21 11:06
+ * create by zhusw on 5/28/21 13:40
  */
-abstract class BaseFragmentActivity : BaseParamsActivity() {
+abstract class BaseFragmentManagerFragment : BaseVMFragment() {
     private var showFragment: Fragment? = null
     fun switchFragment(tag: String, @IdRes frameLayoutId: Int = 0): Fragment? {
         try {
-            val fm: FragmentManager = supportFragmentManager
+            val fm: FragmentManager = childFragmentManager
             val fragment: Fragment? = fm.findFragmentByTag(tag)
             fragment?.let {
                 switchFragment(it, frameLayoutId)
                 return it
             }
-        } catch (e: InstantiationException) {
+        } catch (e: java.lang.InstantiationException) {
             e.printStackTrace()
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
@@ -30,14 +29,14 @@ abstract class BaseFragmentActivity : BaseParamsActivity() {
 
     /**
      * 切换fragment，如果没有缓存则新建
-     * 使用hasCode 作为tag
+     * 默认使用currentFragment.hasCode 作为tag
      */
     fun switchFragment(
         @NonNull currentFragment: Fragment,
-        @IdRes frameLayoutId: Int = 0
+        @IdRes frameLayoutId: Int = 0, tag: String? = null
     ) {
-        val tag = currentFragment.hashCode().toString()
-        val fm: FragmentManager = supportFragmentManager
+        val safeTag = tag ?: currentFragment.hashCode().toString()
+        val fm: FragmentManager = childFragmentManager
         val ft: FragmentTransaction = fm.beginTransaction()
         //如果选择的fragment 不是第一个也不是正在显示的 则隐藏正在显示的
         showFragment?.let {
@@ -48,7 +47,7 @@ abstract class BaseFragmentActivity : BaseParamsActivity() {
         if (currentFragment.isAdded) {
             ft.show(currentFragment)
         } else if (frameLayoutId != 0) {
-            ft.add(frameLayoutId, currentFragment, tag)
+            ft.add(frameLayoutId, currentFragment, safeTag)
         }
         ft.commitAllowingStateLoss()
         showFragment = currentFragment
@@ -56,10 +55,9 @@ abstract class BaseFragmentActivity : BaseParamsActivity() {
 
     /**
      * 隐藏一个Fragment
-     * @param clazz
      */
     fun hideFragment(@NonNull clazz: Class<out Fragment>) {
-        val fm: FragmentManager = supportFragmentManager
+        val fm: FragmentManager = childFragmentManager
         val ft: FragmentTransaction = fm.beginTransaction()
         val currentFragment: Fragment? = fm.findFragmentByTag(clazz.name)
         currentFragment?.let {
@@ -70,11 +68,9 @@ abstract class BaseFragmentActivity : BaseParamsActivity() {
 
     /**
      * 移除一个Fragment
-     *
-     * @param clazz
      */
     fun removeFragment(@NonNull clazz: Class<out Fragment?>) {
-        val fm: FragmentManager = supportFragmentManager
+        val fm: FragmentManager = childFragmentManager
         val ft: FragmentTransaction = fm.beginTransaction()
         val currentFragment: Fragment? = fm.findFragmentByTag(clazz.name)
         currentFragment?.let {
@@ -82,5 +78,4 @@ abstract class BaseFragmentActivity : BaseParamsActivity() {
             ft.commit()
         }
     }
-
 }

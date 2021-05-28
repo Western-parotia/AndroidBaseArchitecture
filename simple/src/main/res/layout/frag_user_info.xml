@@ -5,17 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/aui_tv_vm"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="20dp"
-        android:text="img no init"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
         android:id="@+id/aui_tv_userId"
-        app:layout_constraintTop_toBottomOf="@+id/aui_tv_vm"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20dp"
         android:text="userId no init"
@@ -25,24 +16,6 @@
     <TextView
         android:id="@+id/aui_tv_userName"
         app:layout_constraintTop_toBottomOf="@+id/aui_tv_userId"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="20dp"
-        android:text="no init"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/aui_tv_address"
-        app:layout_constraintTop_toBottomOf="@+id/aui_tv_userName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="20dp"
-        android:text="no init"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/aui_tv_desc"
-        app:layout_constraintTop_toBottomOf="@+id/aui_tv_address"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20dp"
         android:text="no init"

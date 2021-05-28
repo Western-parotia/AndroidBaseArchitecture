@@ -19,7 +19,6 @@ import com.foundation.widget.loading.NormalLoadingAdapter
 /**
  * create by zhusw on 5/20/21 11:33
  */
-
 class HomeActivity : BaseActivity() {
 
     private val homeVM by lazyActivityVM<HomeVM>()
@@ -41,7 +40,7 @@ class HomeActivity : BaseActivity() {
 
         viewBinding.btnInit.setOnClickListener {
             homeVM.loadBanner()
-            homeVM.loadNews(false)
+            homeVM.loadNews(true)
         }
         viewBinding.btnListMore.setOnClickListener {
             homeVM.loadNews(false)

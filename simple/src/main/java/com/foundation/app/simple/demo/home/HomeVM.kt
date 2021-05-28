@@ -45,9 +45,7 @@ class HomeVM : BaseWanAndroidVM() {
 
     fun loadNews(refresh: Boolean = true) {
         if (refresh) {
-            if (pageCount > 0) {
-                _cleanAdapterLiveData.value = Unit
-            }
+            _cleanAdapterLiveData.value = Unit
             pageCount = 0
         } else {
             pageCount++

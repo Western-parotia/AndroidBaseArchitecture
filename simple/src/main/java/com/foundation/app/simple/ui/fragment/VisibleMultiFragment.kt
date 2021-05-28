@@ -22,7 +22,6 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
         this.log("${VisibleMultiFragment::class.java.simpleName} : $text: ")
     }
 
-
     private val vbBinding by initVB<FragVisibleBinding>()
 
     @BundleParams("color")
@@ -51,14 +50,13 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
         vbBinding.btnOpenNewPage.setOnClickListener {
             jump(EmptyActivity::class.java)
         }
+        vbBinding.btnSetChildFragment.visibility = View.VISIBLE
         vbBinding.btnSetChildFragment.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(
-                    R.id.fl_child,
-                    VisibleChildFragment.newInstance(color, "$text Child"),
-                    "VisibleChildFragment"
-                )
-                .commitNowAllowingStateLoss()
+            switchFragment(
+                VisibleChildFragment.newInstance(color, "$text Child"),
+                R.id.fl_child,
+                "VisibleChildFragment"
+            )
         }
         vbBinding.flChild.setBackgroundColor(Color.LTGRAY)
     }

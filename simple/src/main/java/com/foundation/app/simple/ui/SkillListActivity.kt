@@ -17,9 +17,7 @@ class SkillListActivity : BaseActivity() {
     override fun getContentVB(): ViewBinding? = null
 
     override fun init(savedInstanceState: Bundle?) {
-        supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, SkillListFragment(), "SkillListFragment")
-            .commitNowAllowingStateLoss()
+        switchFragment(SkillListFragment(), android.R.id.content)
     }
 
     override fun bindData() {

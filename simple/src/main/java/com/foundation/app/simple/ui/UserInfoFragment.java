@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * @Desc: -
- * -
+ * 这是java 示例
  * create by zhusw on 5/18/21 09:40
  */
 public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
@@ -19,7 +19,7 @@ public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
     private int userId = -1;
 
     @BundleParams("userName")
-    private String userName = "none";
+    private String userName = "没自动赋值";
 
     @Override
     public void initViewModel() {
@@ -33,7 +33,7 @@ public class UserInfoFragment extends BaseFragment<FragUserInfoBinding> {
 
     @Override
     protected void bindData() {
-        jViewBinding.auiTvUserId.setText(String.valueOf(userId));
-        jViewBinding.auiTvUserName.setText(userName);
+        jViewBinding.auiTvUserId.setText("用户ID:" + String.valueOf(userId));
+        jViewBinding.auiTvUserName.setText("用户名：" + userName);
     }
 }

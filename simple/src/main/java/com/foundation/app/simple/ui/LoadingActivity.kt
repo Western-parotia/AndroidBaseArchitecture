@@ -1,4 +1,4 @@
-package com.foundation.app.simple
+package com.foundation.app.simple.ui
 
 import android.content.Context
 import android.graphics.drawable.Animatable
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import com.foundation.app.simple.R
 import com.foundation.app.simple.databinding.ActivityLoadingBinding
 import com.foundation.widget.loading.PageLoadingAdapter
 

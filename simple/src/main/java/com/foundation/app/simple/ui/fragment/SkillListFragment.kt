@@ -44,10 +44,10 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
 
     override fun init(savedInstanceState: Bundle?) {
         "init savedInstanceState".log()
-        actVbBinding.btn.setOnClickListener {
+        actVbBinding.btnParamsTest.setOnClickListener {
             val intent = Intent(activity, UserInfoActivity::class.java)
-            intent.putExtra("userId", 2)
-            intent.putExtra("userName", "DogGi")
+            intent.putExtra("userId", 10003)
+            intent.putExtra("userName", "王二")
             //不支持传递实体
 //            val address = UserAddress("beijing", 99)
 //            val desc = UserDesc("friendly", 170)

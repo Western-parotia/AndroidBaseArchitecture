@@ -22,7 +22,7 @@ class UserInfoActivity : BaseActivity() {
     @BundleParams("userId")
     private val userId: Int = 0
 
-    @BundleParams("userId")
+    @BundleParams("userName")
     private val userName: String = "none"
 
     private val vbBinding by initVB<ActUserInfoBinding>()
@@ -35,16 +35,13 @@ class UserInfoActivity : BaseActivity() {
             val frag = UserInfoFragment()
             val bundle = BundleProducer.create()
             frag.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.aui_fl, frag, "UserInfoFragment")
-                .commitNowAllowingStateLoss()
+            switchFragment(frag, R.id.aui_fl, "UserInfoFragment")
         }
     }
 
     override fun bindData() {
-        vbBinding.auiTvUserId.text = userId.toString()
-        vbBinding.auiTvUserName.text = userName
+        vbBinding.auiTvUserId.text = "用户ID: $userId"
+        vbBinding.auiTvUserName.text = "用户名称: $userName"
     }
-
 
 }

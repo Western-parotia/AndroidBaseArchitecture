@@ -14,7 +14,7 @@ import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
  * create by zhusw on 5/18/21 10:46
  */
 abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
-    BaseVMFragment(), ViewBindingLifecycleListener {
+    BaseFragmentManagerFragment(), ViewBindingLifecycleListener {
 
     /**
      * 懒加载赋值

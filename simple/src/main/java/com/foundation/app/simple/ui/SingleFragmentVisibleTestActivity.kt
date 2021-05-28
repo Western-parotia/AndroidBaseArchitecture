@@ -19,13 +19,9 @@ class SingleFragmentVisibleTestActivity : BaseActivity() {
     override fun getContentVB(): ViewBinding = viewBinding
 
     override fun init(savedInstanceState: Bundle?) {
-        supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.afv_fl,
-                VisibleOneFragment.newInstance(Color.YELLOW, "单个fragment"),
-                "VisibleOneFragment"
-            )
-            .commitNowAllowingStateLoss()
+        switchFragment(
+            VisibleOneFragment.newInstance(Color.YELLOW, "单个fragment"), R.id.afv_fl
+        )
     }
 
     override fun bindData() {

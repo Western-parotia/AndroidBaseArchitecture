@@ -9,8 +9,8 @@ import android.os.Bundle;
 public class BundleProducer {
     public static Bundle create() {
         Bundle bundle = new Bundle();
-        bundle.putInt("userId", 1);
-        bundle.putString("userName", "YonGo");
+        bundle.putInt("userId", 100001);
+        bundle.putString("userName", "张三");
         UserAddress address = new UserAddress("inJava", 1);
         UserDesc desc = new UserDesc("inJava", 1);
         bundle.putParcelable("address", address);
