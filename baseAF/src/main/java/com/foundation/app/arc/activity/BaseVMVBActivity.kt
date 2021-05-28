@@ -91,7 +91,8 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     }
 
     /**
-     * 是否支持activity被杀死后重建（就是savedInstanceState相关数据）
+     * 是否支持activity被杀死后重建（是否使用 savedInstanceState中相关数据，
+     * 系统默认在其中保存了Fragment的状态，重建会导致fragment异常展示）
      *
      * @return 默认不支持。如果返回true，则必须测试杀死后重建的流程
      */
