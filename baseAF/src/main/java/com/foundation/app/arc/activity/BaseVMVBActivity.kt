@@ -56,8 +56,8 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     t.invoke()
     }
     以上代码，在跨module中的子类中访问，将会报错
-    如果inline 函数 内部使用了 lambda 或者匿名内部类 就会导致无法访问（仅在小米k30 os 10 上不复现）
-    必须是public的
+    如果inline 函数 内部使用了 lambda 或者匿名内部类,并在其中访问了外部类非public的成员
+    就会导致无法访问的异常（仅在小米k30 os 10 上不复现）
      */
     @MainThread
     inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {

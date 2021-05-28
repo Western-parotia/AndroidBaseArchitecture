@@ -1,6 +1,7 @@
 package com.foundation.app.simple.demo.net
 
 import com.foundation.app.simple.demo.net.api.ApiUrl
+import com.foundation.service.net.utils.addDynamicDomainSkill
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +13,8 @@ object RetrofitFactory {
             return OkHttpClient.Builder()
         }
 
-    fun factory(): Retrofit {
+    fun create(): Retrofit {
+        okHttpClientBuilder.addDynamicDomainSkill()
         val okHttpClient = okHttpClientBuilder.build()
         return Retrofit.Builder()
             .client(okHttpClient)

@@ -10,7 +10,7 @@ import java.lang.reflect.Field
  * 订阅无粘性消息，使用到了反射 liveData的 mVersion
  * 反射谣言：在Android 大可不必考虑反射的性能开销。在个位数指令执行测试中，反射1w次
  * 裸调 多消耗 16 ms， 使用缓存 多消耗 2ms
- * 订阅前尝试移除，避免同一个Observer 分别订阅在了[LiveData.observe] 与 [observerStickyLess] 中
+ * 订阅前尝试了移除，避免同一个Observer 分别订阅在了[LiveData.observe] 与 [observerStickyLess] 中
  * 造成重复收到结果
  * create by zhusw on 5/21/21 14:34
  */
@@ -42,7 +42,7 @@ private class StickLessWrapperObserver<T>(
         } else if (other is Observer<*>) {
             return realObs == other
         }
-        return false
+        return super.equals(other)
     }
 //</editor-fold>
 

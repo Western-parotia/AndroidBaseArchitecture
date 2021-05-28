@@ -8,7 +8,7 @@ import android.app.Application
 object Utils {
 
     private var _application: Application? = null
-    val app = _application!!
+    val app: Application get() = _application!!
     fun init(app: Application) {
         _application = app
     }

@@ -7,9 +7,7 @@ package com.foundation.widget.buildsrc
  *create by zhusw on 5/6/21 15:45
  */
 object Dependencies {
-    object Dex {
-        const val multidex = "androidx.multidex:multidex:2.0.0"
-    }
+
 
     object Foundation {
         const val loading = "com.foundation.widget:loading:1.0-SNAPSHOT"
@@ -38,15 +36,22 @@ object Dependencies {
     }
 
     object Retrofit {
-        const val retorifit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val retorifit = "com.squareup.retrofit2:retrofit:2.9.0"//依赖okhttp 3.14.9
         const val converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"
+        const val url_manager = "me.jessyan:retrofit-url-manager:1.4.0"
+        const val gson = "com.google.code.gson:gson:2.8.5"
+    }
+
+    object UI {
+        const val BaseRecyclerViewAdapterHelper =
+            "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
 
     }
 
     /**
      * ktx 库清单与版本：https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
      */
-    object Ktx {
+    object JetPack {
         const val core_ktx = "androidx.core:core-ktx:1.3.2"
         const val fragment_ktx = "androidx.fragment:fragment-ktx:1.3.3"
 
@@ -56,8 +61,11 @@ object Dependencies {
         /*livedata 拓展协程*/
         const val lifecycle_liveData_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
+        //        "androidx.lifecycle:lifecycle-livedata-core:2.3.1"
         /*viewModel 拓展协程*/
         const val lifecycle_viewModel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+
+
     }
 
 }
