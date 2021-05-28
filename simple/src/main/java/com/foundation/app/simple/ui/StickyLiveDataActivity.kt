@@ -34,7 +34,6 @@ class StickyLiveDataActivity : BaseActivity() {
             stickyCount = it
             binding.tv.text = "$stickyCount"
         }
-
         vm.data.observerStickyLess(this) {
             binding.tv2.text = "$it"
         }

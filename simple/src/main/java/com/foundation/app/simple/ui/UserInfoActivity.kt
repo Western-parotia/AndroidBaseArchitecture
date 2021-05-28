@@ -40,6 +40,7 @@ class UserInfoActivity : BaseActivity() {
     }
 
     override fun bindData() {
+
         vbBinding.auiTvUserId.text = "用户ID: $userId"
         vbBinding.auiTvUserName.text = "用户名称: $userName"
     }
