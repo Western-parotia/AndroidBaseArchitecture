@@ -4,9 +4,6 @@ import androidx.annotation.MainThread
 import com.foundation.app.arc.BuildConfig
 
 /**
-
-*-
- *-
  *create by zhusw on 5/11/21 14:24
  */
 private const val TAG = "baseAF"
