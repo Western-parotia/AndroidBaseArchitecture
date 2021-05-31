@@ -83,12 +83,3 @@ dependencies {
     implementation(project(":net"))
 
 }
-repositories {
-    maven {
-        setUrl(com.foundation.widget.buildsrc.Publish.Maven.codingArtifactsRepoUrl)
-        credentials {
-            username = com.foundation.widget.buildsrc.Publish.Maven.codingArtifactsGradleUsername
-            password = com.foundation.widget.buildsrc.Publish.Maven.codingArtifactsGradlePassword
-        }
-    }
-}

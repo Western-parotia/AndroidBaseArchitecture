@@ -36,6 +36,7 @@ object Publish {
     }
 
     object Maven {
+        //路径取决于首次访问此变量的kts文件所在地目录
         private val pFile = File("../local.properties")
 
         const val groupId = "com.foundation.app"

@@ -25,8 +25,11 @@ allprojects {
         google()
         jcenter()
         maven { setUrl("https://jitpack.io") }
+
     }
+
 }
+
 
 tasks.register("clean2", Delete::class.java) {
     delete(rootProject.buildDir)
