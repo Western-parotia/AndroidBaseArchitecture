@@ -104,7 +104,7 @@ publishing {
         }
         repositories {
             maven {
-                setUrl(Publish.Maven.getRepoUrl(project))
+                setUrl(Publish.Maven.getCodingRepoUrl(project))
                 credentials {
                     username = Publish.Maven.getCodingMavenUsername(project)
                     password = Publish.Maven.getCodingMavenPassword(project)

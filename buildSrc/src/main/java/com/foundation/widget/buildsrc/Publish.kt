@@ -41,7 +41,7 @@ object Publish {
         const val groupId = "com.foundation.app"
         const val artifactId = "activity-fragment"
 
-        fun getRepoUrl(project: Project): String {
+        fun getCodingRepoUrl(project: Project): String {
             val pFile = File("${project.rootDir}/$fileName")
             val url = getProperties(pFile, "codingArtifactsRepoUrl")
             "url $url".log("Maven===")

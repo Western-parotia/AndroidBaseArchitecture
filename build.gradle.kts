@@ -29,7 +29,7 @@ allprojects {
         jcenter()
         maven { setUrl("https://jitpack.io") }
         maven {
-            setUrl(com.foundation.widget.buildsrc.Publish.Maven.getRepoUrl(project))
+            setUrl(com.foundation.widget.buildsrc.Publish.Maven.getCodingRepoUrl(project))
             credentials {
                 username =
                     com.foundation.widget.buildsrc.Publish.Maven.getCodingMavenUsername(project)
