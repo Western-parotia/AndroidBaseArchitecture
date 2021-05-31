@@ -36,18 +36,19 @@ object Publish {
     }
 
     object Maven {
+        private val pFile = File("../local.properties")
+
         const val groupId = "com.foundation.app"
         const val artifactId = "activity-fragment"
 
         val codingArtifactsRepoUrl: String
+            get() = getProperties(pFile, "codingArtifactsRepoUrl")
         val codingArtifactsGradleUsername: String
+            get() = getProperties(pFile, "codingArtifactsGradleUsername")
         val codingArtifactsGradlePassword: String
+            get() = getProperties(pFile, "codingArtifactsGradlePassword")
 
         init {
-            val pFile = File("local.properties")
-            codingArtifactsRepoUrl = getProperties(pFile, "codingArtifactsRepoUrl")
-            codingArtifactsGradleUsername = getProperties(pFile, "codingArtifactsGradleUsername")
-            codingArtifactsGradlePassword = getProperties(pFile, "codingArtifactsGradlePassword")
             "url=$codingArtifactsRepoUrl userName=$codingArtifactsGradleUsername pwd=$codingArtifactsGradlePassword".log(
                 "Publish config=========:"
             )

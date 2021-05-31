@@ -77,7 +77,7 @@ publishing {
     val artifactId = Publish.Maven.artifactId
 
     publications {
-        create<MavenPublication>("LoadingView") {
+        create<MavenPublication>("BaseAF") {
             setGroupId(groupId)
             setArtifactId(artifactId)
             version = versionName
