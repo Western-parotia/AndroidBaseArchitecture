@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  * create by zhusw on 5/19/21 13:24
  */
 class MultiFragmentVisibleTestActivity : BaseActivity() {
-    private val viewBinding by initVB<ActMultiFragmentVisibleTestBinding>()
+    private val viewBinding by lazyVB<ActMultiFragmentVisibleTestBinding>()
     override fun getContentVB(): ViewBinding = viewBinding
 
     override fun init(savedInstanceState: Bundle?) {

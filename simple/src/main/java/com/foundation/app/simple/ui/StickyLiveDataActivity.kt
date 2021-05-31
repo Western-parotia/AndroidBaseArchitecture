@@ -13,7 +13,7 @@ import com.foundation.app.simple.vm.AppVM
  */
 class StickyLiveDataActivity : BaseActivity() {
     val vm by lazyGlobalVM<AppVM>()
-    val binding by initVB<ActStickyBinding>()
+    val binding by lazyVB<ActStickyBinding>()
 
     override fun getContentVB(): ViewBinding = binding
 

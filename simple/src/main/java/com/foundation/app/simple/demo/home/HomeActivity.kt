@@ -21,7 +21,7 @@ import com.foundation.widget.loading.NormalLoadingAdapter
  */
 class HomeActivity : BaseActivity() {
 
-    private val viewBinding by initVB<ActHomeWanandroidBinding>()
+    private val viewBinding by lazyVB<ActHomeWanandroidBinding>()
 
     override fun getContentVB(): ViewBinding = viewBinding
 

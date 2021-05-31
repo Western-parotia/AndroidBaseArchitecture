@@ -15,7 +15,7 @@ import com.foundation.app.simple.ui.fragment.VisibleOneFragment
  *create by zhusw on 5/19/21 13:24
  */
 class SingleFragmentVisibleTestActivity : BaseActivity() {
-    private val viewBinding by initVB<ActSingleFragmentVisibleTestBinding>()
+    private val viewBinding by lazyVB<ActSingleFragmentVisibleTestBinding>()
     override fun getContentVB(): ViewBinding = viewBinding
 
     override fun init(savedInstanceState: Bundle?) {

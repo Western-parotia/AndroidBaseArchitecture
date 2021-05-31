@@ -22,7 +22,7 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
         this.log("${VisibleMultiFragment::class.java.simpleName} : $text: ")
     }
 
-    private val vbBinding by initVB<FragVisibleBinding>()
+    private val vbBinding by lazyVB<FragVisibleBinding>()
 
     @BundleParams("color")
     val color: Int = Color.parseColor("#3e3e3e")

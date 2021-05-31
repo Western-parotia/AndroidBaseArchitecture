@@ -96,7 +96,7 @@ Tips:`onNewIntent`中不会进行重新绑定
 ```kotlin
 class SkillListFragment : BaseFragment2(R.layout.act_vb) {
 
-	val actVbBinding by initVB<ActVbBinding>()
+	val actVbBinding by lazyVB<ActVbBinding>()
 	
 	fun bindData() {
        actVbBinding.yourView

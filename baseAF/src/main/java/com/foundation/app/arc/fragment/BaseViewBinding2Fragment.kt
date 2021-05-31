@@ -10,7 +10,7 @@ import com.foundation.app.arc.utils.ext.FragmentViewBindingDelegate
 import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
 
 /**
- * 约束在子类中使用[initVB] 时 必须设置 layoutId
+ * 约束在子类中使用[lazyVB] 时 必须设置 layoutId
  * create by zhusw on 5/18/21 10:46
  */
 abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
@@ -20,7 +20,7 @@ abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
      * 懒加载赋值
      * viewBinding 销毁前调用 [onViewBindingDestroy]
      */
-    protected inline fun <reified VB : ViewBinding> initVB() = FragmentViewBindingDelegate {
+    protected inline fun <reified VB : ViewBinding> lazyVB() = FragmentViewBindingDelegate {
         VB::class.java.getMethod("bind", View::class.java)
             .invoke(null, requireView()) as VB
     }

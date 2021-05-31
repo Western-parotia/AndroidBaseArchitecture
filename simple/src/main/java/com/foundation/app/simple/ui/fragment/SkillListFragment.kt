@@ -23,7 +23,7 @@ import com.foundation.app.simple.ui.UserInfoActivity
  */
 class SkillListFragment : BaseFragment2(R.layout.act_vb) {
 
-    val actVbBinding by initVB<ActVbBinding>()
+    val actVbBinding by lazyVB<ActVbBinding>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

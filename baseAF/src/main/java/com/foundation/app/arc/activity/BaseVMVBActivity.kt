@@ -132,7 +132,7 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
      */
     protected abstract fun bindData()
 
-    protected inline fun <reified VB : ViewBinding> Activity.initVB() = lazyAtomic {
+    protected inline fun <reified VB : ViewBinding> Activity.lazyVB() = lazyAtomic {
         VB::class.java.getMethod("inflate", LayoutInflater::class.java)
             .invoke(null, layoutInflater) as VB
     }

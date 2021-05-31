@@ -23,7 +23,7 @@ open class VisibleChildFragment : BaseFragment2(R.layout.frag_visible) {
     }
 
 
-    private val vbBinding by initVB<FragVisibleBinding>()
+    private val vbBinding by lazyVB<FragVisibleBinding>()
 
     @BundleParams("color")
     val color: Int = Color.parseColor("#3e3e3e")

@@ -25,7 +25,7 @@ class UserInfoActivity : BaseActivity() {
     @BundleParams("userName")
     private val userName: String = "none"
 
-    private val vbBinding by initVB<ActUserInfoBinding>()
+    private val vbBinding by lazyVB<ActUserInfoBinding>()
 
     override fun getContentVB(): ViewBinding = vbBinding
 
