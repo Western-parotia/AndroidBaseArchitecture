@@ -104,10 +104,10 @@ publishing {
         }
         repositories {
             maven {
-                setUrl(Publish.Maven.codingArtifactsRepoUrl)
+                setUrl(Publish.Maven.getRepoUrl(project))
                 credentials {
-                    username = Publish.Maven.codingArtifactsGradleUsername
-                    password = Publish.Maven.codingArtifactsGradlePassword
+                    username = Publish.Maven.getCodingMavenUsername(project)
+                    password = Publish.Maven.getCodingMavenPassword(project)
                 }
             }
         }

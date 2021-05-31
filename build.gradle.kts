@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
 
-val kotlin_version by extra("1.4.32")
     repositories {
         google()
         jcenter()
@@ -9,7 +8,11 @@ val kotlin_version by extra("1.4.32")
     }
     dependencies {
         classpath(group = "com.android.tools.build", name = "gradle", version = "4.1.0")
-        classpath(group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version = "1.4.32")
+        classpath(
+            group = "org.jetbrains.kotlin",
+            name = "kotlin-gradle-plugin",
+            version = com.foundation.widget.buildsrc.Dependencies.Kotlin.version
+        )
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle-backup-backup files
     }
@@ -25,7 +28,15 @@ allprojects {
         google()
         jcenter()
         maven { setUrl("https://jitpack.io") }
-
+        maven {
+            setUrl(com.foundation.widget.buildsrc.Publish.Maven.getRepoUrl(project))
+            credentials {
+                username =
+                    com.foundation.widget.buildsrc.Publish.Maven.getCodingMavenUsername(project)
+                password =
+                    com.foundation.widget.buildsrc.Publish.Maven.getCodingMavenPassword(project)
+            }
+        }
     }
 
 }
