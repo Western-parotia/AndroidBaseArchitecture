@@ -10,7 +10,8 @@ import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
 
 /**
  * 完成viewBinding的初始化，设置根布局
- * 为了兼容JAVA，不推荐
+ * 反射获取获取范型类型后进行初始化
+ * 这样的实现是为了兼容JAVA，不推荐在kotlin中使用
  *create by zhusw on 4/22/21 11:28
  */
 abstract class BaseViewBindingFragment<B : ViewBinding> : BaseFragmentManagerFragment(),
