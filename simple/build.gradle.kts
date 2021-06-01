@@ -80,6 +80,6 @@ dependencies {
     implementation(Dependencies.Retrofit.converter_gson)
     implementation(Dependencies.UI.BaseRecyclerViewAdapterHelper)
     implementation(project(":baseAF"))
-    implementation(project(":net"))
+    implementation("com.foundation.service:net:1.0-SNAPSHOT")
 
 }
