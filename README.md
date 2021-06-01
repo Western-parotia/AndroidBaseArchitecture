@@ -14,6 +14,13 @@
 
 ![uml](./images/uml.jpg)
 
+使用：
+
+```kotlin
+ implementation("com.foundation.app:activity-fragment:最新版本")
+```
+
+
 在使用场景上，从View的角色去看待Activity与Fragment，它承担的职责基本一致——接收数据>展示数据，所以本库中为这两者提供的API，保持高度的一致性。
 
 ## 1.明确View层在架构中的职责边界，规范初始化方法与生命周期
