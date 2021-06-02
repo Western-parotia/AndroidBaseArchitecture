@@ -12,7 +12,8 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
  * ViewModel 创建与使用规范
- *create by zhusw on 5/18/21 13:36
+ *
+ * create by zhusw on 5/18/21 13:36
  */
 abstract class BaseVMFragment : BaseParamsFragment() {
 
