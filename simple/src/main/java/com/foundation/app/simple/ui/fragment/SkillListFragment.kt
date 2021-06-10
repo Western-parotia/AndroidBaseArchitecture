@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.foundation.app.simple.R
+import com.foundation.app.simple.VBIncludeTestActivity
 import com.foundation.app.simple.architecture.BaseFragment2
 import com.foundation.app.simple.databinding.ActVbBinding
 import com.foundation.app.simple.demo.home.HomeActivity
@@ -67,7 +68,9 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
         actVbBinding.btnLd.setOnClickListener {
             jump(StickyLiveDataActivity::class.java)
         }
-
+        actVbBinding.btnVbIncludeTest.setOnClickListener {
+            jump(VBIncludeTestActivity::class.java)
+        }
     }
 
     override fun bindData() {

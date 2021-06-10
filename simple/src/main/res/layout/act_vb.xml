@@ -34,5 +34,9 @@
         android:text="vm repo 网络示例"
         android:layout_height="wrap_content" />
 
-
+    <Button
+        android:id="@+id/btn_vb_include_test"
+        android:layout_width="wrap_content"
+        android:text="include VB 测试"
+        android:layout_height="wrap_content" />
 </LinearLayout>
