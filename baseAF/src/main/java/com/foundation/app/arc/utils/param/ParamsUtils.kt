@@ -81,7 +81,7 @@ object ParamsUtils {
                 }
                 else -> when {
                     Parcelable::class.java.isAssignableFrom(field.type) -> {
-                        bundle.getParcelable(key)
+                        bundle.getParcelable(key) as? Any
                     }
                     Serializable::class.java.isAssignableFrom(field.type) -> {
                         bundle.getSerializable(key)
