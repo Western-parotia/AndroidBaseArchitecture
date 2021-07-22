@@ -84,7 +84,7 @@ object ParamsUtils {
                         bundle.getParcelable(key) as? Any
                     }
                     Serializable::class.java.isAssignableFrom(field.type) -> {
-                        bundle.getSerializable(key)
+                        throw IllegalArgumentException("Don't pass Serializable type in Bundle! Must use Parcelable")
                     }
                     else -> {
                         null
