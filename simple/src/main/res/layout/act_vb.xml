@@ -7,7 +7,21 @@
     <Button
         android:id="@+id/btn_params_test"
         android:layout_width="wrap_content"
-        android:text="参数绑定测试"
+        android:text="基础类型 参数绑定测试"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_params_parcelable_test"
+        android:layout_width="wrap_content"
+        android:text="parcelable参数绑定测试"
+        android:textAllCaps="false"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_params_serializable_test"
+        android:layout_width="wrap_content"
+        android:text="serializable参数绑定测试"
+        android:textAllCaps="false"
         android:layout_height="wrap_content" />
 
     <Button

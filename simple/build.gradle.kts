@@ -79,7 +79,8 @@ dependencies {
     implementation(Dependencies.Retrofit.retorifit)
     implementation(Dependencies.Retrofit.converter_gson)
     implementation(Dependencies.UI.BaseRecyclerViewAdapterHelper)
+    implementation(Dependencies.UI.glde)
     implementation(project(":baseAF"))
-    implementation("com.foundation.service:net:1.0-SNAPSHOT")
+    implementation("com.foundation.service:net:1.0.0")
 
 }

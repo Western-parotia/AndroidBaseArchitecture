@@ -71,6 +71,8 @@ class MyContentLoadingAdapter(private val context: Context) : PageLoadingAdapter
         background = ContextCompat.getDrawable(context, R.drawable.img_skeleton_screen)
     }
 
+    override fun getEmptyView(): View? = null
+
     /**
      * 自定义加载动画的View
      */
@@ -79,6 +81,8 @@ class MyContentLoadingAdapter(private val context: Context) : PageLoadingAdapter
     }
 
     override fun getLoadingView(): View? = loadingView
+    override fun onShowEmptyView(emptyView: View) {
+    }
 
     /**
      * 展示动画

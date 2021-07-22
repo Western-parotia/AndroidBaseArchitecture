@@ -10,7 +10,7 @@ object Dependencies {
 
 
     object Foundation {
-        const val loading = "com.foundation.widget:loading:1.0-SNAPSHOT"
+        const val loading = "com.foundation.widget:loadingview:1.1.3-SNAPSHOT"
     }
 
     object Kotlin {
@@ -47,7 +47,8 @@ object Dependencies {
     object UI {
         const val BaseRecyclerViewAdapterHelper =
             "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
-
+        const val glde =
+            "com.github.bumptech.glide:glide:4.3.1"
     }
 
     /**

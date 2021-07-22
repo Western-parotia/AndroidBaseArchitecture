@@ -2,6 +2,7 @@ package com.foundation.app.simple.ui.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
 /**
 
@@ -37,17 +38,17 @@ data class UserAddress(val city: String = "none", val streetNo: Int = 0) : Parce
 
 }
 
+data class UserDescSerializable(val introduce: String = "none", val height: Int = 0) : Serializable
 
-data class UserDesc(val disposition: String = "none", val height: Int = 0) : Parcelable {
-
+data class UserDesc(val introduce: String = "none", val height: Int = 0) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
+        parcel.readString() ?: "",
         parcel.readInt()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(disposition)
+        parcel.writeString(introduce)
         parcel.writeInt(height)
     }
 
@@ -64,5 +65,6 @@ data class UserDesc(val disposition: String = "none", val height: Int = 0) : Par
             return arrayOfNulls(size)
         }
     }
+
 
 }

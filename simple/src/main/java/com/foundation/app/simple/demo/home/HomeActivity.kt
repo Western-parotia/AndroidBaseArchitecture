@@ -89,7 +89,7 @@ class HomeActivity : BaseActivity() {
 
 }
 
-private class LoadingAdapter(private val ctx: Context) : NormalLoadingAdapter(ctx) {
+private class LoadingAdapter(private val ctx: Context) : NormalLoadingAdapter() {
     override fun getBottomPlateView(): View? {
         return View(ctx).apply {
             setBackgroundColor(Color.LTGRAY)

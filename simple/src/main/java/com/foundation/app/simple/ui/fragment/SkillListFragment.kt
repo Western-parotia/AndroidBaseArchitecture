@@ -11,10 +11,9 @@ import com.foundation.app.simple.databinding.ActVbBinding
 import com.foundation.app.simple.demo.home.HomeActivity
 import com.foundation.app.simple.jump
 import com.foundation.app.simple.log
-import com.foundation.app.simple.ui.MultiFragmentVisibleTestActivity
-import com.foundation.app.simple.ui.SingleFragmentVisibleTestActivity
-import com.foundation.app.simple.ui.StickyLiveDataActivity
-import com.foundation.app.simple.ui.UserInfoActivity
+import com.foundation.app.simple.ui.*
+import com.foundation.app.simple.ui.data.UserDesc
+import com.foundation.app.simple.ui.data.UserDescSerializable
 
 /**
 
@@ -56,6 +55,15 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
 //            intent.putExtra("desc", desc)
             startActivity(intent)
         }
+        actVbBinding.btnParamsParcelableTest.setOnClickListener {
+            ParcelableActivity.enter(requireActivity(), UserDesc("来自Parcelable 100", 100))
+        }
+        actVbBinding.btnParamsSerializableTest.setOnClickListener {
+            SerializableActivity.enter(
+                requireActivity(),
+                UserDescSerializable("来自Serializable 200", 200)
+            )
+        }
         actVbBinding.btnSingleVisible.setOnClickListener {
             jump(SingleFragmentVisibleTestActivity::class.java)
         }
@@ -71,6 +79,8 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
         actVbBinding.btnVbIncludeTest.setOnClickListener {
             jump(VBIncludeTestActivity::class.java)
         }
+
+
     }
 
     override fun bindData() {

@@ -32,6 +32,8 @@
         <activity android:name=".demo.home.HomeActivity" />
         <activity android:name=".ui.StickyLiveDataActivity" />
         <activity android:name=".VBIncludeTestActivity" />
+        <activity android:name=".ui.ParcelableActivity" />
+        <activity android:name=".ui.SerializableActivity" />
 
     </application>
 

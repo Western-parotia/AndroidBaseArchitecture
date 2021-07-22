@@ -3,9 +3,11 @@ package com.foundation.app.arc.utils.param
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.foundation.app.arc.utils.ext.log
+import java.io.Serializable
 import java.lang.reflect.Field
 
 /**
@@ -77,9 +79,16 @@ object ParamsUtils {
                 Double::class.javaPrimitiveType -> {
                     bundle.getDouble(key, 0.0)
                 }
-                else -> {
-//                    bundle.getParcelable(key) //不允许传递实体
-                    null
+                else -> when {
+                    Parcelable::class.java.isAssignableFrom(field.type) -> {
+                        bundle.getParcelable(key)
+                    }
+                    Serializable::class.java.isAssignableFrom(field.type) -> {
+                        bundle.getSerializable(key)
+                    }
+                    else -> {
+                        null
+                    }
                 }
             }?.apply {
                 "set value=$this".log(TAG)
@@ -88,6 +97,7 @@ object ParamsUtils {
                 field.set(obj, this)
                 if (!accessible) field.isAccessible = false
             }
+
         } else {
             Log.e(TAG, "bundle not contains this key=$key")
         }
