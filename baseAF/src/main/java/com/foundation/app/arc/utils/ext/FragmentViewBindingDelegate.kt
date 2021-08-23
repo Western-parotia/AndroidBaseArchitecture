@@ -37,6 +37,7 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () ->
                         if (thisRef is ViewBindingLifecycleListener) {
                             thisRef.onViewBindingDestroy()
                         }
+                        thisRef.viewLifecycleOwner.lifecycle.removeObserver(this)
                         hasInit = false
                         binding = null
                     }
