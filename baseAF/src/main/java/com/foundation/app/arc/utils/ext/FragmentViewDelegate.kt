@@ -11,7 +11,7 @@ internal object UNINITIALIZED_VALUE
 /**
  * 跟着frag的生命周期走，当destroy时会销毁，当再次create时会创建新的
  */
-class FragmentAnyDelegate<out T>(
+class FragmentViewDelegate<out T>(
     private val frag: Fragment,
     private val initializer: () -> T
 ) : Lazy<T>, Serializable {
@@ -27,7 +27,7 @@ class FragmentAnyDelegate<out T>(
                                 " you can implement ViewBindingLifecycleListener on Fragment and override onViewBindingDestroy to work"
                     )
                 }
-                "init binding instance".log("FragmentAnyDelegate")
+                "init binding instance".log("FragmentViewDelegate")
                 _value = initializer()
                 frag.viewLifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
                     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

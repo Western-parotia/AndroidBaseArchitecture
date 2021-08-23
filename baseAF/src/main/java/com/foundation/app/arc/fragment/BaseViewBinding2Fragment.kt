@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.viewbinding.ViewBinding
-import com.foundation.app.arc.utils.ext.FragmentAnyDelegate
 import com.foundation.app.arc.utils.ext.FragmentViewBindingDelegate
+import com.foundation.app.arc.utils.ext.FragmentViewDelegate
 import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
 
 /**
@@ -33,7 +33,8 @@ abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
      *
      * 这两个方法逻辑后期需要合并（统一ViewBindingLifecycleListener）
      */
-    protected fun <T> lazyAny(initializer: () -> T) = FragmentAnyDelegate(this, initializer)
+    protected fun <T> lazyWithFragment(initializer: () -> T) =
+        FragmentViewDelegate(this, initializer)
 
     override fun onCreateView(
         inflater: LayoutInflater,
