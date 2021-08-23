@@ -33,7 +33,7 @@ class FragmentAnyDelegate<out T>(
                     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                     fun onDestroyView() {
                         frag.viewLifecycleOwner.lifecycle.removeObserver(this)
-                        _value = null
+                        _value = UNINITIALIZED_VALUE
                     }
                 })
             }
