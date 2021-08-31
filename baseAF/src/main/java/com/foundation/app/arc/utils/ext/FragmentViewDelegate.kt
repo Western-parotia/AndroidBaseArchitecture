@@ -23,11 +23,11 @@ class FragmentViewDelegate<out T>(
                 val curSate = frag.viewLifecycleOwner.lifecycle.currentState
                 if (curSate == Lifecycle.State.DESTROYED) {
                     throw IllegalAccessException(
-                        "can not init binding,because of fragment will be destroy soon" +
+                        "can not init,because of fragment will be destroy soon" +
                                 " you can implement ViewBindingLifecycleListener on Fragment and override onViewBindingDestroy to work"
                     )
                 }
-                "init binding instance".log("FragmentViewDelegate")
+                "init instance".log("FragmentViewDelegate")
                 _value = initializer()
                 frag.viewLifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
                     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

@@ -3,6 +3,7 @@ package com.foundation.app.arc.fragment
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
+import com.foundation.app.arc.utils.ext.FragmentViewDelegate
 
 /**
  * fragment 状态管理，首次显示，显示，隐藏,视图重用
@@ -134,4 +135,11 @@ abstract class BaseVisibilityFragment : Fragment() {
         }
     }
 
+    /**
+     * 加载任意值，跟随frag生命周期销毁、创建
+     *
+     * 这两个方法逻辑后期需要合并（统一ViewBindingLifecycleListener）
+     */
+    public fun <T> lazyWithFragment(initializer: () -> T) =
+        FragmentViewDelegate(this, initializer)
 }

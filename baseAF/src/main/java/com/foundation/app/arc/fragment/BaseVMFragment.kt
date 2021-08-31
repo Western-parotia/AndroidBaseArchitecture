@@ -7,7 +7,6 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.foundation.app.arc.utils.ext.AFViewModelLazy
 import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
@@ -57,17 +56,24 @@ abstract class BaseVMFragment : BaseParamsFragment() {
 
     @MainThread
     inline fun <reified VM : ViewModel> lazyFragmentVM(): Lazy<VM> {
-        return AFViewModelLazy(VM::class) { fragmentVMProvider }
+        return lazyWithFragment {
+            fragmentVMProvider.get(VM::class.java)
+        }
     }
+
 
     @MainThread
     inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
-        return AFViewModelLazy(VM::class) { activityVMProvider }
+        return lazyWithFragment {
+            activityVMProvider.get(VM::class.java)
+        }
     }
 
     @MainThread
     inline fun <reified VM : ViewModel> lazyGlobalVM(): Lazy<VM> {
-        return AFViewModelLazy(VM::class) { applicationVMProvider }
+        return lazyWithFragment {
+            applicationVMProvider.get(VM::class.java)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
