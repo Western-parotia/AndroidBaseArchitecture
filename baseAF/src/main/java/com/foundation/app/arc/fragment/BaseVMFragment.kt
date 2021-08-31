@@ -78,12 +78,13 @@ abstract class BaseVMFragment : BaseParamsFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewModel()//1
+
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()//1
         init(savedInstanceState)//2
         bindData()//3
     }
@@ -91,7 +92,9 @@ abstract class BaseVMFragment : BaseParamsFragment() {
     /**
      * 主要是支持在java中使用，在kotlin中可用[lazyFragmentVM]
      */
-    protected abstract fun initViewModel()
+    protected open fun initViewModel() {
+
+    }
 
     /**
      * 建议：
