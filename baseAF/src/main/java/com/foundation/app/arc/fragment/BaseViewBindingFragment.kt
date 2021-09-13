@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.foundation.app.arc.utils.ViewBindingHelper
 import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
+import com.foundation.widget.binding.ViewBindingHelper
 
 /**
  * 完成viewBinding的初始化，设置根布局

@@ -56,6 +56,7 @@ dependencies {
     implementation(Dependencies.Coroutines.coroutines_android)
     implementation(Dependencies.JetPack.lifecycle_viewModel_ktx)
     implementation(Dependencies.JetPack.fragment_ktx)
+    implementation(Dependencies.Foundation.viewBindingHelper)
 
 }
 
