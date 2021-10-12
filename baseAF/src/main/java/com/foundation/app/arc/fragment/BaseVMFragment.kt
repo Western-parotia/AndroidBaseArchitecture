@@ -16,9 +16,12 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
  */
 abstract class BaseVMFragment : BaseParamsFragment() {
 
-    val fragmentVMProvider: ViewModelProvider by lazyAtomic {
-        ViewModelProvider(this)
-    }
+    /**
+     * can not visit before onCreate
+     * the case is in viewPager2 when switch tab fragment it will be invoke all life method
+     */
+    private lateinit var _fragmentVMProvider: ViewModelProvider
+    val fragmentVMProvider get() = _fragmentVMProvider
     val activityVMProvider by lazyAtomic {
         val activity = requireActivity()
         ViewModelProvider(activity)
@@ -41,6 +44,7 @@ abstract class BaseVMFragment : BaseParamsFragment() {
             }
         }
     }
+
 
     protected fun <VM : ViewModel> getFragmentVM(clz: Class<VM>): VM {
         return fragmentVMProvider.get(clz)
@@ -78,7 +82,7 @@ abstract class BaseVMFragment : BaseParamsFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        _fragmentVMProvider = ViewModelProvider(this)
     }
 
     @CallSuper
