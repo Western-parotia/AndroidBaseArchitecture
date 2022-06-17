@@ -1,8 +1,5 @@
 package com.foundation.widget.buildsrc
 
-import org.gradle.api.Project
-import java.io.File
-
 
 /**
 
@@ -40,26 +37,19 @@ object Publish {
         private const val fileName = "local.properties"
         const val groupId = "com.foundation.app"
         const val artifactId = "activity-fragment"
+        const val codingArtifactsRepoUrl = Repositories.codingMjMaven
+        val repositoryUserName: String
+        val repositoryPassword: String
 
-        fun getCodingRepoUrl(project: Project): String {
-            val pFile = File("${project.rootDir}/$fileName")
-            val url = getProperties(pFile, "codingArtifactsRepoUrl")
-            "url $url".log("Maven===")
-            return url
-        }
-
-        fun getCodingMavenUsername(project: Project): String {
-            val pFile = File("${project.rootDir}/$fileName")
-            val userName = getProperties(pFile, "codingArtifactsGradleUsername")
-            "userName $userName".log("Maven===")
-            return userName
-        }
-
-        fun getCodingMavenPassword(project: Project): String {
-            val pFile = File("${project.rootDir}/$fileName")
-            val pw = getProperties(pFile, "codingArtifactsGradlePassword")
-            "pw $pw".log("Maven===")
-            return pw
+        init {
+            val lp = PropertiesUtils.localProperties
+            val name = lp.getProperty("codingArtifactsGradleUsername")
+            val password = lp.getProperty("codingArtifactsGradlePassword")
+            if (name == null || password == null) {
+                throw RuntimeException("请在local.properties添加私有仓库的用户名（codingArtifactsGradleUsername）和密码（codingArtifactsGradlePassword）")
+            }
+            repositoryUserName = name
+            repositoryPassword = password
         }
     }
 

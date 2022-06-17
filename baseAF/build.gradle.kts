@@ -1,4 +1,5 @@
-import com.foundation.widget.buildsrc.*
+import com.foundation.widget.buildsrc.Dependencies
+import com.foundation.widget.buildsrc.Publish
 
 plugins {
     id("com.android.library")
@@ -104,10 +105,10 @@ publishing {
         }
         repositories {
             maven {
-                setUrl(com.foundation.widget.buildsrc.Repositories.codingMjMaven)
+                setUrl(Publish.Maven.codingArtifactsRepoUrl)
                 credentials {
-                    username = com.foundation.widget.buildsrc.Repositories.codingMjDefName
-                    password = com.foundation.widget.buildsrc.Repositories.codingMjDefPassword
+                    username = Publish.Maven.repositoryUserName
+                    password = Publish.Maven.repositoryPassword
                 }
             }
         }

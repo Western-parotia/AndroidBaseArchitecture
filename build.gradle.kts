@@ -1,4 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+//buildSrc的初始化init
+com.foundation.widget.buildsrc.GlobalConfig.init(project)
+
 buildscript {
 
     repositories {
