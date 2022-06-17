@@ -47,11 +47,11 @@ object ParamsUtils {
     }
 
     private fun bind(p: BundleParams, field: Field, obj: Any, bundle: Bundle) {
-        val key: String = if (p.value.isEmpty()) field.name else p.value
+        val key: String = p.value.ifEmpty { field.name }
         "bind key=$key".log(TAG)
         if (bundle.containsKey(key)) {
             "bind type=${field.type.name}".log(TAG)
-            when (field.type) {
+            val value: Any? = when (field.type) {
                 String::class.java -> {
                     bundle.getString(key, "")
                 }
@@ -81,20 +81,25 @@ object ParamsUtils {
                 }
                 else -> when {
                     Parcelable::class.java.isAssignableFrom(field.type) -> {
-                        bundle.getParcelable(key) as? Any
+                        bundle.getParcelable(key)
                     }
                     Serializable::class.java.isAssignableFrom(field.type) -> {
-                        throw IllegalArgumentException("Don't pass Serializable type in Bundle! Must use Parcelable")
+                        if (!field.isAnnotationPresent(BundleParamsUseSerializable::class.java)) {
+                            throw IllegalArgumentException("not recommend use Serializable key:$key,you should use Parcelable or add @BundleParamsUseSerializable annotation")
+                        }
+                        bundle.getSerializable(key)
                     }
                     else -> {
-                        null
+                        //理论上不可能走到这里
+                        throw IllegalArgumentException("unknown class type key:$key")
                     }
                 }
-            }?.apply {
-                "set value=$this".log(TAG)
+            }
+            value?.let {
+                "set value=$it".log(TAG)
                 val accessible = field.isAccessible
                 if (!accessible) field.isAccessible = true
-                field.set(obj, this)
+                field.set(obj, it)
                 if (!accessible) field.isAccessible = false
             }
 

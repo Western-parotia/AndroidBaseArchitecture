@@ -17,7 +17,7 @@ import com.foundation.app.simple.ui.data.UserDescSerializable
 
 /**
 
-*-
+ *-
  *-
  *create by zhusw on 5/19/21 13:32
  */
@@ -48,6 +48,7 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
             val intent = Intent(activity, UserInfoActivity::class.java)
             intent.putExtra("userId", 10003)
             intent.putExtra("userName", "王二")
+            intent.putExtra("clsTest", SkillListFragment::class.java)
             //不支持传递实体
 //            val address = UserAddress("beijing", 99)
 //            val desc = UserDesc("friendly", 170)

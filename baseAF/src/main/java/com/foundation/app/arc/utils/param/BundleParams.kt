@@ -14,6 +14,13 @@ package com.foundation.app.arc.utils.param
 @Retention(AnnotationRetention.RUNTIME)
 annotation class BundleParams(val value: String)
 
+/**
+ * 强制使用Serializable
+ */
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class BundleParamsUseSerializable()
+
 /*在java中需要显式的赋值 key 字段
 annotation class BundleParams(val key: String = "") {
 

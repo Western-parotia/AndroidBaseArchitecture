@@ -2,9 +2,23 @@
 buildscript {
 
     repositories {
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusPublic) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusRelease) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunPublic) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunGoogle) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunJcenter) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunCentral) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.jitpackIo) }
+        mavenCentral()
+        maven {
+            setUrl(com.foundation.widget.buildsrc.Repositories.codingMjMaven)
+            credentials {
+                username = com.foundation.widget.buildsrc.Repositories.codingMjDefName
+                password = com.foundation.widget.buildsrc.Repositories.codingMjDefPassword
+            }
+        }
+        mavenLocal()
         google()
-        jcenter()
-
     }
     dependencies {
         classpath(group = "com.android.tools.build", name = "gradle", version = "4.1.0")
@@ -20,23 +34,23 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { setUrl("http://maven.aliyun.com/nexus/content/groups/public/") }
-        maven { setUrl("https://maven.aliyun.com/repository/public/") }
-        maven { setUrl("https://maven.aliyun.com/repository/google/") }
-        maven { setUrl("https://maven.aliyun.com/repository/jcenter/") }
-        maven { setUrl("https://maven.aliyun.com/repository/central/") }
-        google()
-        jcenter()
-        maven { setUrl("https://jitpack.io") }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusPublic) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusRelease) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunPublic) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunGoogle) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunJcenter) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunCentral) }
+        maven { setUrl(com.foundation.widget.buildsrc.Repositories.jitpackIo) }
+        mavenCentral()
         maven {
-            setUrl(com.foundation.widget.buildsrc.Publish.Maven.getCodingRepoUrl(project))
+            setUrl(com.foundation.widget.buildsrc.Repositories.codingMjMaven)
             credentials {
-                username =
-                    com.foundation.widget.buildsrc.Publish.Maven.getCodingMavenUsername(project)
-                password =
-                    com.foundation.widget.buildsrc.Publish.Maven.getCodingMavenPassword(project)
+                username = com.foundation.widget.buildsrc.Repositories.codingMjDefName
+                password = com.foundation.widget.buildsrc.Repositories.codingMjDefPassword
             }
         }
+        mavenLocal()
+        google()
     }
 
 }
