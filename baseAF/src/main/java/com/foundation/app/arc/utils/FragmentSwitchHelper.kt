@@ -15,7 +15,7 @@ class FragmentSwitchHelper(private val fm: FragmentManager) {
                 switchFragment(it, frameLayoutId)
                 return it
             }
-        } catch (e: java.lang.InstantiationException) {
+        } catch (e: InstantiationException) {
             e.printStackTrace()
         } catch (e: IllegalAccessException) {
             e.printStackTrace()

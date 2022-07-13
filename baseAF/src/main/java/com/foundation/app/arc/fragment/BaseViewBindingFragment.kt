@@ -31,9 +31,9 @@ abstract class BaseViewBindingFragment<B : ViewBinding> : BaseFragmentManagerFra
     ): View? {
         binding = ViewBindingHelper.getViewBindingInstance(this, inflater, container, false)
         jViewBinding = binding
-        val vbCheck = requireNotNull(binding, {
+        val vbCheck = requireNotNull(binding) {
             "BaseViewBindingFragment ViewBinding has not init  or init failure,please check it"
-        })
+        }
         return vbCheck.root
     }
 
