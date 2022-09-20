@@ -8,8 +8,8 @@ package com.foundation.widget.buildsrc
  *create by zhusw on 5/6/21 16:43
  */
 
-private const val VERSION = "1.0.7"
-private const val SNAPSHOT = true
+private const val VERSION = "1.0.8"
+private const val SNAPSHOT = false
 
 object Publish {
     object Version {

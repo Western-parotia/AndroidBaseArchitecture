@@ -81,6 +81,5 @@ dependencies {
     implementation(Dependencies.UI.BaseRecyclerViewAdapterHelper)
     implementation(Dependencies.UI.glde)
     implementation(project(":baseAF"))
-    implementation("com.foundation.service:net:1.0.0")
-
+    implementation(Dependencies.Foundation.net)
 }

@@ -81,6 +81,7 @@ class MyContentLoadingAdapter(private val context: Context) : PageLoadingAdapter
     }
 
     override fun getLoadingView(): View? = loadingView
+
     override fun onShowEmptyView(emptyView: View) {
     }
 
@@ -122,7 +123,7 @@ class MyContentLoadingAdapter(private val context: Context) : PageLoadingAdapter
     /**
      * 停止动画
      */
-    override fun onStop(loadingView: View?, failView: View?) {
+    override fun onDismissLoading(loadingView: View?, failView: View?) {
         if (loadingView?.background is Animatable) {
             val anim = loadingView.background as Animatable
             anim.stop()

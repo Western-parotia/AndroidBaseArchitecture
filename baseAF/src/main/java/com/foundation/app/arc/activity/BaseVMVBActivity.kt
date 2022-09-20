@@ -2,7 +2,6 @@ package com.foundation.app.arc.activity
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.annotation.MainThread
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +9,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.ext.AFViewModelLazy
 import com.foundation.app.arc.utils.ext.lazyAtomic
+import com.foundation.widget.binding.ViewBindingHelper
 
 /**
  * ViewModel 创建与使用规范
@@ -133,8 +133,6 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     protected abstract fun bindData()
 
     protected inline fun <reified VB : ViewBinding> Activity.lazyVB() = lazyAtomic {
-        VB::class.java.getMethod("inflate", LayoutInflater::class.java)
-            .invoke(null, layoutInflater) as VB
+        ViewBindingHelper.getViewBindingInstanceByClass<VB>(VB::class.java, layoutInflater, null)
     }
-
 }
