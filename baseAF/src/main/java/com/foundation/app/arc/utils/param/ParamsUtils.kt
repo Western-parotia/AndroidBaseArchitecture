@@ -81,7 +81,7 @@ object ParamsUtils {
                 }
                 else -> when {
                     Parcelable::class.java.isAssignableFrom(field.type) -> {
-                        bundle.getParcelable(key)
+                        bundle.getParcelable(key) as? Parcelable//不as的话智能推断无法识别，会被强转成Serializable导致崩溃
                     }
                     Serializable::class.java.isAssignableFrom(field.type) -> {
                         if (!field.isAnnotationPresent(BundleParamsUseSerializable::class.java)) {
@@ -102,7 +102,6 @@ object ParamsUtils {
                 field.set(obj, it)
                 if (!accessible) field.isAccessible = false
             }
-
         } else {
             Log.e(TAG, "bundle not contains this key=$key")
         }
