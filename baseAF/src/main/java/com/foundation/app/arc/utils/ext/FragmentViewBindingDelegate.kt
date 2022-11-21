@@ -25,7 +25,7 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () ->
                 val curSate = thisRef.viewLifecycleOwner.lifecycle.currentState
                 if (curSate == Lifecycle.State.DESTROYED) {
                     throw IllegalAccessException(
-                        "can not init binding,because of fragment will be destroy soon" +
+                        "can not init binding,because of fragment will be destroy soon," +
                                 " you can implement ViewBindingLifecycleListener on Fragment and override onViewBindingDestroy to work"
                     )
                 }
