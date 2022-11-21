@@ -65,9 +65,11 @@ abstract class BaseVisibilityFragment : Fragment() {
         }
     }
 
-    //isVisible=$isVisible userVis=$userVisibleHint isAdded=$isAdded isHidden=$isHidden view v=${view?.visibility==View.VISIBLE}
-    //在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
-    //所以真实的状态需要参考父 fragment 是否可见
+    /** isVisible=$isVisible userVis=$userVisibleHint isAdded=$isAdded
+     * isHidden=$isHidden
+    * 在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
+    * 所以真实的状态需要参考父 fragment 是否可见
+     **/
     @CallSuper
     protected open fun onFragmentVisibleChange(isVisible: Boolean, tag: String = "") {
         //支持子fragment 完全跟随 父fragment 可见状态
