@@ -81,7 +81,7 @@ object ParamsUtils {
                 }
                 else -> when {
                     Parcelable::class.java.isAssignableFrom(field.type) -> {
-                        bundle.getParcelable(key) as? Parcelable//不 as 的话智能推断无法识别，会被强转成 Serializable 导致崩溃
+                        bundle.getParcelable(key) as? Parcelable//不as的话智能推断无法识别，会被强转成Serializable导致崩溃
                     }
                     Serializable::class.java.isAssignableFrom(field.type) -> {
                         if (!field.isAnnotationPresent(BundleParamsUseSerializable::class.java)) {

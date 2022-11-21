@@ -19,7 +19,8 @@ class AFViewModelLazy<VM : ViewModel>(
     private var cached: VM? = null
     override val value: VM
         get() {
-            return cached ?: viewModelProvider.invoke().get(viewModelClass.java).also {
+            val viewModel = cached
+            return viewModel ?: viewModelProvider.invoke().get(viewModelClass.java).also {
                 cached = it
             }
         }
