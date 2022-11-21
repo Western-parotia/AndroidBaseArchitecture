@@ -64,11 +64,9 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
      */
     @MainThread
     inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
-        return AFViewModelLazy(VM::class, object : Function0<ViewModelProvider> {
-            override fun invoke(): ViewModelProvider {
-                return activityVMProvider
-            }
-        })
+        return AFViewModelLazy(VM::class) {
+            activityVMProvider
+        }
     }
 
     @MainThread

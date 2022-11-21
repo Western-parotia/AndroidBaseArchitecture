@@ -21,9 +21,14 @@ import com.foundation.app.simple.ui.data.UserDescSerializable
  *-
  *create by zhusw on 5/19/21 13:32
  */
+
+fun foo() = 1
+
 class SkillListFragment : BaseFragment2(R.layout.act_vb) {
 
     val actVbBinding by lazyVB<ActVbBinding>()
+
+    val a by lazy {  }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

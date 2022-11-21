@@ -19,8 +19,6 @@ abstract class BaseViewBinding2Fragment(@LayoutRes private val layoutId: Int) :
     /**
      * 懒加载赋值
      * viewBinding 销毁前调用 [onViewBindingDestroy]
-     *
-     * 这两个方法逻辑后期需要合并（统一ViewBindingLifecycleListener）
      */
     protected inline fun <reified VB : ViewBinding> lazyVB() = FragmentViewBindingDelegate {
         VB::class.java.getMethod("bind", View::class.java)

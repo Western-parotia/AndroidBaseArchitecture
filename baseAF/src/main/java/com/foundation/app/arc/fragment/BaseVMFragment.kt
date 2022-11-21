@@ -7,6 +7,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.foundation.app.arc.utils.ext.FragmentViewDelegate
 import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
@@ -113,4 +114,9 @@ abstract class BaseVMFragment : BaseParamsFragment() {
      */
     protected abstract fun bindData()
 
+    /**
+     * 加载任意值，跟随frag生命周期销毁、创建
+     */
+    fun <T> lazyWithFragment(initializer: () -> T) =
+        FragmentViewDelegate(this, initializer)
 }
