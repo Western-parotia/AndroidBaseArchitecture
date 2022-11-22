@@ -13,6 +13,8 @@ internal fun String.log(secTag: String = "") {
     }
 }
 
+internal object UNINIT_VALUE
+
 /**
  * 无锁开销的单例加载
  * 多线程场景下保证返回首次创建的实例

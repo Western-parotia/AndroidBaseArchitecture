@@ -4,9 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import java.io.Serializable
 
-internal object UNINITIALIZED_VALUE
 
 /**
  * 跟着frag的生命周期走，当destroy时会销毁，当再次create时会创建新的
@@ -14,8 +12,9 @@ internal object UNINITIALIZED_VALUE
 class FragmentViewDelegate<out T>(
     private val frag: Fragment,
     private val initializer: () -> T
-) : Lazy<T>, Serializable {
-    private var _value: Any? = UNINITIALIZED_VALUE
+) : Lazy<T> {
+
+    private var _value: Any? = UNINIT_VALUE
 
     override val value: T
         get() {
@@ -32,16 +31,14 @@ class FragmentViewDelegate<out T>(
                     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                     fun onDestroyView() {
                         frag.viewLifecycleOwner.lifecycle.removeObserver(this)
-                        _value = UNINITIALIZED_VALUE
+                        _value = UNINIT_VALUE
                     }
                 })
             }
             return _value as T
         }
 
-    override fun isInitialized(): Boolean = _value !== UNINITIALIZED_VALUE
+    override fun isInitialized(): Boolean = _value !== UNINIT_VALUE
 
-    override fun toString(): String =
-        if (isInitialized()) value.toString() else "Lazy value not initialized yet."
 
 }
