@@ -14,6 +14,11 @@ abstract class BaseVisibilityFragment : Fragment() {
     private var neverVisibleBefore = true
     private var currentVisibleState = false
 
+    /**
+     * ViewPager或者fragment切换原本的可见性状态
+     */
+    private var originalVisibleState = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         resetState()
@@ -27,6 +32,7 @@ abstract class BaseVisibilityFragment : Fragment() {
     private fun resetState() {
         neverVisibleBefore = true
         currentVisibleState = false
+        originalVisibleState = false
     }
 
 
@@ -45,14 +51,14 @@ abstract class BaseVisibilityFragment : Fragment() {
 
     /**
      * 当前fragment 被hide 时调用true，被show时false
-     * 注意使用pageadapter 创建的fragment 不会调用此方法，而是 走 setUserVisibleHint
-     * 原因很简单  pageadapter，控制显示
+     * 注意使用PageAdapter 创建的fragment 不会调用此方法，而是 走 setUserVisibleHint
+     * 原因很简单  PageAdapter，控制显示
      * 但是onPause时，不会调用，此方法只是 fm 的 hide 跟 show 的回调
-     * @param hidden
      */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        onFragmentVisibleChange(!hidden, "onHiddenChanged")
+        originalVisibleState = !hidden
+        onFragmentVisibleChange(originalVisibleState, "onHiddenChanged")
     }
 
     /**
@@ -61,8 +67,9 @@ abstract class BaseVisibilityFragment : Fragment() {
      */
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
+        originalVisibleState = isVisibleToUser
         if (viewCreated()) {
-            onFragmentVisibleChange(isVisibleToUser, "setUserVisibleHint")
+            onFragmentVisibleChange(originalVisibleState, "setUserVisibleHint")
         }
     }
 
@@ -70,9 +77,9 @@ abstract class BaseVisibilityFragment : Fragment() {
     //在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
     //所以真实的状态需要参考父 fragment 是否可见
     @CallSuper
-    protected open fun onFragmentVisibleChange(originalVisible: Boolean, tag: String = "") {
+    protected open fun onFragmentVisibleChange(changedVisibleState: Boolean, tag: String = "") {
         //支持子fragment 完全跟随 父fragment 可见状态
-        val realVisible = originalVisible && checkParentFragmentIsVisible()
+        val realVisible = changedVisibleState && isAdded && checkParentFragmentIsVisible()
         //区分重复状态 与 用户可见性
         if (realVisible != currentVisibleState) {
             currentVisibleState = realVisible
@@ -107,7 +114,7 @@ abstract class BaseVisibilityFragment : Fragment() {
                 pf.currentVisibleState
             }
             else -> {
-                pf.originalVisibleState
+                pf.isAdded && (userVisibleHint || !pf.isHidden)
             }
         }
     }
@@ -133,11 +140,6 @@ abstract class BaseVisibilityFragment : Fragment() {
             onFragmentVisibleChange(false, "onPause")
         }
     }
-
-    /**
-     * ViewPager或者fragment切换原本的可见性状态
-     */
-    private val Fragment.originalVisibleState get() = userVisibleHint || (isAdded && !isHidden)
 
     /**
      * 加载任意值，跟随frag生命周期销毁、创建

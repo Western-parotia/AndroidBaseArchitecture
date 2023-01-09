@@ -67,9 +67,9 @@ open class VisibleMultiFragment : BaseFragment2(R.layout.frag_visible) {
         vbBinding.btn.text = text
     }
 
-    override fun onFragmentVisibleChange(originalVisible: Boolean, tag: String) {
-        "onFragmentVisibleChange $tag : isVisible=$originalVisible userVis=$userVisibleHint state=${lifecycle.currentState}".vLog()//1
-        super.onFragmentVisibleChange(originalVisible, tag)
+    override fun onFragmentVisibleChange(changedVisibleState: Boolean, tag: String) {
+        "onFragmentVisibleChange $tag : isVisible=$changedVisibleState userVis=$userVisibleHint state=${lifecycle.currentState}".vLog()//1
+        super.onFragmentVisibleChange(changedVisibleState, tag)
 
     }
 
