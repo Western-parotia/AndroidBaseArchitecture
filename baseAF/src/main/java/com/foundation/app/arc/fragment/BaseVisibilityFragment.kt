@@ -70,9 +70,9 @@ abstract class BaseVisibilityFragment : Fragment() {
     //在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
     //所以真实的状态需要参考父 fragment 是否可见
     @CallSuper
-    protected open fun onFragmentVisibleChange(isVisible: Boolean, tag: String = "") {
+    protected open fun onFragmentVisibleChange(originalVisible: Boolean, tag: String = "") {
         //支持子fragment 完全跟随 父fragment 可见状态
-        val realVisible = isVisible && checkParentFragmentIsVisible()
+        val realVisible = originalVisible && checkParentFragmentIsVisible()
         //区分重复状态 与 用户可见性
         if (realVisible != currentVisibleState) {
             currentVisibleState = realVisible
@@ -107,7 +107,7 @@ abstract class BaseVisibilityFragment : Fragment() {
                 pf.currentVisibleState
             }
             else -> {
-                pf.userVisibleHint || (pf.isAdded && !pf.isHidden)
+                pf.originalVisibleState
             }
         }
     }
@@ -115,15 +115,14 @@ abstract class BaseVisibilityFragment : Fragment() {
     private fun onParentFragmentVisibleChanged(isVisible: Boolean) {
         //当父fragment 的状态与子不同时，重新检查子的 状态
         if (isVisible != currentVisibleState) {
-            val realVisible = userVisibleHint || (isAdded && !isHidden)
-            onFragmentVisibleChange(realVisible, "onParentFragmentVisibleChanged")
+            onFragmentVisibleChange(originalVisibleState, "onParentFragmentVisibleChanged")
         }
     }
 
     override fun onResume() {
         super.onResume()
         if (!currentVisibleState) {
-            onFragmentVisibleChange(userVisibleHint, "onResume")
+            onFragmentVisibleChange(originalVisibleState, "onResume")
         }
 
     }
@@ -134,6 +133,11 @@ abstract class BaseVisibilityFragment : Fragment() {
             onFragmentVisibleChange(false, "onPause")
         }
     }
+
+    /**
+     * ViewPager或者fragment切换原本的可见性状态
+     */
+    private val Fragment.originalVisibleState get() = userVisibleHint || (isAdded && !isHidden)
 
     /**
      * 加载任意值，跟随frag生命周期销毁、创建
