@@ -4,13 +4,12 @@ import androidx.annotation.IdRes
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import com.foundation.app.arc.utils.FragmentSwitchHelper
-import com.foundation.app.arc.utils.ext.lazyOnUI
 
 /**
  * create by zhusw on 5/28/21 13:40
  */
 abstract class BaseFragmentManagerFragment : BaseVMFragment() {
-    private val switchHelper by lazyOnUI { FragmentSwitchHelper(childFragmentManager) }
+    private val switchHelper by lazyWithFragment { FragmentSwitchHelper(childFragmentManager) }
 
     protected fun switchFragment(tag: String, @IdRes frameLayoutId: Int = 0): Fragment? {
         return switchHelper.switchFragment(tag, frameLayoutId)
