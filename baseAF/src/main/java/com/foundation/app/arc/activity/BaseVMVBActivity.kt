@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewbinding.ViewBinding
+import com.foundation.app.arc.fragment.BaseVMFragment
 import com.foundation.app.arc.utils.ext.AFViewModelLazy
 import com.foundation.app.arc.utils.ext.lazyAtomic
 import com.foundation.widget.binding.ViewBindingHelper
@@ -93,6 +94,8 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     /**
      * 是否支持activity被杀死后重建（是否使用 savedInstanceState中相关数据，
      * 系统默认在其中保存了Fragment的状态，重建会导致fragment异常展示）
+     *
+     * 注意：此处仅限于app杀死重建，对于fragment的内部的重建参考：[BaseVMFragment.onCreate]
      *
      * @return 默认不支持。如果返回true，则必须测试杀死后重建的流程
      */
