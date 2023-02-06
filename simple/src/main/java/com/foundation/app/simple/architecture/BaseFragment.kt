@@ -23,7 +23,7 @@ open class BaseFragment<VB : ViewBinding> : BaseViewBindingFragment<VB>() {
 
     }
 
-    override fun onVisible(isFirst: Boolean) {
+    override fun onVisible(isFirstVisible: Boolean) {
 
     }
 

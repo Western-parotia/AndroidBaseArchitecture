@@ -23,7 +23,7 @@ open class BaseFragment2(@LayoutRes id: Int) : BaseViewBinding2Fragment(id) {
 
     }
 
-    override fun onVisible(isFirst: Boolean) {
+    override fun onVisible(isFirstVisible: Boolean) {
 
     }
 

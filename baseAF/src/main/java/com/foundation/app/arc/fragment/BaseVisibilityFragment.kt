@@ -1,45 +1,25 @@
 package com.foundation.app.arc.fragment
 
-import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.InternalBasicFragment
 import com.foundation.app.arc.utils.ext.FragmentViewDelegate
 
 /**
  * fragment 状态管理，首次显示，显示，隐藏,视图重用
- *create by zhusw on 5/19/21 09:44
+ * create by zhusw on 5/19/21 09:44
  */
-
-abstract class BaseVisibilityFragment : Fragment() {
+abstract class BaseVisibilityFragment : InternalBasicFragment() {
     private var neverVisibleBefore = true
-    private var currentVisibleState = false
+
+    private var _currentVisibleState = false
+    val currentVisibleState get() = _currentVisibleState
 
     /**
-     * ViewPager或者fragment切换原本的可见性状态
+     * @param isFirstVisible 是是首次可见
+     *                       注意：这个布尔值是根据view算的（destroyView后再create就是first）
      */
-    private var originalVisibleState = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        resetState()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        resetState()
-    }
-
-    private fun resetState() {
-        neverVisibleBefore = true
-        currentVisibleState = false
-        originalVisibleState = false
-    }
-
-
-    /**
-     * @param isFirst 是是首次可见
-     */
-    abstract fun onVisible(isFirst: Boolean)
+    abstract fun onVisible(isFirstVisible: Boolean)
     abstract fun onHidden()
 
     /**
@@ -57,19 +37,17 @@ abstract class BaseVisibilityFragment : Fragment() {
      */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        originalVisibleState = !hidden
-        onFragmentVisibleChange(originalVisibleState, "onHiddenChanged")
+        checkVisibleChangeState(!hidden)
     }
 
     /**
      * FragmentPagerAdapter装载时 显示状态 回调 setUserVisibleHint ，且早于 onCreate，
      * 所以需要过滤view未初始化,否则子类依赖onFragmentVisibleChange 操作view 会空指针
      */
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        originalVisibleState = isVisibleToUser
-        if (viewCreated()) {
-            onFragmentVisibleChange(originalVisibleState, "setUserVisibleHint")
+    override fun setMenuVisibility(menuVisible: Boolean) {
+        super.setMenuVisibility(menuVisible)
+        if (isFirstResumed) {
+            checkVisibleChangeState(menuVisible)
         }
     }
 
@@ -77,12 +55,12 @@ abstract class BaseVisibilityFragment : Fragment() {
     //在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
     //所以真实的状态需要参考父 fragment 是否可见
     @CallSuper
-    protected open fun onFragmentVisibleChange(changedVisibleState: Boolean, tag: String = "") {
+    protected open fun checkVisibleChangeState(changedVisibleState: Boolean) {
         //支持子fragment 完全跟随 父fragment 可见状态
-        val realVisible = changedVisibleState && isAdded && checkParentFragmentIsVisible()
+        val realVisible = changedVisibleState && isAdded && parentIsVisible()
         //区分重复状态 与 用户可见性
-        if (realVisible != currentVisibleState) {
-            currentVisibleState = realVisible
+        if (realVisible != _currentVisibleState) {
+            _currentVisibleState = realVisible
             when (realVisible) {
                 true -> {
                     onVisible(neverVisibleBefore)
@@ -95,50 +73,53 @@ abstract class BaseVisibilityFragment : Fragment() {
         childFragmentManager.fragments.forEach {
             when (it) {
                 is BaseVisibilityFragment -> {
-                    it.onParentFragmentVisibleChanged(realVisible)
+                    it.onParentVisibleChanged(realVisible)
                 }
             }
         }
     }
 
+    private fun onParentVisibleChanged(isParentVisible: Boolean) {
+        //内部判断过了暂时不需要isParentVisible参数
+        checkVisibleChangeState(
+            if (isFragmentManager()) !isFmHidden else isVpVisible
+        )
+    }
+
     /**
      * parentFragment 也必须是[BaseVisibilityFragment] 才完全有效
-     * 如果不是则只判断 userVisibleHint，isAdded,!isHidden
+     * 如果不是则只判断 isAdded
      * @return parentFragment是否可见
      *
      */
-    protected fun checkParentFragmentIsVisible(): Boolean {
+    protected fun parentIsVisible(): Boolean {
         return when (val pf: Fragment? = parentFragment) {
             null -> true
             is BaseVisibilityFragment -> {
                 pf.currentVisibleState
             }
             else -> {
-                pf.isAdded && (userVisibleHint || !pf.isHidden)
+                pf.isAdded
             }
-        }
-    }
-
-    private fun onParentFragmentVisibleChanged(isVisible: Boolean) {
-        //当父fragment 的状态与子不同时，重新检查子的 状态
-        if (isVisible != currentVisibleState) {
-            onFragmentVisibleChange(originalVisibleState, "onParentFragmentVisibleChanged")
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (!currentVisibleState) {
-            onFragmentVisibleChange(originalVisibleState, "onResume")
-        }
-
+        checkVisibleChangeState(if (isFragmentManager()) !isFmHidden else isVpVisible)
     }
 
     override fun onPause() {
         super.onPause()
         if (currentVisibleState) {
-            onFragmentVisibleChange(false, "onPause")
+            checkVisibleChangeState(false)
         }
+    }
+
+    override fun onClearVisibleState() {
+        super.onClearVisibleState()
+        _currentVisibleState = false
+        neverVisibleBefore = true
     }
 
     /**
@@ -146,6 +127,6 @@ abstract class BaseVisibilityFragment : Fragment() {
      *
      * 这两个方法逻辑后期需要合并（统一ViewBindingLifecycleListener）
      */
-    public fun <T> lazyWithFragment(initializer: () -> T) =
+    fun <T> lazyWithFragment(initializer: () -> T) =
         FragmentViewDelegate(this, initializer)
 }
