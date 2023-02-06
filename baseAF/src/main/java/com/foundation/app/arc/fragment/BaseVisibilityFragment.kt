@@ -19,8 +19,11 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
      * @param isFirstVisible 是是首次可见
      *                       注意：这个布尔值是根据view算的（destroyView后再create就是first）
      */
-    abstract fun onVisible(isFirstVisible: Boolean)
-    abstract fun onHidden()
+    protected open fun onVisible(isFirstVisible: Boolean) {
+    }
+
+    protected open fun onHidden() {
+    }
 
     /**
      * 根View是否已创建
