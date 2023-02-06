@@ -30,10 +30,7 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
     }
 
     /**
-     * 当前fragment 被hide 时调用true，被show时false
-     * 注意使用PageAdapter 创建的fragment 不会调用此方法，而是 走 setUserVisibleHint
-     * 原因很简单  PageAdapter，控制显示
-     * 但是onPause时，不会调用，此方法只是 fm 的 hide 跟 show 的回调
+     * fm 的 hide 跟 show 的回调，第一次不会调用
      */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
@@ -41,8 +38,7 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
     }
 
     /**
-     * FragmentPagerAdapter装载时 显示状态 回调 setUserVisibleHint ，且早于 onCreate，
-     * 所以需要过滤view未初始化,否则子类依赖onFragmentVisibleChange 操作view 会空指针
+     * vp的可见回调，在onCreate前，[setUserVisibleHint]太乱不适合锚点
      */
     override fun setMenuVisibility(menuVisible: Boolean) {
         super.setMenuVisibility(menuVisible)
