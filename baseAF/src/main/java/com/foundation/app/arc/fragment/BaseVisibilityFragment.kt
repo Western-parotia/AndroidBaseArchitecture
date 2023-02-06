@@ -9,11 +9,11 @@ import com.foundation.app.arc.utils.ext.FragmentViewDelegate
  * fragment 状态管理，首次显示，显示，隐藏,视图重用
  * create by zhusw on 5/19/21 09:44
  */
-abstract class BaseVisibilityFragment : InternalBasicFragment() {
+abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibilityChild {
     private var neverVisibleBefore = true
 
     private var _currentVisibleState = false
-    val currentVisibleState get() = _currentVisibleState
+    override val currentVisibleState get() = _currentVisibleState
 
     /**
      * @param isFirstVisible 是是首次可见
@@ -72,14 +72,14 @@ abstract class BaseVisibilityFragment : InternalBasicFragment() {
         //每次的parentFragment的变化都需要通知 childFragment
         childFragmentManager.fragments.forEach {
             when (it) {
-                is BaseVisibilityFragment -> {
+                is FragmentVisibilityChild -> {
                     it.onParentVisibleChanged(realVisible)
                 }
             }
         }
     }
 
-    private fun onParentVisibleChanged(isParentVisible: Boolean) {
+    override fun onParentVisibleChanged(parentIsVisible: Boolean) {
         //内部判断过了暂时不需要isParentVisible参数
         checkVisibleChangeState(
             if (isFragmentManager()) !isFmHidden else isVpVisible
@@ -87,7 +87,7 @@ abstract class BaseVisibilityFragment : InternalBasicFragment() {
     }
 
     /**
-     * parentFragment 也必须是[BaseVisibilityFragment] 才完全有效
+     * parentFragment 也必须是[FragmentVisibilityChild] 才完全有效
      * 如果不是则只判断 isAdded
      * @return parentFragment是否可见
      *
@@ -95,7 +95,7 @@ abstract class BaseVisibilityFragment : InternalBasicFragment() {
     protected fun parentIsVisible(): Boolean {
         return when (val pf: Fragment? = parentFragment) {
             null -> true
-            is BaseVisibilityFragment -> {
+            is FragmentVisibilityChild -> {
                 pf.currentVisibleState
             }
             else -> {
@@ -129,4 +129,10 @@ abstract class BaseVisibilityFragment : InternalBasicFragment() {
      */
     fun <T> lazyWithFragment(initializer: () -> T) =
         FragmentViewDelegate(this, initializer)
+}
+
+interface FragmentVisibilityChild {
+    val currentVisibleState: Boolean
+
+    fun onParentVisibleChanged(parentIsVisible: Boolean)
 }
