@@ -90,10 +90,12 @@ abstract class AbstractVisibleTestFragment(@LayoutRes id: Int) : BaseFragment2(i
     private val id get() = Integer.toHexString(System.identityHashCode(this))
 
     override fun onVisible(isFirstVisible: Boolean) {
+        super.onVisible(isFirstVisible)
         "onVisible isFirst=$isFirstVisible".vLog(9)//1
     }
 
     override fun onHidden() {
+        super.onHidden()
         "onHidden".vLog(9)//3
     }
 

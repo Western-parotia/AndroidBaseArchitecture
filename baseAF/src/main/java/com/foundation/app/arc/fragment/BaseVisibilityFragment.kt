@@ -16,16 +16,6 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
     override val currentVisibleState get() = _currentVisibleState
 
     /**
-     * @param isFirstVisible 是是首次可见
-     *                       注意：这个布尔值是根据view算的（destroyView后再create就是first）
-     */
-    protected open fun onVisible(isFirstVisible: Boolean) {
-    }
-
-    protected open fun onHidden() {
-    }
-
-    /**
      * 根View是否已创建
      */
     protected fun viewCreated(): Boolean {
@@ -130,8 +120,21 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
         FragmentViewDelegate(this, initializer)
 }
 
+/**
+ * 可见性状态变化接口，方便其他项目的fragment兼容实现
+ */
 interface FragmentVisibilityChild {
     val currentVisibleState: Boolean
 
     fun onParentVisibleChanged(parentIsVisible: Boolean)
+
+    /**
+     * @param isFirstVisible 是是首次可见
+     *                       注意：这个布尔值是根据view算的（destroyView后再create就是first）
+     */
+    fun onVisible(isFirstVisible: Boolean) {
+    }
+
+    fun onHidden() {
+    }
 }
