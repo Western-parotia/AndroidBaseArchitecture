@@ -3,7 +3,6 @@ package com.foundation.app.arc.fragment
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.InternalBasicFragment
-import com.foundation.app.arc.utils.ext.FragmentViewDelegate
 
 /**
  * fragment 状态管理，首次显示，显示，隐藏,视图重用
@@ -40,9 +39,11 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
         }
     }
 
-    //isVisible=$isVisible userVis=$userVisibleHint isAdded=$isAdded isHidden=$isHidden view v=${view?.visibility==View.VISIBLE}
-    //在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
-    //所以真实的状态需要参考父 fragment 是否可见
+    /** isVisible=$isVisible userVis=$userVisibleHint isAdded=$isAdded
+     * isHidden=$isHidden
+     * 在嵌套fragment 中，作为 child fragment 在被重建时 以上全部为true
+     * 所以真实的状态需要参考父 fragment 是否可见
+     **/
     @CallSuper
     protected open fun checkVisibleChangeState(changedVisibleState: Boolean) {
         //支持子fragment 完全跟随 父fragment 可见状态
@@ -110,14 +111,6 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
         _currentVisibleState = false
         neverVisibleBefore = true
     }
-
-    /**
-     * 加载任意值，跟随frag生命周期销毁、创建
-     *
-     * 这两个方法逻辑后期需要合并（统一ViewBindingLifecycleListener）
-     */
-    fun <T> lazyWithFragment(initializer: () -> T) =
-        FragmentViewDelegate(this, initializer)
 }
 
 /**

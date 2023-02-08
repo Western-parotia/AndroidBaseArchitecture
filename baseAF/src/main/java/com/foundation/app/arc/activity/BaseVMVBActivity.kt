@@ -2,13 +2,13 @@ package com.foundation.app.arc.activity
 
 import android.app.Activity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.*
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.fragment.BaseVMFragment
 import com.foundation.app.arc.utils.ext.AFViewModelLazy
+import com.foundation.app.arc.utils.ext.ActivityViewBindingDelegate
 import com.foundation.app.arc.utils.ext.lazyAtomic
 import com.foundation.widget.binding.ViewBindingHelper
 
@@ -65,11 +65,9 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
      */
     @MainThread
     inline fun <reified VM : ViewModel> lazyActivityVM(): Lazy<VM> {
-        return AFViewModelLazy(VM::class, object : Function0<ViewModelProvider> {
-            override fun invoke(): ViewModelProvider {
-                return activityVMProvider
-            }
-        })
+        return AFViewModelLazy(VM::class) {
+            activityVMProvider
+        }
     }
 
     @MainThread
@@ -115,7 +113,8 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     /**
      * 将ViewBinding.root 设置为根布局
      */
-    abstract fun getContentVB(): ViewBinding?
+    @Deprecated(message = "不再需要实现", replaceWith = ReplaceWith("lazyAndSetRoot"))
+    open fun getContentVB(): ViewBinding? = null
 
     /**
      * 主要是支持在java中使用，在kotlin中可用[lazyActivityVM]
@@ -135,7 +134,21 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
      */
     protected abstract fun bindData()
 
-    protected inline fun <reified VB : ViewBinding> Activity.lazyVB() = lazyAtomic {
-        ViewBindingHelper.getViewBindingInstanceByClass<VB>(VB::class.java, layoutInflater, null)
+    @Deprecated(message = "不再需要实现", replaceWith = ReplaceWith("lazyAndSetRoot"))
+    protected inline fun <reified VB : ViewBinding> lazyVB() = lazyAtomic {
+        ViewBindingHelper.getViewBindingInstanceByClass<VB>(
+            VB::class.java,
+            layoutInflater, null
+        )
     }
+
+    protected inline fun <reified VB : ViewBinding> lazyAndSetRoot() =
+        ActivityViewBindingDelegate(this) {
+            ViewBindingHelper.getViewBindingInstanceByClass<VB>(
+                VB::class.java,
+                layoutInflater, null
+            )
+        }
+
+
 }

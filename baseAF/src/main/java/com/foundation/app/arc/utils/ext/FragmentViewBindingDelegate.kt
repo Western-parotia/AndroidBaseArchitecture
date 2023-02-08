@@ -17,32 +17,31 @@ import kotlin.reflect.KProperty
  */
 class FragmentViewBindingDelegate<VB : ViewBinding>(private val initBlock: () -> VB) :
     ReadOnlyProperty<Fragment, VB> {
+
     private var binding: VB? = null
-    private var hasInit = false
+
     override fun getValue(thisRef: Fragment, property: KProperty<*>): VB {
-        return when {
-            !hasInit && null == binding -> {
+        return when (binding) {
+            null -> {
                 val curSate = thisRef.viewLifecycleOwner.lifecycle.currentState
                 if (curSate == Lifecycle.State.DESTROYED) {
                     throw IllegalAccessException(
-                        "can not init binding,because of fragment will be destroy soon" +
+                        "can not init binding,because of fragment will be destroy soon," +
                                 " you can implement ViewBindingLifecycleListener on Fragment and override onViewBindingDestroy to work"
                     )
                 }
-                "init binding instance".log("FragmentViewBindingDelegate")
                 binding = initBlock()
                 thisRef.viewLifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
                     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                     fun onDestroyView() {
+                        thisRef.viewLifecycleOwner.lifecycle.removeObserver(this)
                         if (thisRef is ViewBindingLifecycleListener) {
                             thisRef.onViewBindingDestroy()
                         }
-                        thisRef.viewLifecycleOwner.lifecycle.removeObserver(this)
-                        hasInit = false
+                        //在 onViewBindingDestroy 之后置空，保证页面不需要再使用 binding
                         binding = null
                     }
                 })
-                hasInit = true
                 binding!!
             }
             else -> {
