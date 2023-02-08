@@ -1,10 +1,10 @@
 package com.foundation.app.arc.activity
 
-import android.app.Activity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.fragment.BaseVMFragment
 import com.foundation.app.arc.utils.ext.AFViewModelLazy
@@ -136,19 +136,12 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
 
     @Deprecated(message = "不再需要实现", replaceWith = ReplaceWith("lazyAndSetRoot"))
     protected inline fun <reified VB : ViewBinding> lazyVB() = lazyAtomic {
-        ViewBindingHelper.getViewBindingInstanceByClass<VB>(
+        ViewBindingHelper.getViewBindingInstanceByClass(
             VB::class.java,
             layoutInflater, null
         )
     }
 
     protected inline fun <reified VB : ViewBinding> lazyAndSetRoot() =
-        ActivityViewBindingDelegate(this) {
-            ViewBindingHelper.getViewBindingInstanceByClass<VB>(
-                VB::class.java,
-                layoutInflater, null
-            )
-        }
-
-
+        ActivityViewBindingDelegate(this, VB::class.java)
 }

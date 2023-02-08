@@ -11,7 +11,7 @@ object Dependencies {
 
     object Foundation {
         const val loading = "com.foundation.widget:loadingview:1.1.9"
-        const val viewBindingHelper = "com.foundation.widget:view-binding-helper:1.0.2"
+        const val viewBindingHelper = "com.foundation.widget:view-binding-helper:1.0.5-SNAPSHOT"
         const val net = "com.foundation.service:net:1.0.5"
     }
 
