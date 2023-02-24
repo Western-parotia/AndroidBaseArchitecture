@@ -28,7 +28,7 @@ class FragmentSwitchHelper(private val fm: FragmentManager) {
      * 默认使用currentFragment.hasCode 作为tag
      */
     fun switchFragment(
-        @NonNull currentFragment: Fragment,
+        currentFragment: Fragment,
         @IdRes frameLayoutId: Int = 0, tag: String? = null
     ) {
         val safeTag = tag ?: currentFragment.hashCode().toString()
@@ -51,7 +51,7 @@ class FragmentSwitchHelper(private val fm: FragmentManager) {
     /**
      * 隐藏一个Fragment
      */
-    fun hideFragment(@NonNull clazz: Class<out Fragment>) {
+    fun hideFragment(clazz: Class<out Fragment>) {
         val ft: FragmentTransaction = fm.beginTransaction()
         val currentFragment: Fragment? = fm.findFragmentByTag(clazz.name)
         currentFragment?.let {

@@ -1,11 +1,12 @@
 package com.foundation.app.arc.activity
 
-import android.app.Activity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewbinding.ViewBinding
+import com.foundation.app.arc.fragment.BaseVMFragment
 import com.foundation.app.arc.utils.ext.AFViewModelLazy
 import com.foundation.app.arc.utils.ext.ActivityViewBindingDelegate
 import com.foundation.app.arc.utils.ext.lazyAtomic
@@ -92,6 +93,8 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
      * 是否支持activity被杀死后重建（是否使用 savedInstanceState中相关数据，
      * 系统默认在其中保存了Fragment的状态，重建会导致fragment异常展示）
      *
+     * 注意：此处仅限于app杀死重建，对于fragment的内部的重建参考：[BaseVMFragment.onCreate]
+     *
      * @return 默认不支持。如果返回true，则必须测试杀死后重建的流程
      */
     protected open fun supportRebuildData() = false
@@ -133,19 +136,12 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
 
     @Deprecated(message = "不再需要实现", replaceWith = ReplaceWith("lazyAndSetRoot"))
     protected inline fun <reified VB : ViewBinding> lazyVB() = lazyAtomic {
-        ViewBindingHelper.getViewBindingInstanceByClass<VB>(
+        ViewBindingHelper.getViewBindingInstanceByClass(
             VB::class.java,
             layoutInflater, null
         )
     }
 
     protected inline fun <reified VB : ViewBinding> lazyAndSetRoot() =
-        ActivityViewBindingDelegate(this) {
-            ViewBindingHelper.getViewBindingInstanceByClass<VB>(
-                VB::class.java,
-                layoutInflater, null
-            )
-        }
-
-
+        ActivityViewBindingDelegate(this, VB::class.java)
 }

@@ -8,7 +8,7 @@ package com.foundation.widget.buildsrc
  *create by zhusw on 5/6/21 16:43
  */
 
-private const val VERSION = "1.0.9"
+private const val VERSION = "1.1.0"
 private const val SNAPSHOT = false
 
 object Publish {

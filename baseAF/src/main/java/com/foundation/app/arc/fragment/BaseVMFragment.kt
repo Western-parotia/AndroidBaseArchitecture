@@ -81,6 +81,10 @@ abstract class BaseVMFragment : BaseParamsFragment() {
         }
     }
 
+    /**
+     * @param savedInstanceState 注意：由于多嵌套在内部销毁重建时（实现了saveState的，示例：ViewPager套ViewPager），也可能会引起ui错乱
+     *                           此处不可类比Activity强制返null，遂暂未解决，见ViewPager2的FragmentStateAdapter.restoreState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _fragmentVMProvider = ViewModelProvider(this)

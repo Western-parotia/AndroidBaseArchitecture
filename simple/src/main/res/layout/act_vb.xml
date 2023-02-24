@@ -24,12 +24,6 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_single_visible"
-        android:layout_width="wrap_content"
-        android:text="单fragment 可见性测试"
-        android:layout_height="wrap_content" />
-
-    <Button
         android:id="@+id/btn_viewPage_visible"
         android:layout_width="wrap_content"
         android:text="viewPage fragment 可见性测试"

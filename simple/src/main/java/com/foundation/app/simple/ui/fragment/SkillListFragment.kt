@@ -70,9 +70,6 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
                 UserDescSerializable("来自Serializable 200", 200)
             )
         }
-        actVbBinding.btnSingleVisible.setOnClickListener {
-            jump(SingleFragmentVisibleTestActivity::class.java)
-        }
         actVbBinding.btnViewPageVisible.setOnClickListener {
             jump(MultiFragmentVisibleTestActivity::class.java)
         }

@@ -1,16 +1,14 @@
 package com.foundation.app.arc.fragment
 
 import androidx.annotation.IdRes
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import com.foundation.app.arc.utils.FragmentSwitchHelper
-import com.foundation.app.arc.utils.ext.lazyOnUI
 
 /**
  * create by zhusw on 5/28/21 13:40
  */
 abstract class BaseFragmentManagerFragment : BaseVMFragment() {
-    private val switchHelper by lazyOnUI { FragmentSwitchHelper(childFragmentManager) }
+    private val switchHelper by lazyWithFragment { FragmentSwitchHelper(childFragmentManager) }
 
     protected fun switchFragment(tag: String, @IdRes frameLayoutId: Int = 0): Fragment? {
         return switchHelper.switchFragment(tag, frameLayoutId)
@@ -21,7 +19,7 @@ abstract class BaseFragmentManagerFragment : BaseVMFragment() {
      * 默认使用currentFragment.hasCode 作为tag
      */
     protected fun switchFragment(
-        @NonNull currentFragment: Fragment,
+        currentFragment: Fragment,
         @IdRes frameLayoutId: Int = 0, tag: String? = null
     ) {
         switchHelper.switchFragment(currentFragment, frameLayoutId, tag)
@@ -30,14 +28,14 @@ abstract class BaseFragmentManagerFragment : BaseVMFragment() {
     /**
      * 隐藏一个Fragment
      */
-    protected fun hideFragment(@NonNull clazz: Class<out Fragment>) {
+    protected fun hideFragment(clazz: Class<out Fragment>) {
         switchHelper.hideFragment(clazz)
     }
 
     /**
      * 移除一个Fragment
      */
-    protected fun removeFragment(@NonNull clazz: Class<out Fragment?>) {
+    protected fun removeFragment(clazz: Class<out Fragment?>) {
         switchHelper.removeFragment(clazz)
     }
 }

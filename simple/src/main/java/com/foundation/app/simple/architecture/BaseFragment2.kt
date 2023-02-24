@@ -20,14 +20,5 @@ open class BaseFragment2(@LayoutRes id: Int) : BaseViewBinding2Fragment(id) {
     }
 
     override fun bindData() {
-
-    }
-
-    override fun onVisible(isFirst: Boolean) {
-
-    }
-
-    override fun onHidden() {
-
     }
 }

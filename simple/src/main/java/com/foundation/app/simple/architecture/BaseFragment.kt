@@ -22,13 +22,4 @@ open class BaseFragment<VB : ViewBinding> : BaseViewBindingFragment<VB>() {
     override fun bindData() {
 
     }
-
-    override fun onVisible(isFirst: Boolean) {
-
-    }
-
-    override fun onHidden() {
-
-    }
-
 }
