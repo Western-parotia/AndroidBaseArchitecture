@@ -15,15 +15,15 @@ import com.foundation.app.arc.fragment.BaseVisibilityFragment
 abstract class InternalBasicFragment internal constructor() : Fragment() {
 
     /**
-     * -1表示未初始化（下面几个成员变量同理），0表示ViewPager(2)，1表示FragmentManager
+     * null表示未初始化（下面几个成员变量同理），0表示ViewPager(2)，1表示FragmentManager
      */
-    private var _isFragmentManager = -1
+    private var _isFragmentManager: Boolean? = null
 
-    private var _isFmHidden: Int = -1
-    protected val isFmHidden get() = if (isFragmentManager()) _isFmHidden == 1 else false
+    private var _isFmHidden: Boolean? = null
+    protected val isFmHidden get() = isFragmentManager() && (_isFmHidden ?: false)
 
-    private var _isVpVisible = -1
-    protected val isVpVisible get() = if (isFragmentManager()) false else _isVpVisible == 1
+    private var _isVpVisible: Boolean? = null
+    protected val isVpVisible get() = !isFragmentManager() && (_isVpVisible ?: false)
 
     private var _isFirstResumed = false
     protected val isFirstResumed get() = _isFirstResumed
@@ -32,17 +32,17 @@ abstract class InternalBasicFragment internal constructor() : Fragment() {
      * 获取父类类型是FragmentManager还是ViewPager(2)
      */
     protected fun isFragmentManager(): Boolean {
-        if (_isFragmentManager >= 0) {
-            return _isFragmentManager == 1
+        _isFragmentManager?.let {
+            return it
         }
         return when (mContainer) {
             is ViewPager -> {
-                _isFragmentManager = 0
+                _isFragmentManager = false
                 false
             }
             is ViewGroup -> {
                 //FragmentManager的父布局类似FrameLayout、LinearLayout
-                _isFragmentManager = 1
+                _isFragmentManager = true
                 true
             }
             else -> false//mContainer null的情况，是ViewPager2（除非自定义）
@@ -54,8 +54,8 @@ abstract class InternalBasicFragment internal constructor() : Fragment() {
      */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        _isFragmentManager = 1
-        _isFmHidden = if (hidden) 1 else 0
+        _isFragmentManager = true
+        _isFmHidden = hidden
     }
 
     /**
@@ -63,8 +63,8 @@ abstract class InternalBasicFragment internal constructor() : Fragment() {
      */
     override fun setMenuVisibility(menuVisible: Boolean) {
         super.setMenuVisibility(menuVisible)
-        _isFragmentManager = 0
-        _isVpVisible = if (menuVisible) 1 else 0
+        _isFragmentManager = false
+        _isVpVisible = menuVisible
     }
 
     override fun onResume() {
@@ -86,8 +86,8 @@ abstract class InternalBasicFragment internal constructor() : Fragment() {
      * 当[onDestroy]或[onDestroyView]时应当重置保存状态
      */
     protected open fun onClearVisibleState() {
-        _isFmHidden = -1
-        _isVpVisible = -1
+        _isFmHidden = null
+        _isVpVisible = null
         _isFirstResumed = false
     }
 }
