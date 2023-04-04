@@ -2,7 +2,6 @@ package com.foundation.app.simple.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.param.BundleParams
 import com.foundation.app.arc.utils.param.BundleParamsUseSerializable
 import com.foundation.app.simple.R
@@ -16,6 +15,8 @@ import com.foundation.app.simple.ui.data.BundleProducer
  */
 class UserInfoActivity : BaseActivity() {
 
+    private val vbBinding by lazyAndSetRoot<ActUserInfoBinding>()
+
     @BundleParams("userId")
     private val userId: Int = 0
 
@@ -26,9 +27,7 @@ class UserInfoActivity : BaseActivity() {
     @BundleParams("clsTest")
     private val cls: Class<*> = Any::class.java
 
-    private val vbBinding by lazyVB<ActUserInfoBinding>()
 
-    override fun getContentVB(): ViewBinding = vbBinding
 
     override fun init(savedInstanceState: Bundle?) {
         vbBinding.auiBtn.visibility = View.VISIBLE

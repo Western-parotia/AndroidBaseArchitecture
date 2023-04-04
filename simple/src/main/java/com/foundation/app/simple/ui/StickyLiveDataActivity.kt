@@ -1,7 +1,6 @@
 package com.foundation.app.simple.ui
 
 import android.os.Bundle
-import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.ext.observerStickyLess
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActStickyBinding
@@ -13,10 +12,7 @@ import com.foundation.app.simple.vm.AppVM
  */
 class StickyLiveDataActivity : BaseActivity() {
     val vm by lazyGlobalVM<AppVM>()
-    val binding by lazyVB<ActStickyBinding>()
-
-    override fun getContentVB(): ViewBinding = binding
-
+    val binding by lazyAndSetRoot<ActStickyBinding>()
     private var stickyCount = 0
     override fun init(savedInstanceState: Bundle?) {
         binding.btnSticky.setOnClickListener {

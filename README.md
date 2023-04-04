@@ -2,11 +2,11 @@
 
 核心功能：
 
-* 1.明确View层在架构中的职责边界，规范初始化方法与生命周期
+* 1.明确View层在架构中的职责边界，规范初始化方法与简化生命周期
 * 2.支持参数注解，自动初始化
 * 3.ViewBinding 自动初始化（fragment 中自动跟随声命周期）
 * 4.ViewModel 作用域管理、快速初始化
-* 5.Fragment 可见状态完全控制
+* 5.Fragment 可见状态简化管理
 * 6.LiveData 支持无粘性消息
 * 7.Fragment 快速切换（防重叠）
 
@@ -17,11 +17,11 @@
 使用：
 
 ```kotlin
- implementation("com.foundation.app:activity-fragment:最新版本")
+ implementation("com.foundation.app:activity-fragment:1.1.0")
 ```
 
-
-在使用场景上，从View的角色去看待Activity与Fragment，它承担的职责基本一致——接收数据>展示数据，所以本库中为这两者提供的API，保持高度的一致性。
+在使用场景上，从View的角色去看待Activity与Fragment，它承担的职责基本一致——接收数据>展示数据，
+所以本库中为这两者提供的API，保持高度的一致性，统一抽象为 init,与 bindData 两个方法。
 
 ## 1.明确View层在架构中的职责边界，规范初始化方法与生命周期
 * Activity初始化方法顺序
@@ -56,21 +56,6 @@
     }
 ```
 
-Tips:Activity重建支持开关
-
-```kotlin
-     /**
-     * 是否支持activity被杀死后重建（是否使用 savedInstanceState中相关数据，
-     * 系统默认在其中保存了Fragment的状态，重建会导致fragment异常展示）
-     *
-     * @return 默认不支持。如果返回true，则必须测试杀死后重建的流程
-     */
-    protected open fun supportRebuildData() = false
-```
-
-
-
-
 ## 2.参数注解：BundleParams
 是否兼容JAVA：是
 
@@ -78,7 +63,14 @@ Tips:Activity重建支持开关
 
 ```kotlin
     @BundleParams("userName")
-    private String userName = "没自动赋值";
+private String userName = "没自动赋值";
+
+@BundleParams("userDesc")
+private val userDesc: UserDesc = UserDesc()
+
+@BundleParamsUseSerializable
+@BundleParams("userDesc")
+private val userDesc: UserDescSerializable = UserDescSerializable()
 ```
 
 ### 2.2手动使用：
@@ -88,7 +80,7 @@ ParamsUtils.initWithActivity()
 ParamsUtils.initWithFragment()
 ```
 
-### 2.3取消使用
+### 2.3 单页面降级取消使用
 
 ```kotlin
 openAutoBindParams(): Boolean = false
@@ -98,26 +90,28 @@ Tips:`onNewIntent`中不会进行重新绑定
 
 ## 3.ViewBinding 自动初始化
 
-### 3.1 快速初始化 方式一 （建议）
+### 3.1  快速初始化 方式一
 是否兼容JAVA：否
 
 参考了默认fragment支持的自动根据布局id创建出根View，耦合性更低。
 语意也更清晰，满足所见即所得。
 
 ```kotlin
-class SkillListFragment : BaseFragment2(R.layout.act_vb) {
+class UserInfoActivity : BaseActivity() {
+    private val vbBinding by lazyAndSetRoot<ActUserInfoBinding>()
+}
 
-	val actVbBinding by lazyVB<ActVbBinding>()
-	
-	fun bindData() {
-       actVbBinding.yourView
+class SkillListFragment : BaseViewBindingFragment(R.layout.act_vb) {
+
+    val actVbBinding by lazyVB<ActVbBinding>()
+
+    fun bindData() {
+        actVbBinding.yourView
     }
 }
 ```
 
-
-
-### 3.2 快速初始化 方式二
+### 3.2 快速初始化 方式二 （不建议）
 是否兼容JAVA：是
 
 完全使用反射初始化，耦合性较高，且无法脱离范型限制。
@@ -228,7 +222,23 @@ java 中使用
 Activity 与 fragment中的API 相同
 
 ```kotlin
- fun switchFragment(@NonNull currentFragment: Fragment,@IdRes frameLayoutId: Int = 0, tag: String? = null)
- 
- fun switchFragment(tag: String, @IdRes frameLayoutId: Int = 0): Fragment? 
+ fun switchFragment(
+    @NonNull currentFragment: Fragment,
+    @IdRes frameLayoutId: Int = 0,
+    tag: String? = null
+)
+
+fun switchFragment(tag: String, @IdRes frameLayoutId: Int = 0): Fragment? 
+```
+
+Tips:默认关闭了Activity重建
+
+```kotlin
+     /**
+ * 是否支持activity被杀死后重建（是否使用 savedInstanceState中相关数据，
+ * 系统默认在其中保存了Fragment的状态，重建会导致fragment异常展示）
+ *
+ * @return 默认不支持。如果返回true，则必须测试杀死后重建的流程
+ */
+protected open fun supportRebuildData() = false
 ```

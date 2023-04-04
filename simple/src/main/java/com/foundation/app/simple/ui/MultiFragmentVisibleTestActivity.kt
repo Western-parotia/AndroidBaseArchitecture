@@ -10,9 +10,7 @@ import com.foundation.app.simple.ui.fragment.visible.FragmentManagerVisibleTestF
  * create by zhusw on 5/19/21 13:24
  */
 class MultiFragmentVisibleTestActivity : BaseActivity() {
-    private val vb by lazyVB<ActMultiFragmentVisibleTestBinding>()
-    override fun getContentVB() = vb
-
+    private val vb by lazyAndSetRoot<ActMultiFragmentVisibleTestBinding>()
     override fun init(savedInstanceState: Bundle?) {
         switchFragment(
             FragmentManagerVisibleTestFragment().apply {

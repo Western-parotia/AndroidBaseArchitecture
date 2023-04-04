@@ -3,7 +3,6 @@ package com.foundation.app.simple.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.param.BundleParams
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActUserInfoBinding
@@ -28,9 +27,7 @@ class ParcelableActivity : BaseActivity() {
     private val userDesc: UserDesc = UserDesc()
 
 
-    private val vbBinding by lazyVB<ActUserInfoBinding>()
-
-    override fun getContentVB(): ViewBinding = vbBinding
+    private val vbBinding by lazyAndSetRoot<ActUserInfoBinding>()
 
     override fun init(savedInstanceState: Bundle?) {
 
