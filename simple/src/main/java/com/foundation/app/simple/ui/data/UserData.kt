@@ -5,9 +5,6 @@ import android.os.Parcelable
 import java.io.Serializable
 
 /**
-
-*-
- *-
  *create by zhusw on 5/17/21 17:52
  */
 data class UserAddress(val city: String = "none", val streetNo: Int = 0) : Parcelable {

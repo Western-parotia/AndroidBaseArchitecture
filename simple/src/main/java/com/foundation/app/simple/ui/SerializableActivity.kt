@@ -12,12 +12,8 @@ import com.foundation.app.simple.ui.data.UserDescSerializable
 
 
 /**
-
-*-
- *-
  *create by zhusw on 5/17/21 17:11
  * scheme://xxxd/?k-v
- *
  */
 class SerializableActivity : BaseActivity() {
 

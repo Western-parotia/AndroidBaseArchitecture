@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.InternalBasicFragment
 
 /**
- * fragment 状态管理，首次显示，显示，隐藏,视图重用
+ * 对 fragment 的状态管理进行优化，简化对fragment可见性的管理，尤其是在Fragment嵌套时的可见状态判断。
+ * 简化为：首次显示，显示，隐藏。
  * create by zhusw on 5/19/21 09:44
  */
 abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibilityChild {
@@ -30,7 +31,7 @@ abstract class BaseVisibilityFragment : InternalBasicFragment(), FragmentVisibil
     }
 
     /**
-     * vp的可见回调，在onCreate前，[setUserVisibleHint]太乱不适合锚点
+     * viewPager的可见回调，在onCreate前，[setUserVisibleHint]太乱不适合锚点
      */
     override fun setMenuVisibility(menuVisible: Boolean) {
         super.setMenuVisibility(menuVisible)
@@ -123,7 +124,7 @@ interface FragmentVisibilityChild {
 
     /**
      * @param isFirstVisible 是是首次可见
-     *                       注意：这个布尔值是根据view算的（destroyView后再create就是first）
+     * 注意：这个布尔值是根据view算的（destroyView后再create就是first）
      */
     fun onVisible(isFirstVisible: Boolean) {
     }

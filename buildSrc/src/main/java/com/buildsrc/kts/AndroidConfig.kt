@@ -3,9 +3,6 @@ package com.buildsrc.kts
 import org.gradle.api.JavaVersion
 
 /**
-
-*-
- *-
  *create by zhusw on 5/6/21 16:09
  */
 object AndroidConfig {

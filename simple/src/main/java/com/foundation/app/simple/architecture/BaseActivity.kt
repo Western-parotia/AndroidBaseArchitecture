@@ -4,9 +4,6 @@ import android.os.Bundle
 import com.foundation.app.arc.activity.BaseFragmentManagerActivity
 
 /**
-
- *-
- *-
  *create by zhusw on 5/18/21 18:38
  */
 abstract class BaseActivity : BaseFragmentManagerActivity() {

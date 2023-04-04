@@ -24,8 +24,7 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     }
     val applicationVMProvider by lazyAtomic {
         val app = application ?: throw IllegalStateException(
-            "$this is not attach application." +
-                    "Activity 不可以在 onCreate 之前使用  ViewModel"
+            "Activity 不可以在 onCreate 之前使用  ViewModel，因为此时 $this 还未绑定 application."
         )
         when (app) {
             is ViewModelStoreOwner -> {
@@ -37,7 +36,7 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
             else -> {
                 throw IllegalStateException(
                     "application:$app 没实现" +
-                            " ViewModelStoreOwner:调用处为 Activity$this "
+                            " ViewModelStoreOwner，调用者是 Activity：$this "
                 )
             }
         }

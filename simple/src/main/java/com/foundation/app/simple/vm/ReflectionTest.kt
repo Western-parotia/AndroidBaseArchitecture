@@ -2,7 +2,6 @@ package com.foundation.app.simple.vm
 
 /**
  * create by zhusw on 5/21/21 15:24
- *
 count = 1_0000
 I/System.out: --反射:无 1 ms
 I/System.out: --反射：java 17 ms

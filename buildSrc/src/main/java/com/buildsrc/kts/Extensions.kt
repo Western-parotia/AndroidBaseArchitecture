@@ -4,9 +4,6 @@ import java.io.File
 import java.util.*
 
 /**
-
- *-
- *-
  *create by zhusw on 5/7/21 14:10
  */
 private const val TAG = "buildSrc"

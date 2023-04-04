@@ -6,9 +6,6 @@ import com.foundation.app.simple.utils.Utils
 import com.foundation.service.net.NetManager
 
 /**
-
-*-
- *-
  *create by zhusw on 5/18/21 11:26
  */
 class CustomApplication : BaseVMApplication() {

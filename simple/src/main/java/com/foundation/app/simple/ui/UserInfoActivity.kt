@@ -12,12 +12,7 @@ import com.foundation.app.simple.ui.data.BundleProducer
 
 
 /**
-
- *-
- *-
  *create by zhusw on 5/17/21 17:11
- * scheme://xxxd/?k-v
- *
  */
 class UserInfoActivity : BaseActivity() {
 

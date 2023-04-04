@@ -4,43 +4,37 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.viewbinding.ViewBinding
+import com.foundation.app.arc.utils.ext.FragmentViewBindingDelegate
 import com.foundation.app.arc.utils.ext.ViewBindingLifecycleListener
-import com.foundation.widget.binding.ViewBindingHelper
 
 /**
- * 完成viewBinding的初始化，设置根布局
- * 反射获取获取范型类型后进行初始化
- * 这样的实现是为了兼容JAVA，不推荐在kotlin中使用
- *create by zhusw on 4/22/21 11:28
+ * 约束在子类中使用[lazyVB] 时 必须设置 layoutId
+ * create by zhusw on 5/18/21 10:46
  */
-abstract class BaseViewBindingFragment<B : ViewBinding> : BaseFragmentManagerFragment(),
-    ViewBindingLifecycleListener {
+abstract class BaseViewBindingFragment(@LayoutRes private val layoutId: Int) :
+    BaseFragmentManagerFragment(), ViewBindingLifecycleListener {
 
-    private var binding: B? = null
+    /**
+     * 懒加载赋值
+     * viewBinding 销毁前调用 [onViewBindingDestroy]
+     */
+    protected inline fun <reified VB : ViewBinding> lazyVB() = FragmentViewBindingDelegate {
+        VB::class.java.getMethod("bind", View::class.java)
+            .invoke(null, requireView()) as VB
+    }
 
-    protected val viewBinding: B get() = binding!!
-
-    @JvmField
-    protected var jViewBinding: B? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = ViewBindingHelper.getViewBindingInstance(this, inflater, container, false)
-        jViewBinding = binding
-        val vbCheck = requireNotNull(binding) {
-            "BaseViewBindingFragment ViewBinding has not init  or init failure,please check it"
+    ): View? =
+        if (layoutId != 0) {
+            inflater.inflate(layoutId, container, false)
+        } else {
+            null
         }
-        return vbCheck.root
-    }
-
-    override fun onDestroyView() {
-        onViewBindingDestroy()
-        binding = null
-        super.onDestroyView()
-    }
 
 }

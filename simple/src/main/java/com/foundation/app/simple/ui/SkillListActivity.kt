@@ -6,12 +6,8 @@ import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.ui.fragment.SkillListFragment
 
 /**
-
-*-
- *-
  *create by zhusw on 5/11/21 14:42
  */
-
 class SkillListActivity : BaseActivity() {
 
     override fun getContentVB(): ViewBinding? = null

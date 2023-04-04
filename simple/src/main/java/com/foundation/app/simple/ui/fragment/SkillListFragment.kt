@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.foundation.app.simple.R
 import com.foundation.app.simple.VBIncludeTestActivity
-import com.foundation.app.simple.architecture.BaseFragment2
+import com.foundation.app.simple.architecture.BaseFragmentWithLayoutId
 import com.foundation.app.simple.databinding.ActVbBinding
 import com.foundation.app.simple.demo.home.HomeActivity
 import com.foundation.app.simple.jump
@@ -16,19 +16,13 @@ import com.foundation.app.simple.ui.data.UserDesc
 import com.foundation.app.simple.ui.data.UserDescSerializable
 
 /**
-
- *-
- *-
  *create by zhusw on 5/19/21 13:32
  */
-
-fun foo() = 1
-
-class SkillListFragment : BaseFragment2(R.layout.act_vb) {
+class SkillListFragment : BaseFragmentWithLayoutId(R.layout.act_vb) {
 
     val actVbBinding by lazyVB<ActVbBinding>()
 
-    val a by lazy {  }
+    val a by lazy { }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,11 +48,6 @@ class SkillListFragment : BaseFragment2(R.layout.act_vb) {
             intent.putExtra("userId", 10003)
             intent.putExtra("userName", "王二")
             intent.putExtra("clsTest", SkillListFragment::class.java)
-            //不支持传递实体
-//            val address = UserAddress("beijing", 99)
-//            val desc = UserDesc("friendly", 170)
-//            intent.putExtra("address", address)
-//            intent.putExtra("desc", desc)
             startActivity(intent)
         }
         actVbBinding.btnParamsParcelableTest.setOnClickListener {

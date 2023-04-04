@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.foundation.app.arc.utils.ext.lazyOnUI
-import com.foundation.app.simple.architecture.BaseFragment2
+import com.foundation.app.simple.architecture.BaseFragmentWithLayoutId
 import com.foundation.app.simple.jump
 import com.foundation.app.simple.log
 import com.foundation.app.simple.ui.EmptyActivity
@@ -17,8 +17,7 @@ import com.foundation.app.simple.ui.EmptyActivity
  * visible测试基类
  * create by zhusw on 5/19/21 14:33
  */
-
-abstract class AbstractVisibleTestFragment(@LayoutRes id: Int) : BaseFragment2(id) {
+abstract class AbstractVisibleTestFragment(@LayoutRes id: Int) : BaseFragmentWithLayoutId(id) {
 
     companion object {
         const val TYPE_VP_PAGER_HINT_ALL = "PagerHintAll"

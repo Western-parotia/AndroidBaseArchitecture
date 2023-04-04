@@ -12,14 +12,12 @@ import com.foundation.app.arc.utils.ext.lazyAtomic
 
 /**
  * ViewModel 创建与使用规范
- *
  * create by zhusw on 5/18/21 13:36
  */
 abstract class BaseVMFragment : BaseParamsFragment() {
 
     /**
-     * can not visit before onCreate
-     * the case is in viewPager2 when switch tab fragment it will be invoke all life method
+     * 不能在 onCreate 之前调用
      */
     private lateinit var _fragmentVMProvider: ViewModelProvider
     val fragmentVMProvider get() = _fragmentVMProvider
@@ -30,8 +28,8 @@ abstract class BaseVMFragment : BaseParamsFragment() {
     val applicationVMProvider by lazyAtomic {
         val activity = requireActivity()
         val app = activity.application ?: throw IllegalStateException(
-            "$hostActivity 还没有 attached to application." +
-                    "Fragment 不可以在 onCreate 之前使用  ViewModel"
+            "$hostActivity 还没有 attach application." +
+                    "Fragment 也不可以在 onCreate 之前使用 ViewModel"
         )
         when (app) {
             is ViewModelStoreOwner -> {
@@ -82,8 +80,9 @@ abstract class BaseVMFragment : BaseParamsFragment() {
     }
 
     /**
-     * @param savedInstanceState 注意：由于多嵌套在内部销毁重建时（实现了saveState的，示例：ViewPager套ViewPager），也可能会引起ui错乱
-     *                           此处不可类比Activity强制返null，遂暂未解决，见ViewPager2的FragmentStateAdapter.restoreState
+     * @param savedInstanceState
+     * 注意：由于多嵌套在内部销毁重建时（实现了saveState的，示例：ViewPager套ViewPager），也可能会引起ui错乱
+     * 此处不可类比Activity强制返null，遂暂未解决，见ViewPager2的FragmentStateAdapter.restoreState
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

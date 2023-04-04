@@ -11,11 +11,7 @@ import java.io.Serializable
 import java.lang.reflect.Field
 
 /**
-
- * 支持全部基本类型
- *
- *
- *create by zhusw on 5/17/21 16:32
+ * create by zhusw on 5/17/21 16:32
  */
 object ParamsUtils {
     private val TAG = ParamsUtils::class.java.simpleName
@@ -81,7 +77,11 @@ object ParamsUtils {
                 }
                 else -> when {
                     Parcelable::class.java.isAssignableFrom(field.type) -> {
-                        bundle.getParcelable(key) as? Parcelable//不as的话智能推断无法识别，会被强转成Serializable导致崩溃
+                        /*
+                          * 不as的话智能推断无法识别，会被强转成Serializable导致崩溃
+                          * 这一问题已反馈给Kotlin团队，问题已被收录，最快将在1.7之后被修复
+                         */
+                        bundle.getParcelable(key) as? Parcelable
                     }
                     Serializable::class.java.isAssignableFrom(field.type) -> {
                         if (!field.isAnnotationPresent(BundleParamsUseSerializable::class.java)) {

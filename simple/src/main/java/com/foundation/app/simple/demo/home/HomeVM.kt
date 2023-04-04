@@ -8,9 +8,6 @@ import com.foundation.app.simple.demo.home.data.NewsFeedInfo
 import com.foundation.app.simple.demo.net.WanAndroidNetStateHandler
 import kotlinx.coroutines.delay
 
-/**
- *
- */
 class HomeVM : BaseWanAndroidVM() {
 
     private val homeRepo by lazy {
