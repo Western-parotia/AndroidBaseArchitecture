@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.param.BundleParams
+import com.foundation.app.arc.utils.param.BundleParamsUseSerializable
 import com.foundation.app.simple.architecture.BaseActivity
 import com.foundation.app.simple.databinding.ActUserInfoBinding
 import com.foundation.app.simple.ui.data.UserDescSerializable
@@ -28,6 +29,7 @@ class SerializableActivity : BaseActivity() {
         }
     }
 
+    @BundleParamsUseSerializable
     @BundleParams("userDesc")
     private val userDesc: UserDescSerializable = UserDescSerializable()
 

@@ -29,6 +29,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20dp"
         android:text="显示fragment"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

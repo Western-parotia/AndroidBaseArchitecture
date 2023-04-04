@@ -1,6 +1,7 @@
 package com.foundation.app.simple.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.foundation.app.arc.utils.param.BundleParams
 import com.foundation.app.arc.utils.param.BundleParamsUseSerializable
@@ -35,7 +36,7 @@ class UserInfoActivity : BaseActivity() {
     override fun getContentVB(): ViewBinding = vbBinding
 
     override fun init(savedInstanceState: Bundle?) {
-
+        vbBinding.auiBtn.visibility = View.VISIBLE
         vbBinding.auiBtn.setOnClickListener {
             val frag = UserInfoFragment()
             val bundle = BundleProducer.create()
