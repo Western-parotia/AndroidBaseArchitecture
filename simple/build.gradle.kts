@@ -1,4 +1,4 @@
-import com.foundation.widget.buildsrc.Dependencies
+import com.buildsrc.kts.Dependencies
 plugins {
     id("com.android.application")
     id("kotlin-android")

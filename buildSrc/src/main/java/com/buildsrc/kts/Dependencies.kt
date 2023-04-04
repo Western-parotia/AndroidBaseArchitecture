@@ -1,27 +1,16 @@
-package com.foundation.widget.buildsrc
+package com.buildsrc.kts
 
-/**
-
- *
- * 依赖声明
- *create by zhusw on 5/6/21 15:45
- */
 object Dependencies {
+    const val kotlinVersion = "1.6.21"
 
+    object Kotlin {
+        const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    }
 
     object Foundation {
         const val loading = "com.foundation.widget:loadingview:1.1.9"
-        const val viewBindingHelper = "com.foundation.widget:view-binding-helper:1.0.5-SNAPSHOT"
+        const val viewBindingHelper = "com.foundation.widget:view-binding-helper:1.0.6"
         const val net = "com.foundation.service:net:1.0.5"
-    }
-
-    object Kotlin {
-        const val version = "1.4.32"
-
-        /**
-         * kotlin 语言核心库，像 let这种操作域拓展
-         */
-        const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
     }
 
     object AndroidX {
@@ -72,5 +61,4 @@ object Dependencies {
 
 
     }
-
 }

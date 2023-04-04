@@ -1,5 +1,5 @@
-import com.foundation.widget.buildsrc.Dependencies
-import com.foundation.widget.buildsrc.Publish
+import com.buildsrc.kts.Dependencies
+import com.buildsrc.kts.Publish
 
 plugins {
     id("com.android.library")
@@ -9,23 +9,21 @@ plugins {
 
 apply("../common.gradle")
 
-val versionTimestamp = Publish.Version.getVersionTimestamp()
+val versionTimestamp = com.buildsrc.kts.Publish.Version.getVersionTimestamp()
 
 android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
         getByName("debug") {
             isMinifyEnabled = false
 //            consumerProguardFiles("consumer-rules.pro") lib单独打包 此属性是无效的
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -57,8 +55,8 @@ dependencies {
     implementation(Dependencies.JetPack.lifecycle_viewModel_ktx)
     implementation(Dependencies.JetPack.fragment_ktx)
     implementation(Dependencies.Foundation.viewBindingHelper)
-
 }
+
 
 val sourceCodeTask: Jar = tasks.register("sourceCode", Jar::class.java) {
     from(android.sourceSets.getByName("main").java.srcDirs)
@@ -73,23 +71,18 @@ tasks.register("createGitTagAndPush", Exec::class.java) {
 })
 
 publishing {
-    val versionName = Publish.Version.versionName
-    val groupId = Publish.Maven.groupId
-    val artifactId = Publish.Maven.artifactId
-
     publications {
-        create<MavenPublication>("BaseAF") {
-            setGroupId(groupId)
-            setArtifactId(artifactId)
-            version = versionName
+        create<MavenPublication>("tools") {
+            groupId = Publish.Maven.getThreePackage(projectDir)
+            artifactId = Publish.Version.artifactId
+            version = Publish.Version.versionName
             artifact(sourceCodeTask)
             afterEvaluate {//在脚本读取完成后绑定
                 val bundleReleaseAarTask: Task = tasks.getByName("bundleReleaseAar")
                 bundleReleaseAarTask.finalizedBy("createGitTagAndPush")
                 artifact(bundleReleaseAarTask)
             }
-//            artifact("$buildDir/outputs/aar/loading-release.aar")//直接指定文件
-            " allDependencies=${configurations.implementation.get().allDependencies.size}".log("dep============")
+//            artifact("$buildDir/outputs/aar/loading-release.aar")//直接制定文件
             pom.withXml {
                 val dependenciesNode = asNode().appendNode("dependencies")
                 configurations.implementation.get().allDependencies.forEach {
@@ -104,19 +97,15 @@ publishing {
 
         }
         repositories {
-            maven {
-                setUrl(Publish.Maven.codingArtifactsRepoUrl)
-                credentials {
-                    username = Publish.Maven.repositoryUserName
-                    password = Publish.Maven.repositoryPassword
-                }
+            if (Publish.SNAPSHOT) {
+                Publish.Maven.aliyunSnapshotRepositories(this)
+            } else {
+                Publish.Maven.aliyunReleaseRepositories(this)
             }
         }
     }
-
 }
-
-
 fun String.log(tag: String) {
     println("$tag:$this")
+
 }

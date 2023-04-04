@@ -1,4 +1,4 @@
-package com.foundation.widget.buildsrc
+package com.buildsrc.kts
 
 import org.gradle.api.JavaVersion
 

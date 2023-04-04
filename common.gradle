@@ -1,5 +1,5 @@
-import com.foundation.widget.buildsrc.AndroidConfig
-import com.foundation.widget.buildsrc.Publish
+import com.buildsrc.kts.AndroidConfig
+import com.buildsrc.kts.Publish
 
 apply plugin: 'com.android.library'
 

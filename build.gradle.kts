@@ -1,66 +1,28 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.buildsrc.kts.GlobalConfig
 
 //buildSrc的初始化init
-com.foundation.widget.buildsrc.GlobalConfig.init(project)
+GlobalConfig.init(project)
 
-buildscript {
-
+buildscript {//这里不支持import
     repositories {
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusPublic) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusRelease) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunPublic) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunGoogle) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunJcenter) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunCentral) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.jitpackIo) }
-        mavenCentral()
-        maven {
-            setUrl(com.foundation.widget.buildsrc.Repositories.codingMjMaven)
-            credentials {
-                username = com.foundation.widget.buildsrc.Repositories.codingMjDefName
-                password = com.foundation.widget.buildsrc.Repositories.codingMjDefPassword
-            }
-        }
-        mavenLocal()
-        google()
+        com.buildsrc.kts.Repositories.defRepositories(this)
     }
     dependencies {
-        classpath(group = "com.android.tools.build", name = "gradle", version = "4.1.0")
-        classpath(
-            group = "org.jetbrains.kotlin",
-            name = "kotlin-gradle-plugin",
-            version = com.foundation.widget.buildsrc.Dependencies.Kotlin.version
-        )
+        classpath("com.android.tools.build:gradle:4.1.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${com.buildsrc.kts.Dependencies.kotlinVersion}")
+
         // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle-backup-backup files
+        // in the individual module build.gradle files
     }
 }
 
 allprojects {
     repositories {
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusPublic) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunNexusRelease) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunPublic) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunGoogle) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunJcenter) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.aliyunCentral) }
-        maven { setUrl(com.foundation.widget.buildsrc.Repositories.jitpackIo) }
-        mavenCentral()
-        maven {
-            setUrl(com.foundation.widget.buildsrc.Repositories.codingMjMaven)
-            credentials {
-                username = com.foundation.widget.buildsrc.Repositories.codingMjDefName
-                password = com.foundation.widget.buildsrc.Repositories.codingMjDefPassword
-            }
-        }
-        mavenLocal()
-        google()
+        com.buildsrc.kts.Repositories.defRepositories(this)
     }
-
 }
 
-
-tasks.register("clean2", Delete::class.java) {
+tasks.register("clean", Delete::class.java) {
     delete(rootProject.buildDir)
-
 }
