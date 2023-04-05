@@ -22,11 +22,11 @@
  implementation("com.foundation.app:activity-fragment:1.1.0")
 ```
 
-类图：
+# API
+
+## 类图：
 
 ![uml](./images/uml.jpg)
-
-# API
 
 ## 1.明确View层在架构中的职责边界，规范初始化方法与生命周期
 
@@ -34,9 +34,9 @@
 
 ```kotlin
     override fun onCreate(savedInstanceState: Bundle?) {
-        val support = supportRebuildData()//1
-        val state = if (support) savedInstanceState else null
-        beforeSuperOnCreate(state)//2
+    val support = supportRebuildData()//1
+    val state = if (support) savedInstanceState else null
+    beforeSuperOnCreate(state)//2
         super.onCreate(state)//3
         afterSuperOnCreate(state)//4
         getContentVB()?.let { setContentView(it.root) }//5
