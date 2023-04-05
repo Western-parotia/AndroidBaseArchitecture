@@ -1,30 +1,36 @@
-# BaseActivity,BaseFragment 使用文档
+# 简介
+
+从View的角色去看待Activity与Fragment，在使用场景上它们承担的职责基本一致即：接收数据>展示数据
+所以本库中为这两者提供的API，保持高度的一致性，统一抽象为 init,与 bindData 两个方法。并提供对VB 与 VM的自动初始化
+按照分层架构与数据驱动为架构核心封装的脚手架,可快速搭建出基于Google最新架构建议的项目框架。
 
 核心功能：
 
 * 1.明确View层在架构中的职责边界，规范初始化方法与简化生命周期
 * 2.支持参数注解，自动初始化
-* 3.ViewBinding 自动初始化（fragment 中自动跟随声命周期）
-* 4.ViewModel 作用域管理、快速初始化
+* 3.ViewBinding 一行代码快速初始化（fragment 中自动跟随声命周期）
+* 4.ViewModel 作用域管理、一行代码快速初始化
 * 5.Fragment 可见状态简化管理
 * 6.LiveData 支持无粘性消息
 * 7.Fragment 快速切换（防重叠）
 
-类图：
+## 更新日志：
 
-![uml](./images/uml.jpg)
-
-使用：
+## 引用：
 
 ```kotlin
  implementation("com.foundation.app:activity-fragment:1.1.0")
 ```
 
-在使用场景上，从View的角色去看待Activity与Fragment，它承担的职责基本一致——接收数据>展示数据，
-所以本库中为这两者提供的API，保持高度的一致性，统一抽象为 init,与 bindData 两个方法。
+类图：
+
+![uml](./images/uml.jpg)
+
+# API
 
 ## 1.明确View层在架构中的职责边界，规范初始化方法与生命周期
-* Activity初始化方法顺序
+
+* Base层对初始化方法的编排顺序
 
 ```kotlin
     override fun onCreate(savedInstanceState: Bundle?) {
