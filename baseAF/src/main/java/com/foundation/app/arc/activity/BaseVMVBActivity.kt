@@ -142,5 +142,10 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     }
 
     protected inline fun <reified VB : ViewBinding> lazyAndSetRoot() =
-        ActivityViewBindingDelegate(this, VB::class.java)
+        ActivityViewBindingDelegate(this) {
+            ViewBindingHelper.getViewBindingInstanceByClass(
+                VB::class.java,
+                layoutInflater, null
+            )
+        }
 }
