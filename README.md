@@ -19,7 +19,7 @@
 ## 引用：
 
 ```kotlin
- implementation("com.foundation.app:activity-fragment:1.1.0")
+ implementation("com.foundation.app:activity-fragment:1.1.1")
 ```
 
 # API

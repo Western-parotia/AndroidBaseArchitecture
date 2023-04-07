@@ -11,7 +11,7 @@ import java.util.*
  *create by zhusw on 5/6/21 16:43
  */
 object Publish {
-    private const val VERSION = "1.1.0"
+    private const val VERSION = "1.1.1"
     const val SNAPSHOT = false
     private const val ARTIFACT_ID = "activity-fragment"
 
