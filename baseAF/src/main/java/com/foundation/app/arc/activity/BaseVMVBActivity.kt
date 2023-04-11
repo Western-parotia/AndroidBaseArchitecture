@@ -123,13 +123,13 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     /**
      * 建议：
      * 1.view初始化,比如是否开启下拉刷新
-     * 2.调用数据加载
      */
     protected abstract fun init(savedInstanceState: Bundle?)
 
     /**
      * 建议：
      * 订阅viewModel的数据并进行绑定
+     * 调用数据加载
      */
     protected abstract fun bindData()
 
