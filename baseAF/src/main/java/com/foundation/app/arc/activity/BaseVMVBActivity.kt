@@ -112,7 +112,7 @@ abstract class BaseVMVBActivity : BaseParamsActivity() {
     /**
      * 将ViewBinding.root 设置为根布局
      */
-    @Deprecated(message = "不再需要实现", replaceWith = ReplaceWith("lazyAndSetRoot"))
+    @Deprecated(message = "不再需要实现 getContentVB", replaceWith = ReplaceWith("lazyAndSetRoot"))
     open fun getContentVB(): ViewBinding? = null
 
     /**
