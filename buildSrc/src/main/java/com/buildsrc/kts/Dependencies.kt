@@ -1,7 +1,13 @@
 package com.buildsrc.kts
 
+import org.gradle.api.JavaVersion
+
 object Dependencies {
-    const val kotlinVersion = "1.6.21"
+    const val kotlinVersion = "1.7.0"
+    const val agp = "7.4.2"
+
+    val javaVersion = JavaVersion.VERSION_1_8
+    val jvmTarget = "11"
 
     object Kotlin {
         const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"

@@ -41,6 +41,13 @@ android {
             }
         }
     }
+    kotlinOptions {
+        jvmTarget = "11"
+        //指定kotlin module 唯一标识，避免重复时报错
+        freeCompilerArgs =
+            freeCompilerArgs + arrayOf("-module-name", Publish.Maven.getFourPackage(projectDir))
+
+    }
     buildFeatures {
         viewBinding = true
     }
